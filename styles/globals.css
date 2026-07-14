@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  /* Paleta extraída del logo oficial de Bambú */
+  --background: #f9f9f9;
+  --foreground: #2a2a2a;
+  --bamboo: #2d5a27;
+  --bamboo-light: #68a637;
+  --bamboo-dark: #1e4620;
+  --bamboo-muted: #e8f0e4;
+  --earth: #a67c45;
+  --earth-light: #c4a574;
+  --earth-muted: #f3ede4;
+  --beige: #f3ede4;
+  --beige-dark: #e5d9c8;
+  --gray-brand: #8e9191;
+  --gray-light: #f2f2f2;
+  --glass: rgba(255, 255, 255, 0.88);
+  --glass-border: rgba(255, 255, 255, 0.45);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-bamboo: var(--bamboo);
+  --color-bamboo-light: var(--bamboo-light);
+  --color-bamboo-dark: var(--bamboo-dark);
+  --color-bamboo-muted: var(--bamboo-muted);
+  --color-earth: var(--earth);
+  --color-earth-light: var(--earth-light);
+  --color-earth-muted: var(--earth-muted);
+  --color-beige: var(--beige);
+  --color-beige-dark: var(--beige-dark);
+  --color-gray-brand: var(--gray-brand);
+  --color-gray-light: var(--gray-light);
+  --font-sans: var(--font-jakarta);
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+html {
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-jakarta), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--bamboo-muted);
+  color: var(--bamboo-dark);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px) saturate(1.4);
+  -webkit-backdrop-filter: blur(20px) saturate(1.4);
+}
+
+.glass-dark {
+  background: rgba(30, 70, 32, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--beige);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bamboo);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bamboo-dark);
+}
+
+:focus-visible {
+  outline: 2px solid var(--bamboo);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
