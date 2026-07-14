@@ -36,6 +36,10 @@
   --font-sans: var(--font-jakarta);
 }
 
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+}
+
 * {
   scroll-behavior: smooth;
 }

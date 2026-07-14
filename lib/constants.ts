@@ -27,6 +27,13 @@ export const SITE = {
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d-75.6812!3d4.5339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38f5e5e5e5e5e5%3A0x0!2sArmenia%2C%20Quind%C3%ADo!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco",
 } as const;
 
+export const HERO_MEDIA = {
+  video:
+    "https://videos.pexels.com/video-files/3575514/3575514-hd_1920_1080_25fps.mp4",
+  poster:
+    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=85",
+} as const;
+
 export const NAV_LINKS = [
   { label: "Inicio", href: "#inicio" },
   { label: "¿Por qué Bambú?", href: "#por-que-bambu" },

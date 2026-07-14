@@ -64,7 +64,7 @@ export function Destinations() {
                   <span className="mb-1 text-sm font-medium text-white/70">
                     {dest.country}
                   </span>
-                  <h3 className="text-xl font-bold text-white sm:text-2xl">
+                  <h3 className="font-display text-xl font-semibold text-white sm:text-2xl">
                     {dest.name}
                   </h3>
                   <p className="mt-1 text-sm text-white/80">{dest.tagline}</p>

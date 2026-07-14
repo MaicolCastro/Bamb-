@@ -29,11 +29,12 @@ export function ScrollReveal({
   const offset = directionOffset[direction];
 
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset },
+    hidden: { opacity: 0, ...offset, filter: "blur(6px)" },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
+      filter: "blur(0px)",
       transition: {
         duration,
         delay,
@@ -46,7 +47,7 @@ export function ScrollReveal({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-80px" }}
       variants={variants}
       className={cn(className)}
     >
