@@ -2,7 +2,15 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
+import {
+  ArrowUpRight,
+  Sun,
+  Mountain,
+  Building2,
+  TreePine,
+  Sparkles,
+  type LucideIcon,
+} from "lucide-react";
 import { DESTINATIONS, SITE } from "@/lib/constants";
 import { getWhatsAppUrl, cn } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -22,6 +30,17 @@ const kenBurnsClasses = [
   "ken-burns ken-burns-4",
 ];
 
+const climateConfig: Record<
+  (typeof DESTINATIONS)[number]["climate"],
+  { Icon: LucideIcon; label: string }
+> = {
+  beach: { Icon: Sun, label: "Playa y sol" },
+  mountain: { Icon: Mountain, label: "Montaña y aventura" },
+  city: { Icon: Building2, label: "Ciudad y cultura" },
+  nature: { Icon: TreePine, label: "Naturaleza" },
+  family: { Icon: Sparkles, label: "Familia y diversión" },
+};
+
 function DestinationCard({
   dest,
   index,
@@ -30,6 +49,7 @@ function DestinationCard({
   index: number;
 }) {
   const { ref, handleMouseMove, handleMouseLeave } = useTilt(7);
+  const { Icon: ClimateIcon, label: climateLabel } = climateConfig[dest.climate];
 
   return (
     <ScrollReveal
@@ -72,6 +92,13 @@ function DestinationCard({
           </div>
 
           <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+            <div
+              className="mb-3 flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-medium text-white/90 ring-1 ring-white/20 backdrop-blur-sm"
+              title={climateLabel}
+            >
+              <ClimateIcon className="h-3.5 w-3.5 text-bamboo-light" aria-hidden="true" />
+              <span>{climateLabel}</span>
+            </div>
             <span className="mb-1 text-sm font-medium text-white/70">
               {dest.country}
             </span>

@@ -79,6 +79,7 @@ export const DESTINATIONS = [
     tagline: "Historia, mar y magia caribeña",
     image: "/images/destinations/cartagena.png",
     span: "wide" as const,
+    climate: "beach" as const,
   },
   {
     name: "San Andrés",
@@ -86,6 +87,7 @@ export const DESTINATIONS = [
     tagline: "El mar de siete colores te espera",
     image: "/images/destinations/san-andres.png",
     span: "normal" as const,
+    climate: "beach" as const,
   },
   {
     name: "Eje Cafetero",
@@ -93,6 +95,7 @@ export const DESTINATIONS = [
     tagline: "Paisajes que enamoran desde casa",
     image: "/images/destinations/eje-cafetero.png",
     span: "tall" as const,
+    climate: "nature" as const,
   },
   {
     name: "Cancún",
@@ -100,6 +103,7 @@ export const DESTINATIONS = [
     tagline: "Sol, arena y experiencias inolvidables",
     image: "/images/destinations/cancun.png",
     span: "wide" as const,
+    climate: "beach" as const,
   },
   {
     name: "Punta Cana",
@@ -107,6 +111,7 @@ export const DESTINATIONS = [
     tagline: "Paraíso tropical sin complicaciones",
     image: "/images/destinations/punta-cana.png",
     span: "normal" as const,
+    climate: "beach" as const,
   },
   {
     name: "Europa",
@@ -115,6 +120,7 @@ export const DESTINATIONS = [
     image:
       "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80",
     span: "tall" as const,
+    climate: "city" as const,
   },
   {
     name: "Medellín",
@@ -122,6 +128,7 @@ export const DESTINATIONS = [
     tagline: "La ciudad de la eterna primavera",
     image: "/images/destinations/medellin.png",
     span: "normal" as const,
+    climate: "city" as const,
   },
   {
     name: "Orlando",
@@ -129,6 +136,7 @@ export const DESTINATIONS = [
     tagline: "Magia, parques y diversión en familia",
     image: "/images/destinations/orlando.png",
     span: "normal" as const,
+    climate: "family" as const,
   },
   {
     name: "Perú",
@@ -136,6 +144,7 @@ export const DESTINATIONS = [
     tagline: "Historia inca y paisajes imponentes",
     image: "/images/destinations/peru.png",
     span: "normal" as const,
+    climate: "mountain" as const,
   },
   {
     name: "Río de Janeiro",
@@ -143,6 +152,7 @@ export const DESTINATIONS = [
     tagline: "Samba, playas icónicas y energía única",
     image: "/images/destinations/rio-de-janeiro.png",
     span: "normal" as const,
+    climate: "beach" as const,
   },
   {
     name: "Miami",
@@ -150,6 +160,7 @@ export const DESTINATIONS = [
     tagline: "Estilo, playas y vida cosmopolita",
     image: "/images/destinations/miami.png",
     span: "normal" as const,
+    climate: "beach" as const,
   },
   {
     name: "Panamá",
@@ -157,6 +168,7 @@ export const DESTINATIONS = [
     tagline: "Canal, modernidad y naturaleza",
     image: "/images/destinations/panama.png",
     span: "normal" as const,
+    climate: "city" as const,
   },
 ] as const;
 
