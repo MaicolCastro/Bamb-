@@ -165,7 +165,7 @@ body {
 
 .group:hover .gallery-duotone {
   filter: grayscale(1) contrast(1.1) brightness(0.85);
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* Ken Burns — paneo cinematográfico en destinos */
@@ -263,16 +263,4 @@ body {
   100% {
     left: 150%;
   }
-}
-
-/* Polaroid — galería */
-.polaroid-tilt {
-  transition:
-    transform 0.4s ease,
-    box-shadow 0.4s ease;
-}
-
-.polaroid-tilt:hover {
-  transform: rotate(0deg) scale(1.03) !important;
-  z-index: 10;
 }

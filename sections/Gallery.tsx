@@ -15,8 +15,6 @@ const spanClasses = {
   normal: "",
 };
 
-const polaroidRotations = [-2.5, 2, -1.5, 3, -2, 1.5, -3, 2.5, -1, 2, -2.5, 1];
-
 export function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
@@ -35,7 +33,7 @@ export function Gallery() {
           description="Cada imagen cuenta una historia. ¿Cuál será la tuya?"
         />
 
-        <div className="mt-16 grid auto-rows-auto grid-flow-dense grid-cols-2 gap-5 sm:gap-6 lg:grid-cols-4">
+        <div className="mt-16 grid auto-rows-[200px] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[220px] sm:gap-4 lg:grid-cols-4">
           {GALLERY_IMAGES.map((image, index) => (
             <ScrollReveal
               key={image.id}
@@ -48,38 +46,24 @@ export function Gallery() {
               <button
                 type="button"
                 onClick={() => setLightboxIndex(index)}
-                className="polaroid-tilt group relative h-full w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
-                style={{
-                  transform: `rotate(${polaroidRotations[index % polaroidRotations.length]}deg)`,
-                }}
+                className="group relative h-full w-full overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
                 aria-label={`Ver imagen: ${image.alt}`}
               >
-                <div className="flex h-full flex-col bg-white p-3 pb-4 shadow-xl shadow-black/15 ring-1 ring-black/5 sm:p-4 sm:pb-5">
-                  <div
-                    className={cn(
-                      "relative w-full overflow-hidden bg-gray-light",
-                      image.span === "tall" ? "aspect-[3/4]" : "aspect-[4/3]"
-                    )}
-                  >
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="gallery-duotone object-cover"
-                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-bamboo/55 mix-blend-multiply opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="absolute inset-0 bg-earth/35 mix-blend-color opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      <div className="flex h-11 w-11 items-center justify-center rounded-full bg-white/90 shadow-lg">
-                        <ZoomIn className="h-5 w-5 text-bamboo" />
-                      </div>
-                    </div>
+                <Image
+                  src={image.src}
+                  alt={image.alt}
+                  fill
+                  className="gallery-duotone object-cover"
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-bamboo/55 mix-blend-multiply opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-earth/35 mix-blend-color opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/15" />
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg">
+                    <ZoomIn className="h-5 w-5 text-bamboo" />
                   </div>
-                  <p className="mt-3 line-clamp-2 text-center font-display text-xs leading-snug text-foreground/55 sm:text-sm">
-                    {image.alt}
-                  </p>
                 </div>
               </button>
             </ScrollReveal>
