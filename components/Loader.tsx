@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Logo } from "./Logo";
+import { AnimatedMonogram } from "./AnimatedMonogram";
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
 const STRIP_COUNT = 10;
 
-type LoaderPhase = "loading" | "curtain" | "done";
+type LoaderPhase = "loading" | "monogram" | "curtain" | "done";
 
 export function Loader() {
   const [phase, setPhase] = useState<LoaderPhase>("loading");
@@ -25,7 +25,7 @@ export function Loader() {
       if (next < 1) {
         frame = requestAnimationFrame(tick);
       } else {
-        setTimeout(() => setPhase("curtain"), 200);
+        setTimeout(() => setPhase("monogram"), 150);
       }
     };
 
@@ -34,12 +34,19 @@ export function Loader() {
   }, []);
 
   useEffect(() => {
-    if (phase !== "curtain") return;
-    const timer = setTimeout(() => setPhase("done"), 900);
-    return () => clearTimeout(timer);
+    if (phase === "monogram") {
+      const timer = setTimeout(() => setPhase("curtain"), 700);
+      return () => clearTimeout(timer);
+    }
+    if (phase === "curtain") {
+      const timer = setTimeout(() => setPhase("done"), 900);
+      return () => clearTimeout(timer);
+    }
   }, [phase]);
 
   const showLoader = phase !== "done";
+  const monogramProgress =
+    phase === "monogram" || phase === "curtain" ? 1 : progress;
 
   return (
     <AnimatePresence mode="wait">
@@ -80,16 +87,7 @@ export function Loader() {
                 transition={{ duration: 0.7, ease: easePremium }}
                 className="relative flex flex-col items-center gap-8"
               >
-                <motion.div
-                  animate={{ scale: [1, 1.04, 1] }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <Logo size="lg" priority />
-                </motion.div>
+                <AnimatedMonogram size={132} progress={progress} />
 
                 <div className="flex flex-col items-center gap-3">
                   <p className="font-display text-lg tracking-wide text-bamboo-dark sm:text-xl">
@@ -106,9 +104,28 @@ export function Loader() {
             </motion.div>
           )}
 
+          {/* Monograma completo antes de la cortina */}
+          {(phase === "monogram" || phase === "curtain") && (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-beige via-background to-bamboo-muted/40" />
+              <div className="pointer-events-none absolute inset-0 z-20 flex items-center justify-center">
+                <motion.div
+                  initial={{ scale: 0.92, opacity: 0 }}
+                  animate={{
+                    scale: phase === "curtain" ? 1.08 : 1,
+                    opacity: phase === "curtain" ? 0 : 1,
+                  }}
+                  transition={{ duration: 0.5, ease: easePremium }}
+                >
+                  <AnimatedMonogram size={148} progress={monogramProgress} />
+                </motion.div>
+              </div>
+            </>
+          )}
+
           {/* Cortina de aeropuerto — franjas que se abren */}
           {phase === "curtain" && (
-            <div className="absolute inset-0 flex" aria-hidden="true">
+            <div className="absolute inset-0 z-10 flex" aria-hidden="true">
               {Array.from({ length: STRIP_COUNT }).map((_, i) => {
                 const fromLeft = i < STRIP_COUNT / 2;
                 return (
