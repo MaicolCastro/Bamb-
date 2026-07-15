@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import { SITE } from "@/lib/constants";
 import { getTravelAgencySchema } from "@/lib/seo";
-import { getSiteUrl } from "@/lib/site-url";
+import { getSiteUrl, getOgImageUrl } from "@/lib/site-url";
 import "@/styles/globals.css";
 
 const siteUrl = getSiteUrl();
-const ogImageUrl = `${siteUrl}/og-image.png`;
+const ogImageUrl = getOgImageUrl();
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: ogImageUrl,
+        url: "/og-image.png",
         width: 1200,
         height: 630,
         alt: `${SITE.fullName} — Agencia de viajes en Colombia`,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.tagline} | ${SITE.fullName}`,
     description: SITE.description,
-    images: [ogImageUrl],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -96,6 +96,7 @@ export default function RootLayout({
     >
       <head>
         <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:secure_url" content={ogImageUrl} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/png" />
