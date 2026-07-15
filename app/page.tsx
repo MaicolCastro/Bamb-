@@ -8,6 +8,7 @@ import { HowWeWork } from "@/sections/HowWeWork";
 import { Testimonials } from "@/sections/Testimonials";
 import { Stats } from "@/sections/Stats";
 import { Gallery } from "@/sections/Gallery";
+import { FAQ } from "@/sections/FAQ";
 import { ContactForm } from "@/sections/ContactForm";
 
 const COLORS = {
@@ -35,7 +36,9 @@ export default function HomePage() {
         <Stats />
         <SectionWave topColor={COLORS.bambooDark} bottomColor={COLORS.background} />
         <Gallery />
-        <SectionWave topColor={COLORS.background} bottomColor={COLORS.earthMuted} />
+        <SectionWave topColor={COLORS.background} bottomColor={COLORS.grayLight} />
+        <FAQ />
+        <SectionWave topColor={COLORS.grayLight} bottomColor={COLORS.earthMuted} />
         <ContactForm />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.bambooDark} />
       </main>

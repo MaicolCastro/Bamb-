@@ -41,6 +41,7 @@ export const NAV_LINKS = [
   { label: "Proceso", href: "#proceso" },
   { label: "Testimonios", href: "#testimonios" },
   { label: "Galería", href: "#galeria" },
+  { label: "FAQ", href: "#faq" },
   { label: "Contacto", href: "#contacto" },
 ] as const;
 
@@ -309,6 +310,39 @@ export const GALLERY_IMAGES = [
     src: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80",
     alt: "Canales y arquitectura en Venecia",
     span: "normal" as const,
+  },
+] as const;
+
+export const FAQ_ITEMS = [
+  {
+    question: "¿Cómo funciona el proceso de cotización?",
+    answer:
+      "Escríbenos por WhatsApp o completa el formulario de contacto. Un asesor te contacta en menos de 2 horas, conoce tus preferencias, fechas y presupuesto, y te envía una propuesta personalizada sin compromiso.",
+  },
+  {
+    question: "¿Debo pagar todo el viaje de una sola vez?",
+    answer:
+      "No necesariamente. Trabajamos con planes de pago flexibles según el destino y la anticipación del viaje. Te explicamos las cuotas, fechas límite y condiciones antes de que confirmes.",
+  },
+  {
+    question: "¿Qué incluyen los paquetes que ofrecen?",
+    answer:
+      "Depende del destino y del plan que elijas. Generalmente incluyen tiquetes, alojamiento, traslados y asesoría completa. Siempre te entregamos un detalle claro de qué está incluido y qué no, para que no haya sorpresas.",
+  },
+  {
+    question: "¿Pueden diseñar un viaje completamente a mi medida?",
+    answer:
+      "Sí, esa es nuestra especialidad. No vendemos paquetes genéricos: adaptamos destino, fechas, hoteles, actividades y presupuesto a lo que tú y tu grupo necesitan.",
+  },
+  {
+    question: "¿Qué pasa si necesito cancelar o cambiar fechas?",
+    answer:
+      "Las políticas varían según aerolínea, hotel y operador. Te informamos las condiciones de cada reserva antes de confirmar y te acompañamos en cualquier cambio o cancelación que necesites gestionar.",
+  },
+  {
+    question: "¿Atienden solo en Armenia o en todo el país?",
+    answer:
+      "Nuestra oficina está en Armenia, Quindío, pero atendemos clientes de todo Colombia de forma virtual. Cotizamos, confirmamos y te acompañamos por WhatsApp, llamada o correo sin importar dónde estés.",
   },
 ] as const;
 
