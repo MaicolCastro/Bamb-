@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
 import { SITE } from "@/lib/constants";
 import { getTravelAgencySchema } from "@/lib/seo";
+import { getSiteUrl } from "@/lib/site-url";
 import "@/styles/globals.css";
+
+const siteUrl = getSiteUrl();
+const ogImageUrl = `${siteUrl}/og-image.png`;
 
 const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
@@ -18,7 +22,7 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(SITE.url),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `${SITE.fullName} | Agencia de Viajes en ${SITE.city}, ${SITE.region}`,
     template: `%s | ${SITE.name}`,
@@ -40,16 +44,17 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: SITE.locale,
-    url: SITE.url,
+    url: siteUrl,
     siteName: SITE.fullName,
     title: `${SITE.tagline} | ${SITE.fullName}`,
     description: SITE.description,
     images: [
       {
-        url: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&h=630&fit=crop&q=80",
+        url: ogImageUrl,
         width: 1200,
         height: 630,
         alt: `${SITE.fullName} — Agencia de viajes en Colombia`,
+        type: "image/png",
       },
     ],
   },
@@ -57,16 +62,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.tagline} | ${SITE.fullName}`,
     description: SITE.description,
-    images: [
-      "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1200&h=630&fit=crop&q=80",
-    ],
+    images: [ogImageUrl],
   },
   robots: {
     index: true,
     follow: true,
   },
   alternates: {
-    canonical: SITE.url,
+    canonical: siteUrl,
   },
   icons: {
     icon: [
@@ -92,6 +95,11 @@ export default function RootLayout({
       className={`${jakarta.variable} ${cormorant.variable} h-full scroll-smooth`}
     >
       <head>
+        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta name="twitter:image" content={ogImageUrl} />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon.png" />
