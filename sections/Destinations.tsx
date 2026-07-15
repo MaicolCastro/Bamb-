@@ -15,6 +15,13 @@ const spanClasses = {
   normal: "",
 };
 
+const kenBurnsClasses = [
+  "ken-burns ken-burns-1",
+  "ken-burns ken-burns-2",
+  "ken-burns ken-burns-3",
+  "ken-burns ken-burns-4",
+];
+
 function DestinationCard({
   dest,
   index,
@@ -54,7 +61,10 @@ function DestinationCard({
               src={dest.image}
               alt={`${dest.name}, ${dest.country}`}
               fill
-              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              className={cn(
+                "object-cover",
+                kenBurnsClasses[index % kenBurnsClasses.length]
+              )}
               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
               loading="lazy"
             />

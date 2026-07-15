@@ -7,6 +7,7 @@ import { WhatsAppIcon } from "@/components/SocialIcons";
 import { SITE } from "@/lib/constants";
 import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/Button";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
 
@@ -18,6 +19,7 @@ export function Hero() {
       aria-label="Sección principal"
     >
       <HeroVideo />
+      <CursorSpotlight size={380} intensity={0.2} />
 
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">

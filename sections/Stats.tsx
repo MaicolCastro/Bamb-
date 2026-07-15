@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { Users, Award, MapPin, Star, type LucideIcon } from "lucide-react";
 import { HERO_MEDIA, STATS } from "@/lib/constants";
 import { useCountUp } from "@/hooks/useCountUp";
+import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { cn } from "@/lib/utils";
 
 const statIcons: LucideIcon[] = [Users, Award, MapPin, Star];
@@ -100,7 +101,9 @@ export function Stats() {
         <div className="absolute -right-32 bottom-0 h-64 w-64 rounded-full bg-earth/15 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <CursorSpotlight size={300} intensity={0.18} />
+
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ul className="flex flex-wrap justify-center gap-y-10 lg:flex-nowrap lg:items-center lg:gap-0">
           {STATS.map((stat, index) => (
             <li

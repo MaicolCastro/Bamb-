@@ -108,6 +108,16 @@ body {
   .film-grain::before {
     animation: none !important;
   }
+
+  .ken-burns {
+    animation: none !important;
+    transform: scale(1.1) !important;
+  }
+
+  .card-shine::after {
+    animation: none !important;
+    display: none;
+  }
 }
 
 /* Textura cinematográfica sutil */
@@ -155,5 +165,114 @@ body {
 
 .group:hover .gallery-duotone {
   filter: grayscale(1) contrast(1.1) brightness(0.85);
-  transform: scale(1.1);
+  transform: scale(1.05);
+}
+
+/* Ken Burns — paneo cinematográfico en destinos */
+.ken-burns {
+  transform: scale(1.18);
+  animation-duration: 20s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+.ken-burns-1 {
+  animation-name: ken-burns-1;
+}
+.ken-burns-2 {
+  animation-name: ken-burns-2;
+}
+.ken-burns-3 {
+  animation-name: ken-burns-3;
+}
+.ken-burns-4 {
+  animation-name: ken-burns-4;
+}
+
+.group:hover .ken-burns {
+  animation-duration: 12s;
+}
+
+@keyframes ken-burns-1 {
+  0% {
+    transform: scale(1.18) translate(0%, 0%);
+  }
+  100% {
+    transform: scale(1.22) translate(-4%, -2%);
+  }
+}
+
+@keyframes ken-burns-2 {
+  0% {
+    transform: scale(1.18) translate(-3%, 0%);
+  }
+  100% {
+    transform: scale(1.22) translate(3%, -3%);
+  }
+}
+
+@keyframes ken-burns-3 {
+  0% {
+    transform: scale(1.18) translate(0%, -2%);
+  }
+  100% {
+    transform: scale(1.22) translate(-2%, 3%);
+  }
+}
+
+@keyframes ken-burns-4 {
+  0% {
+    transform: scale(1.18) translate(2%, 1%);
+  }
+  100% {
+    transform: scale(1.22) translate(-3%, -2%);
+  }
+}
+
+/* Brillo deslizante en tarjetas blancas */
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 70%
+  );
+  animation: card-shine 5s ease-in-out infinite;
+  animation-delay: var(--shine-delay, 0s);
+  pointer-events: none;
+}
+
+@keyframes card-shine {
+  0%,
+  75% {
+    left: -120%;
+  }
+  100% {
+    left: 150%;
+  }
+}
+
+/* Polaroid — galería */
+.polaroid-tilt {
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.polaroid-tilt:hover {
+  transform: rotate(0deg) scale(1.03) !important;
+  z-index: 10;
 }
