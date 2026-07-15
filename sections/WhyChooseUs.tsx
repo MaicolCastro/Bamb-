@@ -10,6 +10,7 @@ import {
 import { WHY_CHOOSE_US } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { FloatingDecor } from "@/components/FloatingDecor";
 
 const iconMap: Record<string, LucideIcon> = {
   HeartHandshake,
@@ -22,10 +23,11 @@ export function WhyChooseUs() {
   return (
     <section
       id="por-que-bambu"
-      className="bg-earth-muted py-24 sm:py-32"
+      className="relative overflow-hidden bg-earth-muted py-24 sm:py-32"
       aria-labelledby="why-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <FloatingDecor variant="earth" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           sectionNumber="01"
           highlights={["confiar"]}

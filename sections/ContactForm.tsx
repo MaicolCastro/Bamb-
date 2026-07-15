@@ -9,6 +9,8 @@ import { getWhatsAppUrl } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/Button";
+import { Confetti } from "@/components/Confetti";
+import { FloatingDecor } from "@/components/FloatingDecor";
 
 interface FormData {
   name: string;
@@ -59,12 +61,15 @@ export function ContactForm() {
 
   if (submitted) {
     return (
-      <section id="contacto" className="bg-earth-muted py-24 sm:py-32">
-        <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
+      <section id="contacto" className="relative overflow-hidden bg-earth-muted py-24 sm:py-32">
+        <FloatingDecor variant="earth" />
+        <Confetti active />
+        <div className="relative mx-auto max-w-xl px-4 text-center sm:px-6">
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            className="rounded-3xl bg-white p-12 shadow-xl"
+            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="relative rounded-3xl bg-white p-12 shadow-xl"
           >
             <CheckCircle className="mx-auto h-16 w-16 text-bamboo" />
             <h2 className="mt-6 text-2xl font-bold">¡Mensaje enviado!</h2>
@@ -90,10 +95,11 @@ export function ContactForm() {
   return (
     <section
       id="contacto"
-      className="bg-earth-muted py-24 sm:py-32"
+      className="relative overflow-hidden bg-earth-muted py-24 sm:py-32"
       aria-labelledby="contact-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <FloatingDecor variant="earth" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
           sectionNumber="07"
           highlights={["sueño"]}
