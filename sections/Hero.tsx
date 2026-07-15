@@ -14,7 +14,7 @@ export function Hero() {
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden"
+      className="film-grain relative flex min-h-screen items-center justify-center overflow-hidden"
       aria-label="Sección principal"
     >
       <HeroVideo />

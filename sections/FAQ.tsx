@@ -106,6 +106,8 @@ export function FAQ() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="06"
+          highlights={["primer paso"]}
           eyebrow="Preguntas frecuentes"
           title="Resolvemos tus dudas antes de que des el primer paso"
           description="Lo más importante es que viajes con confianza. Aquí respondemos las preguntas que nos hacen con más frecuencia."

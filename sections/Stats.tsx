@@ -82,7 +82,7 @@ function StatItem({
 export function Stats() {
   return (
     <section
-      className="relative overflow-hidden py-20 sm:py-28"
+      className="film-grain relative overflow-hidden py-20 sm:py-28"
       aria-label="Estadísticas de la agencia"
     >
       {/* Fondo con imagen desenfocada + patrón */}

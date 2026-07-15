@@ -27,6 +27,8 @@ export function WhyChooseUs() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="01"
+          highlights={["confiar"]}
           eyebrow="¿Por qué elegir Bambú?"
           title="Viajar bien empieza con confiar en quien te acompaña"
           description="No vendemos paquetes enlatados. Diseñamos experiencias únicas con el cuidado que mereces, porque tu viaje es personal y nosotros lo tratamos así."

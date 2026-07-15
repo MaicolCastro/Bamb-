@@ -2,6 +2,7 @@
 
 import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
+import { useMagnetic } from "@/hooks/useMagnetic";
 
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "whatsapp";
 type ButtonSize = "sm" | "md" | "lg";
@@ -12,6 +13,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   asChild?: boolean;
   href?: string;
   external?: boolean;
+  magnetic?: boolean;
 }
 
 const variants: Record<ButtonVariant, string> = {
@@ -32,6 +34,35 @@ const sizes: Record<ButtonSize, string> = {
   lg: "px-8 py-4 text-lg rounded-full",
 };
 
+const magneticVariants: ButtonVariant[] = ["primary", "whatsapp"];
+
+function ButtonContent({
+  children,
+  magnetic,
+}: {
+  children: React.ReactNode;
+  magnetic: boolean;
+}) {
+  const magneticRef = useMagnetic<HTMLSpanElement>(0.28);
+
+  if (!magnetic) {
+    return (
+      <span className="inline-flex items-center justify-center gap-2">
+        {children}
+      </span>
+    );
+  }
+
+  return (
+    <span
+      ref={magneticRef}
+      className="inline-flex items-center justify-center gap-2 transition-transform duration-200 ease-out"
+    >
+      {children}
+    </span>
+  );
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
@@ -40,13 +71,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       href,
       external,
+      magnetic,
       children,
       ...props
     },
     ref
   ) => {
+    const useMagneticEffect =
+      magnetic ?? magneticVariants.includes(variant);
+
     const classes = cn(
-      "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+      "inline-flex items-center justify-center font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
       variants[variant],
       sizes[size],
       className
@@ -61,14 +96,18 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           rel={external ? "noopener noreferrer" : undefined}
           aria-label={typeof children === "string" ? children : undefined}
         >
-          {children}
+          <ButtonContent magnetic={useMagneticEffect}>
+            {children}
+          </ButtonContent>
         </a>
       );
     }
 
     return (
       <button ref={ref} className={classes} {...props}>
-        {children}
+        <ButtonContent magnetic={useMagneticEffect}>
+          {children}
+        </ButtonContent>
       </button>
     );
   }

@@ -95,6 +95,8 @@ export function ContactForm() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="07"
+          highlights={["sueño"]}
           eyebrow="Contacto"
           title="Cuéntanos tu sueño de viaje"
           description="Completa el formulario y te contactamos con una propuesta personalizada. Sin compromiso, sin presión — solo asesoría de calidad."

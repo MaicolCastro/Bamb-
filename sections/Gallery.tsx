@@ -26,6 +26,8 @@ export function Gallery() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="05"
+          highlights={["inspiran"]}
           eyebrow="Galería"
           title="Momentos que inspiran tu próximo viaje"
           description="Cada imagen cuenta una historia. ¿Cuál será la tuya?"
@@ -51,11 +53,13 @@ export function Gallery() {
                   src={image.src}
                   alt={image.alt}
                   fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="gallery-duotone object-cover"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/30" />
+                <div className="absolute inset-0 bg-bamboo/55 mix-blend-multiply opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-earth/35 mix-blend-color opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/15" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg">
                     <ZoomIn className="h-5 w-5 text-bamboo" />

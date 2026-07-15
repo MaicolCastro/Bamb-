@@ -184,6 +184,8 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="04"
+          highlights={["felices"]}
           eyebrow="Testimonios"
           title="Historias reales de viajeros felices"
           description="La confianza de quienes ya viajaron con nosotros es nuestra mejor carta de presentación."

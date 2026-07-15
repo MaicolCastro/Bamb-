@@ -45,6 +45,8 @@ export function HowWeWork() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
+          sectionNumber="03"
+          highlights={["mejor viaje"]}
           eyebrow="Cómo trabajamos"
           title="De tu idea a tu mejor viaje en 4 pasos"
           description="Un proceso simple, transparente y humano. Tú sueñas, nosotros nos encargamos de todo lo demás."
