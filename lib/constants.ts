@@ -24,7 +24,7 @@ export const SITE = {
     tiktok: "https://tiktok.com/@bambuviajes",
   },
   mapEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.5!2d-75.6812!3d4.5339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38f5e5e5e5e5e5%3A0x0!2sArmenia%2C%20Quind%C3%ADo!5e0!3m2!1ses!2sco!4v1700000000000!5m2!1ses!2sco",
+    "https://maps.google.com/maps?q=Armenia,+Quind%C3%ADo,+Colombia&hl=es&z=14&output=embed",
 } as const;
 
 export const HERO_MEDIA = {

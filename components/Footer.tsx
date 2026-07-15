@@ -116,23 +116,25 @@ export function Footer() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-earth-light">
               Ubicación
             </h3>
-            <a
-              href={SITE.mapsUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block overflow-hidden rounded-2xl ring-1 ring-white/10 transition-all hover:ring-bamboo-light/40"
-              aria-label="Ver ubicación de Bambú en Google Maps"
-            >
-              <div className="flex h-[180px] flex-col items-center justify-center gap-3 bg-white/5 px-4 transition-colors group-hover:bg-white/10">
-                <MapPin className="h-10 w-10 text-bamboo-light transition-transform group-hover:scale-110" />
-                <span className="text-center text-sm font-medium text-white/80 group-hover:text-white">
-                  Ver en Google Maps
-                </span>
-                <span className="text-center text-xs text-white/50">
-                  {SITE.address}
-                </span>
-              </div>
-            </a>
+            <div className="overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-lg shadow-black/20">
+              <iframe
+                src={SITE.mapEmbed}
+                title={`Mapa de ${SITE.fullName} en ${SITE.city}, ${SITE.region}`}
+                className="h-[220px] w-full border-0 grayscale-[20%] contrast-[1.05] transition-[filter] hover:grayscale-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <a
+                href={SITE.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 bg-white/5 px-4 py-3 text-xs font-medium text-white/75 transition-colors hover:bg-white/10 hover:text-white"
+              >
+                <MapPin className="h-3.5 w-3.5 shrink-0 text-bamboo-light" />
+                Abrir en Google Maps
+              </a>
+            </div>
           </div>
         </div>
 
