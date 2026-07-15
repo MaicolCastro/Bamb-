@@ -225,6 +225,11 @@ export const TESTIMONIALS = [
   },
 ] as const;
 
+export const GOOGLE_REVIEWS = {
+  rating: 4.9,
+  count: 47,
+} as const;
+
 export const STATS = [
   { value: 1500, suffix: "+", label: "Viajeros felices" },
   { value: 10, suffix: "+", label: "Años de experiencia" },
