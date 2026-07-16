@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Plus_Jakarta_Sans } from "next/font/google";
+import { Cormorant_Garamond, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { SITE } from "@/lib/constants";
 import { getTravelAgencySchema } from "@/lib/seo";
 import { getSiteUrl, getOgImageUrl } from "@/lib/site-url";
@@ -18,6 +18,13 @@ const cormorant = Cormorant_Garamond({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 
@@ -92,7 +99,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${jakarta.variable} ${cormorant.variable} h-full scroll-smooth`}
+      className={`${jakarta.variable} ${cormorant.variable} ${playfair.variable} h-full scroll-smooth`}
     >
       <head>
         <meta property="og:image" content={ogImageUrl} />

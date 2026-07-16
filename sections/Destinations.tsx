@@ -1,8 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
 import {
-  ArrowUpRight,
   Sun,
   Mountain,
   Building2,
@@ -15,15 +13,6 @@ import { getWhatsAppUrl } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CardImage } from "@/components/CardImage";
-import { useTilt } from "@/hooks/useTilt";
-import { cn } from "@/lib/utils";
-
-const kenBurnsClasses = [
-  "ken-burns ken-burns-1",
-  "ken-burns ken-burns-2",
-  "ken-burns ken-burns-3",
-  "ken-burns ken-burns-4",
-];
 
 const climateConfig: Record<
   (typeof DESTINATIONS)[number]["climate"],
@@ -43,71 +32,64 @@ function DestinationCard({
   dest: (typeof DESTINATIONS)[number];
   index: number;
 }) {
-  const { ref, handleMouseMove, handleMouseLeave } = useTilt(7);
   const { Icon: ClimateIcon, label: climateLabel } = climateConfig[dest.climate];
 
   return (
     <ScrollReveal delay={index * 0.06}>
-      <div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="h-full transition-transform duration-300 ease-out will-change-transform"
-        style={{ transformStyle: "preserve-3d" }}
+      <a
+        href={getWhatsAppUrl(
+          SITE.whatsapp,
+          `Hola Bambú, me interesa viajar a ${dest.name}. ¿Me pueden asesorar?`
+        )}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10 ring-1 ring-black/5 transition-shadow duration-300 ease-out hover:shadow-xl hover:shadow-black/20"
+        aria-label={`Cotizar viaje a ${dest.name}`}
       >
-        <a
-          href={getWhatsAppUrl(
-            SITE.whatsapp,
-            `Hola Bambú, me interesa viajar a ${dest.name}. ¿Me pueden asesorar?`
-          )}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10"
-          aria-label={`Cotizar viaje a ${dest.name}`}
-        >
-          <CardImage
-            src={dest.image}
-            alt={`${dest.name}, ${dest.country}`}
-            objectPosition={
-              "objectPosition" in dest ? dest.objectPosition : undefined
-            }
-            imageClassName={cn(
-              kenBurnsClasses[index % kenBurnsClasses.length]
-            )}
-          />
+        <CardImage
+          src={dest.image}
+          alt={`${dest.name}, ${dest.country}`}
+          objectPosition={
+            "objectPosition" in dest ? dest.objectPosition : undefined
+          }
+          imageClassName="transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+          className="rounded-3xl"
+        />
 
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/80" />
+        <div
+          className="destination-card-gradient pointer-events-none absolute inset-0 transition-[background] duration-300 ease-out"
+          aria-hidden="true"
+        />
 
-          <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 transition-transform duration-300 ease-out group-hover:-translate-y-1 sm:p-8">
+          <div className="flex max-w-[92%] flex-col items-start text-left">
             <div
-              className="mb-3 flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-medium text-white/90 ring-1 ring-white/20 backdrop-blur-sm"
+              className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-shadow-premium backdrop-blur-md"
               title={climateLabel}
             >
               <ClimateIcon
-                className="h-3.5 w-3.5 text-bamboo-light"
+                className="h-3.5 w-3.5 shrink-0 text-white/95"
                 aria-hidden="true"
               />
-              <span>{climateLabel}</span>
+              <span className="text-xs font-medium tracking-wide text-white/95 sm:text-[13px]">
+                {climateLabel}
+              </span>
             </div>
-            <span className="mb-1 text-sm font-medium text-white/70">
+
+            <p className="mb-2 text-[15px] font-medium tracking-[0.12em] text-white/85 uppercase text-shadow-premium sm:text-base">
               {dest.country}
-            </span>
-            <h3 className="font-display text-xl font-semibold text-white sm:text-2xl">
+            </p>
+
+            <h3 className="font-playfair mb-3 text-[1.75rem] font-semibold leading-[1.15] tracking-tight text-white text-shadow-premium sm:text-[2.125rem] lg:text-[2.5rem]">
               {dest.name}
             </h3>
-            <p className="mt-1 text-sm text-white/80">{dest.tagline}</p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              whileHover={{ opacity: 1, y: 0 }}
-              className="mt-3 flex items-center gap-2 text-sm font-semibold text-bamboo-light opacity-0 transition-opacity group-hover:opacity-100"
-            >
-              Quiero cotizar este destino
-              <ArrowUpRight className="h-4 w-4" />
-            </motion.div>
+            <p className="line-clamp-2 text-base leading-snug text-white/90 text-shadow-premium sm:text-lg sm:leading-relaxed">
+              {dest.tagline}
+            </p>
           </div>
-        </a>
-      </div>
+        </div>
+      </a>
     </ScrollReveal>
   );
 }
