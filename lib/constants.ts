@@ -31,7 +31,7 @@ export const HERO_MEDIA = {
   video:
     "https://videos.pexels.com/video-files/3575514/3575514-hd_1920_1080_25fps.mp4",
   poster:
-    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=85",
+    "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=2560&h=1440&fit=crop&crop=entropy&auto=format&q=90",
 } as const;
 
 export const NAV_LINKS = [
@@ -78,7 +78,6 @@ export const DESTINATIONS = [
     country: "Colombia",
     tagline: "Historia, mar y magia caribeña",
     image: "/images/destinations/cartagena.png",
-    span: "wide" as const,
     climate: "beach" as const,
   },
   {
@@ -86,7 +85,6 @@ export const DESTINATIONS = [
     country: "Colombia",
     tagline: "El mar de siete colores te espera",
     image: "/images/destinations/san-andres.png",
-    span: "normal" as const,
     climate: "beach" as const,
   },
   {
@@ -94,7 +92,6 @@ export const DESTINATIONS = [
     country: "Colombia",
     tagline: "Paisajes que enamoran desde casa",
     image: "/images/destinations/eje-cafetero.png",
-    span: "tall" as const,
     climate: "nature" as const,
   },
   {
@@ -102,7 +99,6 @@ export const DESTINATIONS = [
     country: "México",
     tagline: "Sol, arena y experiencias inolvidables",
     image: "/images/destinations/cancun.png",
-    span: "wide" as const,
     climate: "beach" as const,
   },
   {
@@ -110,7 +106,6 @@ export const DESTINATIONS = [
     country: "República Dominicana",
     tagline: "Paraíso tropical sin complicaciones",
     image: "/images/destinations/punta-cana.png",
-    span: "normal" as const,
     climate: "beach" as const,
   },
   {
@@ -118,8 +113,7 @@ export const DESTINATIONS = [
     country: "Internacional",
     tagline: "Cultura, gastronomía y aventura",
     image:
-      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1200&q=80",
-    span: "tall" as const,
+      "https://images.unsplash.com/photo-1499856871958-5b9627545d1a",
     climate: "city" as const,
   },
   {
@@ -127,7 +121,6 @@ export const DESTINATIONS = [
     country: "Colombia",
     tagline: "La ciudad de la eterna primavera",
     image: "/images/destinations/medellin.png",
-    span: "normal" as const,
     climate: "city" as const,
   },
   {
@@ -135,7 +128,6 @@ export const DESTINATIONS = [
     country: "Estados Unidos",
     tagline: "Magia, parques y diversión en familia",
     image: "/images/destinations/orlando.png",
-    span: "normal" as const,
     climate: "family" as const,
   },
   {
@@ -143,7 +135,7 @@ export const DESTINATIONS = [
     country: "Internacional",
     tagline: "Historia inca y paisajes imponentes",
     image: "/images/destinations/peru.png",
-    span: "normal" as const,
+    objectPosition: "center 30%",
     climate: "mountain" as const,
   },
   {
@@ -151,7 +143,6 @@ export const DESTINATIONS = [
     country: "Brasil",
     tagline: "Samba, playas icónicas y energía única",
     image: "/images/destinations/rio-de-janeiro.png",
-    span: "normal" as const,
     climate: "beach" as const,
   },
   {
@@ -159,7 +150,6 @@ export const DESTINATIONS = [
     country: "Estados Unidos",
     tagline: "Estilo, playas y vida cosmopolita",
     image: "/images/destinations/miami.png",
-    span: "normal" as const,
     climate: "beach" as const,
   },
   {
@@ -167,7 +157,6 @@ export const DESTINATIONS = [
     country: "Internacional",
     tagline: "Canal, modernidad y naturaleza",
     image: "/images/destinations/panama.png",
-    span: "normal" as const,
     climate: "city" as const,
   },
 ] as const;
@@ -253,75 +242,63 @@ export const STATS = [
 export const GALLERY_IMAGES = [
   {
     id: 1,
-    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1501785888041-af3ef285b470",
     alt: "Montañas al amanecer",
-    span: "tall" as const,
   },
   {
     id: 2,
-    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e",
     alt: "Lago turquesa en la naturaleza",
-    span: "wide" as const,
   },
   {
     id: 3,
-    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
     alt: "Playa paradisíaca",
-    span: "normal" as const,
   },
   {
     id: 4,
-    src: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1469854523086-cc02fe5d8800",
     alt: "Carretera de aventura",
-    span: "normal" as const,
   },
   {
     id: 5,
-    src: "https://images.unsplash.com/photo-1528127269322-539801943592?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1528127269322-539801943592",
     alt: "Templos en Asia",
-    span: "tall" as const,
   },
   {
     id: 6,
-    src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000",
     alt: "Atardecer en la ciudad",
-    span: "wide" as const,
   },
   {
     id: 7,
-    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4",
     alt: "Picos nevados",
-    span: "normal" as const,
   },
   {
     id: 8,
-    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1469474968028-56623f02e42e",
     alt: "Paisaje natural al amanecer",
-    span: "normal" as const,
   },
   {
     id: 9,
-    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee",
     alt: "Dunas al atardecer",
-    span: "normal" as const,
   },
   {
     id: 10,
-    src: "https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1519681393784-d120267933ba",
     alt: "Montañas bajo el cielo nocturno",
-    span: "normal" as const,
   },
   {
     id: 11,
-    src: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5",
     alt: "Aurora boreal en el cielo ártico",
-    span: "normal" as const,
   },
   {
     id: 12,
-    src: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80",
+    src: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9",
     alt: "Canales y arquitectura en Venecia",
-    span: "normal" as const,
   },
 ] as const;
 

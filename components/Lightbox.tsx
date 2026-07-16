@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, MapPin } from "lucide-react";
 import { SITE } from "@/lib/constants";
+import { toAspect169Url } from "@/lib/image-utils";
 
 interface LightboxProps {
   images: readonly { id: number; src: string; alt: string }[];
@@ -142,13 +143,14 @@ export function Lightbox({
               </div>
 
               {/* Imagen */}
-              <div className="relative mx-auto mt-2 max-h-[50vh] overflow-hidden rounded-sm shadow-md ring-1 ring-earth/20 sm:max-h-[55vh]">
+              <div className="relative mx-auto mt-2 aspect-video w-full max-w-3xl overflow-hidden rounded-sm shadow-md ring-1 ring-earth/20">
                 <Image
-                  src={current.src}
+                  src={toAspect169Url(current.src)}
                   alt={current.alt}
-                  width={900}
-                  height={600}
-                  className="max-h-[50vh] w-full object-cover sm:max-h-[55vh]"
+                  fill
+                  quality={90}
+                  sizes="(max-width:768px) 100vw, 90vw"
+                  className="object-cover"
                   priority
                 />
               </div>

@@ -1,0 +1,40 @@
+---
+description: Estándar 16:9 para todas las imágenes de tarjetas y banners del sitio Bambú
+alwaysApply: true
+---
+
+# Imágenes 16:9 — Agencia Bambú
+
+Todas las imágenes en tarjetas, banners y galería deben cumplir:
+
+## Relación de aspecto
+- Exactamente **16:9** (1920×1080 mínimo; preferible 2560×1440 o superior).
+- Nunca deformar ni estirar; usar `object-cover` + `aspect-video`.
+
+## Procesamiento de assets nuevos
+Cuando el usuario proporcione imágenes:
+- Smart crop centrado en el sujeto (crop entropy / punto focal).
+- Si la imagen es muy vertical, preferir lienzo ampliado con fondo difuminado (outpainting/blur extend) antes de recortar en exceso.
+- No reducir resolución; exportar alta calidad.
+- Optimizar solo para web sin pérdida perceptible.
+- Guardar en `public/images/` procesadas con `npm run images:16-9`.
+
+## Componente obligatorio en tarjetas
+Usar `CardImage` de `@/components/CardImage` o estos valores:
+
+```tsx
+<div className="relative aspect-video w-full overflow-hidden">
+  <Image
+    src={...}
+    alt={...}
+    fill
+    quality={90}
+    sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
+    className="object-cover"
+  />
+</div>
+```
+
+## Layout
+- Grid uniforme: todas las tarjetas **mismo tamaño** (sin `row-span`, `col-span-2`, ni `auto-rows` variables).
+- URLs Unsplash: usar `toAspect169Url()` de `@/lib/image-utils`.

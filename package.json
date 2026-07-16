@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "images:16-9": "node scripts/image-to-16-9.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",

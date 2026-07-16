@@ -1,19 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { ZoomIn } from "lucide-react";
 import { GALLERY_IMAGES } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Lightbox } from "@/components/Lightbox";
-import { cn } from "@/lib/utils";
-
-const spanClasses = {
-  tall: "row-span-2",
-  wide: "col-span-2",
-  normal: "",
-};
+import { CardImage } from "@/components/CardImage";
 
 export function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -33,29 +26,20 @@ export function Gallery() {
           description="Cada imagen cuenta una historia. ¿Cuál será la tuya?"
         />
 
-        <div className="mt-16 grid auto-rows-[200px] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[220px] sm:gap-4 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {GALLERY_IMAGES.map((image, index) => (
-            <ScrollReveal
-              key={image.id}
-              delay={index * 0.05}
-              className={cn(
-                spanClasses[image.span],
-                image.span === "wide" && "col-span-2"
-              )}
-            >
+            <ScrollReveal key={image.id} delay={index * 0.05}>
               <button
                 type="button"
                 onClick={() => setLightboxIndex(index)}
-                className="group relative h-full w-full overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
+                className="group relative w-full overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
                 aria-label={`Ver imagen: ${image.alt}`}
               >
-                <Image
+                <CardImage
                   src={image.src}
                   alt={image.alt}
-                  fill
-                  className="gallery-duotone object-cover"
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                  loading="lazy"
+                  imageClassName="gallery-duotone transition-transform duration-700 group-hover:scale-105"
+                  className="rounded-2xl"
                 />
                 <div className="absolute inset-0 bg-bamboo/55 mix-blend-multiply opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 <div className="absolute inset-0 bg-earth/35 mix-blend-color opacity-0 transition-opacity duration-500 group-hover:opacity-100" />

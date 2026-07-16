@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
@@ -12,16 +11,12 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { DESTINATIONS, SITE } from "@/lib/constants";
-import { getWhatsAppUrl, cn } from "@/lib/utils";
+import { getWhatsAppUrl } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
+import { CardImage } from "@/components/CardImage";
 import { useTilt } from "@/hooks/useTilt";
-
-const spanClasses = {
-  tall: "row-span-2",
-  wide: "col-span-2",
-  normal: "",
-};
+import { cn } from "@/lib/utils";
 
 const kenBurnsClasses = [
   "ken-burns ken-burns-1",
@@ -52,13 +47,7 @@ function DestinationCard({
   const { Icon: ClimateIcon, label: climateLabel } = climateConfig[dest.climate];
 
   return (
-    <ScrollReveal
-      delay={index * 0.06}
-      className={cn(
-        spanClasses[dest.span],
-        dest.span === "wide" && "col-span-2"
-      )}
-    >
+    <ScrollReveal delay={index * 0.06}>
       <div
         ref={ref}
         onMouseMove={handleMouseMove}
@@ -73,30 +62,31 @@ function DestinationCard({
           )}
           target="_blank"
           rel="noopener noreferrer"
-          className="group relative block h-full overflow-hidden rounded-3xl shadow-lg shadow-black/10"
+          className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10"
           aria-label={`Cotizar viaje a ${dest.name}`}
         >
-          <div className="relative h-full w-full overflow-hidden">
-            <Image
-              src={dest.image}
-              alt={`${dest.name}, ${dest.country}`}
-              fill
-              className={cn(
-                "object-cover",
-                kenBurnsClasses[index % kenBurnsClasses.length]
-              )}
-              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/80" />
-          </div>
+          <CardImage
+            src={dest.image}
+            alt={`${dest.name}, ${dest.country}`}
+            objectPosition={
+              "objectPosition" in dest ? dest.objectPosition : undefined
+            }
+            imageClassName={cn(
+              kenBurnsClasses[index % kenBurnsClasses.length]
+            )}
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-500 group-hover:from-black/80" />
 
           <div className="absolute inset-0 flex flex-col justify-end p-5 sm:p-6">
             <div
               className="mb-3 flex w-fit items-center gap-1.5 rounded-full bg-white/15 px-2.5 py-1 text-xs font-medium text-white/90 ring-1 ring-white/20 backdrop-blur-sm"
               title={climateLabel}
             >
-              <ClimateIcon className="h-3.5 w-3.5 text-bamboo-light" aria-hidden="true" />
+              <ClimateIcon
+                className="h-3.5 w-3.5 text-bamboo-light"
+                aria-hidden="true"
+              />
               <span>{climateLabel}</span>
             </div>
             <span className="mb-1 text-sm font-medium text-white/70">
@@ -138,7 +128,7 @@ export function Destinations() {
           description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Escríbenos y diseñamos tu experiencia ideal."
         />
 
-        <div className="mt-16 grid auto-rows-[220px] grid-flow-dense grid-cols-2 gap-3 sm:auto-rows-[260px] sm:gap-4 lg:grid-cols-4">
+        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {DESTINATIONS.map((dest, index) => (
             <DestinationCard key={dest.name} dest={dest} index={index} />
           ))}
