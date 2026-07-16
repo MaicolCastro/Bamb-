@@ -1,6 +1,10 @@
 import { ClientShell } from "@/components/ClientShell";
 import { Footer } from "@/components/Footer";
 import { SectionWave } from "@/components/SectionWave";
+import { EditorialBand } from "@/components/EditorialBand";
+import { TripMarquee } from "@/components/TripMarquee";
+import { TrustBadges } from "@/components/TrustBadges";
+import { TravelGuides } from "@/components/TravelGuides";
 import { Hero } from "@/sections/Hero";
 import { WhyChooseUs } from "@/sections/WhyChooseUs";
 import { Destinations } from "@/sections/Destinations";
@@ -24,12 +28,15 @@ export default function HomePage() {
     <ClientShell>
       <main>
         <Hero />
+        <TrustBadges />
         <SectionWave topColor={COLORS.bambooDark} bottomColor={COLORS.earthMuted} />
         <WhyChooseUs />
+        <TripMarquee />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.background} />
         <div className="section-deferred">
           <Destinations />
         </div>
+        <EditorialBand />
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.bamboo} />
         <div className="section-deferred">
           <HowWeWork />
@@ -45,6 +52,10 @@ export default function HomePage() {
           <Gallery />
         </div>
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.earthMuted} />
+        <div className="section-deferred">
+          <TravelGuides />
+        </div>
+        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.earthMuted} />
         <div className="section-deferred">
           <FAQ />
         </div>

@@ -4,6 +4,7 @@ import { Loader } from "./Loader";
 import { Navbar } from "./Navbar";
 import { WhatsAppFloat } from "./WhatsAppFloat";
 import { ScrollToTop } from "./ScrollToTop";
+import { MobileActionBar } from "./MobileActionBar";
 
 interface ClientShellProps {
   children: React.ReactNode;
@@ -17,6 +18,7 @@ export function ClientShell({ children }: ClientShellProps) {
       <Navbar />
       {children}
       <WhatsAppFloat />
+      <MobileActionBar />
       <ScrollToTop />
     </>
   );

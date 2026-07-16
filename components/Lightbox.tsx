@@ -8,7 +8,13 @@ import { SITE } from "@/lib/constants";
 import { toAspect169Url } from "@/lib/image-utils";
 
 interface LightboxProps {
-  images: readonly { id: number; src: string; alt: string }[];
+  images: readonly {
+    id: number;
+    src: string;
+    alt: string;
+    destination?: string;
+    country?: string;
+  }[];
   currentIndex: number | null;
   onClose: () => void;
   onNavigate: (index: number) => void;
@@ -164,8 +170,15 @@ export function Lightbox({
                   </span>
                 </div>
                 <p className="mt-2 font-display text-xl font-semibold text-bamboo-dark sm:text-2xl">
-                  {current.alt}
+                  {"destination" in current && current.destination
+                    ? current.destination
+                    : current.alt}
                 </p>
+                {"country" in current && current.country && (
+                  <p className="mt-0.5 text-xs font-medium uppercase tracking-widest text-earth/80">
+                    {current.country}
+                  </p>
+                )}
                 <p className="mt-1 text-xs italic text-foreground/45">
                   Agencia de Viajes Bambú · Recuerdos que inspiran
                 </p>

@@ -6,11 +6,15 @@ import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
 import { cn, getWhatsAppUrl, scrollToSection } from "@/lib/utils";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
+import { useActiveSection } from "@/hooks/useActiveSection";
 import { Button } from "./Button";
 import { Logo } from "./Logo";
 
+const SECTION_IDS = NAV_LINKS.map((l) => l.href);
+
 export function Navbar() {
   const scrolled = useScrollPosition(60);
+  const activeSection = useActiveSection(SECTION_IDS);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -24,6 +28,22 @@ export function Navbar() {
     setMobileOpen(false);
     scrollToSection(href);
   };
+
+  const linkClass = (href: string, isMobile = false) =>
+    cn(
+      "relative rounded-full font-medium transition-premium",
+      isMobile
+        ? "block px-4 py-3 text-base text-foreground/80 hover:bg-bamboo-muted hover:text-bamboo"
+        : "px-3.5 py-2 text-sm xl:px-4",
+      !isMobile &&
+        (scrolled
+          ? "text-foreground/75 hover:bg-white/40 hover:text-bamboo"
+          : "text-white/90 hover:bg-white/10 hover:text-white"),
+      !isMobile &&
+        activeSection === href &&
+        (scrolled ? "text-bamboo-dark" : "text-white"),
+      isMobile && activeSection === href && "bg-bamboo-muted text-bamboo font-semibold"
+    );
 
   return (
     <>
@@ -51,7 +71,7 @@ export function Navbar() {
               handleNavClick("#inicio");
             }}
             className={cn(
-              "group shrink-0 transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]",
+              "group shrink-0 transition-premium hover:scale-[1.02] active:scale-[0.98]",
               !scrolled &&
                 "rounded-full border border-white/70 bg-white/92 px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.10)] sm:px-5 sm:py-2.5 supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:backdrop-blur-md"
             )}
@@ -69,14 +89,18 @@ export function Navbar() {
                     e.preventDefault();
                     handleNavClick(link.href);
                   }}
-                  className={cn(
-                    "rounded-full px-3.5 py-2 text-sm font-medium transition-colors xl:px-4",
-                    scrolled
-                      ? "text-foreground/75 hover:bg-white/40 hover:text-bamboo"
-                      : "text-white/90 hover:bg-white/10 hover:text-white"
-                  )}
+                  className={linkClass(link.href)}
                 >
                   {link.label}
+                  {activeSection === link.href && (
+                    <span
+                      className={cn(
+                        "absolute bottom-0.5 left-1/2 h-0.5 w-4 -translate-x-1/2 rounded-full",
+                        scrolled ? "bg-bamboo" : "bg-earth-light"
+                      )}
+                      aria-hidden="true"
+                    />
+                  )}
                 </a>
               </li>
             ))}
@@ -97,7 +121,7 @@ export function Navbar() {
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
             className={cn(
-              "rounded-full p-2.5 transition-colors lg:hidden",
+              "rounded-full p-2.5 transition-premium lg:hidden",
               scrolled
                 ? "text-bamboo hover:bg-white/40"
                 : "text-white hover:bg-white/10"
@@ -152,7 +176,7 @@ export function Navbar() {
                         e.preventDefault();
                         handleNavClick(link.href);
                       }}
-                      className="block rounded-full px-4 py-3 text-base font-medium text-foreground/80 transition-colors hover:bg-bamboo-muted hover:text-bamboo"
+                      className={linkClass(link.href, true)}
                     >
                       {link.label}
                     </a>

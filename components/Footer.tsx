@@ -2,11 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Image from "next/image";
 import { Mail, Phone, MapPin } from "lucide-react";
 import { InstagramIcon, FacebookIcon, WhatsAppIcon } from "./SocialIcons";
 import { Logo } from "./Logo";
 import { SITE, NAV_LINKS } from "@/lib/constants";
 import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
+import { PartnersStrip } from "./PartnersStrip";
 
 function FooterLayer({
   children,
@@ -160,8 +162,22 @@ export function Footer() {
 
           <FooterLayer y={layer(mapY)}>
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-earth-light">
-                Ubicación
+                Visítanos
               </h3>
+              <p className="mb-4 text-sm leading-relaxed text-white/65">
+                Te esperamos en el corazón del Eje Cafetero. Agenda una cita o
+                pásate a conversar sobre tu próximo destino.
+              </p>
+              <div className="relative mb-4 h-36 overflow-hidden rounded-2xl ring-1 ring-white/10">
+                <Image
+                  src="/images/destinations/eje-cafetero.png"
+                  alt=""
+                  fill
+                  className="object-cover"
+                  sizes="300px"
+                />
+                <div className="absolute inset-0 bg-bamboo-dark/30" />
+              </div>
               <div className="overflow-hidden rounded-2xl ring-1 ring-white/10 shadow-lg shadow-black/20">
                 <iframe
                   src={SITE.mapEmbed}
@@ -195,6 +211,7 @@ export function Footer() {
           </div>
         </FooterLayer>
       </div>
+      <PartnersStrip />
     </footer>
   );
 }

@@ -385,6 +385,10 @@ body {
   }
 }
 
+.wa-pulse-ring {
+  animation: stat-pulse 2.5s ease-in-out infinite;
+}
+
 @keyframes card-shine {
   0%,
   75% {
@@ -392,5 +396,73 @@ body {
   }
   100% {
     left: 150%;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+.input-boutique {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(42, 42, 42, 0.15);
+  background: transparent;
+  padding: 0.75rem 0;
+  color: var(--foreground);
+  transition: var(--transition-premium);
+}
+
+.input-boutique:focus {
+  outline: none;
+  border-bottom-color: var(--bamboo);
+}
+
+.input-boutique::placeholder {
+  color: rgba(42, 42, 42, 0.35);
+}
+
+.input-boutique-label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(42, 42, 42, 0.45);
+}
+
+.editorial-number {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: rgba(45, 90, 39, 0.06);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Espacio para barra móvil inferior */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: 5rem;
   }
 }

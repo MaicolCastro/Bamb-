@@ -45,12 +45,91 @@ export const NAV_LINKS = [
   { label: "Contacto", href: "#contacto" },
 ] as const;
 
+export const HERO_TRUST = [
+  "+10 años de experiencia",
+  "Asesoría humana",
+  "Armenia, Quindío",
+  "Respuesta en 2 horas",
+] as const;
+
+export const EDITORIAL_BAND = {
+  image:
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=800&fit=crop&crop=entropy&auto=format&q=80",
+  quote: "Cada viaje empieza con una conversación.",
+  cta: "Cuéntanos tu idea",
+  whatsappMessage:
+    "Hola Bambú, quiero empezar a planear mi próximo viaje. ¿Me pueden asesorar?",
+} as const;
+
+export const TRIP_MARQUEE = [
+  "Luna de miel",
+  "Familia",
+  "Aventura",
+  "Corporativo",
+  "Nacional",
+  "Internacional",
+  "Cruceros",
+  "Playa",
+  "Montaña",
+] as const;
+
+export const TRUST_BADGES = [
+  { label: "RNT", sublabel: "Registro Nacional de Turismo" },
+  { label: "ANATO", sublabel: "Asociación Colombiana de Agencias" },
+] as const;
+
+export const COMPARISON_ROWS = [
+  { feature: "Asesoría humana personalizada", ota: false },
+  { feature: "Itinerario a tu medida", ota: false },
+  { feature: "Soporte durante el viaje", ota: false },
+  { feature: "Planes de pago flexibles", ota: false },
+  { feature: "Comparar precios online", ota: true },
+] as const;
+
+export const PARTNERS = [
+  "Avianca",
+  "LATAM",
+  "Decameron",
+  "Hotelbeds",
+  "Best Western",
+  "Hilton",
+] as const;
+
+export const TRAVEL_GUIDES = [
+  {
+    title: "Qué empacar para San Andrés",
+    category: "Playa",
+    excerpt: "Lista esencial para disfrutar el mar de siete colores sin olvidar nada.",
+    image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=800&h=500&fit=crop",
+    whatsappMessage:
+      "Hola Bambú, me interesa viajar a San Andrés. ¿Me pueden asesorar sobre qué necesito?",
+  },
+  {
+    title: "Mejor época para visitar Europa",
+    category: "Internacional",
+    excerpt: "Temporadas, clima y presupuesto: cuándo viajar según tu estilo.",
+    image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&h=500&fit=crop",
+    whatsappMessage:
+      "Hola Bambú, quiero planear un viaje a Europa. ¿Cuál es la mejor época?",
+  },
+  {
+    title: "Documentos para viajar al exterior",
+    category: "Tips",
+    excerpt: "Pasaporte, visa, seguro y requisitos según tu destino soñado.",
+    image: "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&h=500&fit=crop",
+    whatsappMessage:
+      "Hola Bambú, necesito orientación sobre documentos para viajar al exterior.",
+  },
+] as const;
+
 export const WHY_CHOOSE_US = [
   {
     icon: "HeartHandshake" as const,
     title: "Atención personalizada",
     description:
       "Cada viajero es único. Escuchamos tus sueños, preferencias y presupuesto para diseñar una experiencia hecha a tu medida, sin fórmulas genéricas.",
+    featured: true,
+    image: "/images/destinations/eje-cafetero.png",
   },
   {
     icon: "Map" as const,
@@ -167,24 +246,32 @@ export const PROCESS_STEPS = [
     title: "Cuéntanos tu idea",
     description:
       "Comparte con nosotros a dónde quieres ir, con quién viajas y qué experiencias sueñas vivir. Sin compromiso, solo conversación.",
+    image:
+      "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=400&h=225&fit=crop",
   },
   {
     step: 2,
     title: "Diseñamos el viaje",
     description:
       "Nuestro equipo crea propuestas personalizadas con las mejores opciones de vuelos, hoteles y actividades según tu estilo.",
+    image:
+      "https://images.unsplash.com/photo-1524661135-423995f22d0b?w=400&h=225&fit=crop",
   },
   {
     step: 3,
     title: "Organizamos todo",
     description:
       "Nos encargamos de reservas, documentación, seguros y cada detalle logístico para que tú solo te preocupes por hacer la maleta.",
+    image:
+      "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=400&h=225&fit=crop",
   },
   {
     step: 4,
     title: "Disfruta sin preocupaciones",
     description:
       "Viaja sabiendo que tienes un equipo de confianza respaldándote. Tu aventura comienza, nosotros seguimos contigo.",
+    image:
+      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=225&fit=crop",
   },
 ] as const;
 
@@ -194,6 +281,7 @@ export const TESTIMONIALS = [
     name: "María Fernanda López",
     location: "Armenia, Quindío",
     trip: "San Andrés en familia",
+    year: "2024",
     text: "Bambú organizó nuestro viaje familiar completo. Desde el primer contacto sentimos confianza. Todo salió perfecto y los niños aún hablan del mar de siete colores.",
     avatar: "https://i.pravatar.cc/150?img=47",
     rating: 5,
@@ -203,6 +291,7 @@ export const TESTIMONIALS = [
     name: "Carlos Andrés Mejía",
     location: "Pereira, Risaralda",
     trip: "Europa en pareja",
+    year: "2024",
     text: "Queríamos una luna de miel especial y Bambú superó expectativas. Itinerario impecable, hoteles increíbles y asesoría en cada paso. 100% recomendados.",
     avatar: "https://i.pravatar.cc/150?img=12",
     rating: 5,
@@ -212,6 +301,7 @@ export const TESTIMONIALS = [
     name: "Laura Patricia Gómez",
     location: "Manizales, Caldas",
     trip: "Cartagena con amigas",
+    year: "2023",
     text: "La atención personalizada hace la diferencia. Nos ayudaron a encontrar opciones dentro de nuestro presupuesto sin sacrificar calidad. ¡Ya estamos planeando el próximo!",
     avatar: "https://i.pravatar.cc/150?img=32",
     rating: 5,
@@ -221,6 +311,7 @@ export const TESTIMONIALS = [
     name: "Empresa Cafés del Eje",
     location: "Armenia, Quindío",
     trip: "Viaje corporativo Cancún",
+    year: "2024",
     text: "Confiamos en Bambú para el retiro de nuestra empresa. Coordinación impecable para 25 personas. Profesionales, puntuales y siempre disponibles.",
     avatar: "https://i.pravatar.cc/150?img=68",
     rating: 5,

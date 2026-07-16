@@ -1,10 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { HeroVideo } from "@/components/HeroVideo";
 import { WhatsAppIcon } from "@/components/SocialIcons";
-import { SITE } from "@/lib/constants";
+import { HERO_TRUST, SITE } from "@/lib/constants";
 import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/Button";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
@@ -21,7 +21,6 @@ export function Hero() {
       <HeroVideo />
       <CursorSpotlight size={380} intensity={0.2} />
 
-      {/* Ambient glow — animado solo en desktop */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
         <div className="absolute -left-20 top-1/4 h-64 w-64 rounded-full bg-bamboo/12 lg:hidden" />
         <div className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-earth/15 lg:hidden" />
@@ -60,7 +59,16 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.2, ease: easePremium }}
-            className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl md:text-2xl"
+            className="font-playfair mx-auto mt-4 max-w-xl text-lg italic text-white/80 sm:text-xl"
+          >
+            Experiencias únicas, asesoría de corazón.
+          </motion.p>
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 1.25, ease: easePremium }}
+            className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl md:text-2xl"
           >
             Creamos experiencias inolvidables en Colombia y el mundo. Asesoría
             personalizada, sin complicaciones.
@@ -90,14 +98,23 @@ export function Hero() {
             </Button>
           </motion.div>
 
-          <motion.p
+          <motion.ul
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.5 }}
-            className="mt-8 text-sm tracking-wide text-white/55"
+            className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2"
+            aria-label="Garantías de la agencia"
           >
-            Respuesta en menos de 2 horas · Cotización sin compromiso
-          </motion.p>
+            {HERO_TRUST.map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-1.5 text-xs font-medium text-white/70 sm:text-sm"
+              >
+                <Check className="h-3.5 w-3.5 shrink-0 text-bamboo-light" aria-hidden="true" />
+                {item}
+              </li>
+            ))}
+          </motion.ul>
         </motion.div>
       </div>
 
@@ -106,14 +123,18 @@ export function Hero() {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.7, duration: 0.6 }}
         onClick={() => scrollToSection("#por-que-bambu")}
-        className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/60 transition-colors hover:text-white"
+        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60 transition-premium hover:text-white"
         aria-label="Desplazarse hacia abajo"
       >
+        <span className="text-[10px] font-semibold uppercase tracking-[0.25em]">
+          Explorar
+        </span>
+        <div className="h-10 w-px bg-gradient-to-b from-white/70 to-transparent" aria-hidden="true" />
         <motion.div
-          animate={{ y: [0, 8, 0] }}
+          animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ChevronDown className="h-8 w-8" strokeWidth={1.5} />
+          <ChevronDown className="h-5 w-5" strokeWidth={1.5} />
         </motion.div>
       </motion.button>
     </section>

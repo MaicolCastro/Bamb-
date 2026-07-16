@@ -2,6 +2,7 @@
 
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import Image from "next/image";
 import { MessageSquare, PenTool, CalendarCheck, Plane } from "lucide-react";
 import { PROCESS_STEPS } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -91,6 +92,15 @@ export function HowWeWork() {
                 >
                   {/* Nodo del timeline */}
                   <div className="relative z-10 mx-auto mb-8 flex flex-col items-center">
+                    <div className="relative mb-4 h-16 w-28 overflow-hidden rounded-xl ring-2 ring-white/30 shadow-lg sm:h-[4.5rem] sm:w-32">
+                      <Image
+                        src={step.image}
+                        alt=""
+                        fill
+                        className="object-cover transition-premium group-hover:scale-105"
+                        sizes="128px"
+                      />
+                    </div>
                     <motion.div
                       whileHover={{ scale: 1.06 }}
                       transition={{ type: "spring", stiffness: 320, damping: 22 }}

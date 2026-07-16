@@ -82,10 +82,18 @@ function TestimonialCard({
   return (
     <article
       className={cn(
-        "relative flex h-full flex-col rounded-3xl bg-white shadow-xl shadow-black/5 ring-1 ring-black/5",
+        "card-surface relative flex h-full flex-col rounded-3xl",
         compact ? "p-6 sm:p-7" : "p-8 sm:p-12"
       )}
     >
+      <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-bamboo-muted px-3 py-1 ring-1 ring-black/[0.04]">
+        <span className="text-xs font-semibold text-bamboo">{testimonial.trip}</span>
+        <span className="text-[10px] text-foreground/40">·</span>
+        <span className="text-[10px] font-medium uppercase tracking-wider text-foreground/45">
+          {testimonial.year}
+        </span>
+      </div>
+
       <Quote
         className={cn(
           "absolute text-bamboo/10",
@@ -218,12 +226,13 @@ export function Testimonials() {
 
           {/* Carrusel múltiple — desktop / tablet */}
           {cardsPerView > 1 ? (
-            <div
-              className={cn(
-                "grid gap-5 lg:gap-6",
-                cardsPerView === 3 ? "xl:grid-cols-3" : "lg:grid-cols-2"
-              )}
-            >
+            <div className="overflow-hidden xl:-mr-[6%]">
+              <div
+                className={cn(
+                  "grid gap-5 lg:gap-6",
+                  cardsPerView === 3 ? "xl:grid-cols-3" : "lg:grid-cols-2"
+                )}
+              >
               <AnimatePresence mode="popLayout">
                 {visibleTestimonials.map((testimonial, i) => (
                   <motion.div
@@ -242,6 +251,7 @@ export function Testimonials() {
                   </motion.div>
                 ))}
               </AnimatePresence>
+            </div>
             </div>
           ) : (
             /* Carrusel simple — móvil */
