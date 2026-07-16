@@ -14,6 +14,8 @@ interface CardImageProps {
   /** Punto focal para smart crop visual (object-position) */
   objectPosition?: string;
   priority?: boolean;
+  /** Ocupa toda la altura del contenedor (galería bento, tarjetas destacadas) */
+  fillHeight?: boolean;
 }
 
 /**
@@ -27,12 +29,17 @@ export function CardImage({
   imageClassName,
   objectPosition = "center",
   priority = false,
+  fillHeight = false,
 }: CardImageProps) {
   const resolvedSrc = src.startsWith("http") ? toAspect169Url(src) : src;
 
   return (
     <div
-      className={cn("relative aspect-video w-full overflow-hidden", className)}
+      className={cn(
+        "relative w-full overflow-hidden",
+        fillHeight ? "h-full min-h-[160px]" : "aspect-video",
+        className
+      )}
     >
       <Image
         src={resolvedSrc}

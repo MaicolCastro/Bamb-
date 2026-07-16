@@ -8,7 +8,6 @@ import { TravelGuides } from "@/components/TravelGuides";
 import { Hero } from "@/sections/Hero";
 import { WhyChooseUs } from "@/sections/WhyChooseUs";
 import { Destinations } from "@/sections/Destinations";
-import { Packages } from "@/sections/Packages";
 import { HowWeWork } from "@/sections/HowWeWork";
 import { Testimonials } from "@/sections/Testimonials";
 import { Stats } from "@/sections/Stats";
@@ -39,10 +38,6 @@ export default function HomePage() {
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.background} />
         <div className="section-deferred">
           <Destinations />
-        </div>
-        <SectionWave topColor={COLORS.background} bottomColor={COLORS.background} />
-        <div className="section-deferred">
-          <Packages />
         </div>
         <EditorialBand />
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.bamboo} />

@@ -15,7 +15,7 @@ export function EditorialBand() {
         src={EDITORIAL_BAND.image}
         alt=""
         fill
-        className="object-cover"
+        className="ken-burns ken-burns-1 object-cover"
         sizes="100vw"
         aria-hidden="true"
       />

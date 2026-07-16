@@ -72,7 +72,7 @@ export function Loader() {
                 transition={{ duration: 0.5, ease: easePremium }}
                 className="relative z-10 flex flex-col items-center gap-8"
               >
-                <div className="rounded-2xl bg-white/95 px-6 py-4 shadow-xl shadow-black/20 ring-1 ring-white/50">
+                <div className="rounded-2xl bg-white/95 px-6 py-4 shadow-xl shadow-black/20 ring-1 ring-white/50 loader-logo-grow">
                   <Logo size="lg" priority />
                 </div>
 

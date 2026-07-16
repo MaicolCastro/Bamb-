@@ -15,7 +15,7 @@ export function Team() {
   return (
     <section
       id="equipo"
-      className="bg-background py-24 sm:py-32"
+      className="texture-bamboo relative py-24 sm:py-32"
       aria-labelledby="team-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

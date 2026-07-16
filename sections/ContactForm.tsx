@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Phone, Mail, MapPin, Clock } from "lucide-react";
 import { WhatsAppIcon } from "@/components/SocialIcons";
-import { DESTINATION_OPTIONS, HERO_MEDIA, SITE } from "@/lib/constants";
+import { DESTINATION_OPTIONS, SITE } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -130,7 +130,7 @@ export function ContactForm() {
   return (
     <section
       id="contacto"
-      className="relative overflow-hidden bg-earth-muted py-24 sm:py-32"
+      className="texture-dots relative overflow-hidden bg-earth-muted py-24 sm:py-32"
       aria-labelledby="contact-heading"
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -304,7 +304,7 @@ export function ContactForm() {
             <div className="flex h-full flex-col">
               <div className="relative min-h-[220px] flex-1 overflow-hidden rounded-3xl ring-1 ring-black/[0.04] sm:min-h-[280px]">
                 <Image
-                  src={HERO_MEDIA.poster}
+                  src="/images/destinations/eje-cafetero.png"
                   alt=""
                   fill
                   className="object-cover"

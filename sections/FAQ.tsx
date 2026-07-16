@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, MessageCircle, Search, ChevronsUpDown } from "lucide-react";
+import { Plus, Minus, MessageCircle, ChevronsUpDown } from "lucide-react";
 import { FAQ_ITEMS, FAQ_CATEGORIES, SITE } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
@@ -92,21 +92,15 @@ function FaqItem({
 
 export function FAQ() {
   const [activeCategory, setActiveCategory] = useState<CategoryId>("all");
-  const [searchQuery, setSearchQuery] = useState("");
   const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0]));
 
-  const filteredItems = useMemo(() => {
-    const query = searchQuery.trim().toLowerCase();
-    return FAQ_ITEMS.filter((item) => {
-      const matchesCategory =
-        activeCategory === "all" || item.category === activeCategory;
-      const matchesSearch =
-        !query ||
-        item.question.toLowerCase().includes(query) ||
-        item.answer.toLowerCase().includes(query);
-      return matchesCategory && matchesSearch;
-    });
-  }, [activeCategory, searchQuery]);
+  const filteredItems = useMemo(
+    () =>
+      activeCategory === "all"
+        ? FAQ_ITEMS
+        : FAQ_ITEMS.filter((item) => item.category === activeCategory),
+    [activeCategory]
+  );
 
   const toggle = (index: number) => {
     setOpenIndices((prev) => {
@@ -126,7 +120,7 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-beige py-24 sm:py-32"
+      className="texture-dots relative bg-beige py-24 sm:py-32"
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -144,24 +138,7 @@ export function FAQ() {
           </div>
 
           <div>
-            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <label htmlFor="faq-search" className="sr-only">
-                Buscar en preguntas frecuentes
-              </label>
-              <div className="relative flex-1">
-                <Search
-                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40"
-                  aria-hidden="true"
-                />
-                <input
-                  id="faq-search"
-                  type="search"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Buscar pregunta..."
-                  className="input-boutique w-full pl-10 text-sm"
-                />
-              </div>
+            <div className="mb-4 flex justify-end">
               <button
                 type="button"
                 onClick={

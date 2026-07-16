@@ -1,10 +1,17 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronDown } from "lucide-react";
 import { HeroVideo } from "@/components/HeroVideo";
 import { WhatsAppIcon } from "@/components/SocialIcons";
-import { HERO_TRUST, SITE } from "@/lib/constants";
+import {
+  HERO_DESTINATION_STRIP,
+  HERO_ROTATING_DESTINATIONS,
+  HERO_TRUST,
+  SITE,
+} from "@/lib/constants";
 import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/Button";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
@@ -12,6 +19,15 @@ import { CursorSpotlight } from "@/components/CursorSpotlight";
 const easePremium = [0.22, 1, 0.36, 1] as const;
 
 export function Hero() {
+  const [destIndex, setDestIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDestIndex((i) => (i + 1) % HERO_ROTATING_DESTINATIONS.length);
+    }, 3200);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section
       id="inicio"
@@ -63,6 +79,24 @@ export function Hero() {
           >
             Experiencias únicas, asesoría de corazón.
           </motion.p>
+
+          <p className="mx-auto mt-3 flex flex-wrap items-center justify-center gap-x-1.5 text-base text-white/75 sm:text-lg">
+            <span>Tu próximo destino:</span>
+            <span className="inline-flex min-w-[8rem] justify-center font-semibold text-earth-light">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={HERO_ROTATING_DESTINATIONS[destIndex]}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.4, ease: easePremium }}
+                  className="font-playfair italic"
+                >
+                  {HERO_ROTATING_DESTINATIONS[destIndex]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
+          </p>
 
           <motion.p
             initial={{ opacity: 0, y: 16 }}
@@ -117,6 +151,40 @@ export function Hero() {
           </motion.ul>
         </motion.div>
       </div>
+
+      {/* Franja postal de destinos */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.6, duration: 0.7, ease: easePremium }}
+        className="absolute bottom-20 left-0 right-0 z-10 hidden sm:block"
+        aria-hidden="true"
+      >
+        <div className="mx-auto flex max-w-3xl items-center justify-center gap-3 px-4">
+          {HERO_DESTINATION_STRIP.map((dest) => (
+            <button
+              key={dest.name}
+              type="button"
+              onClick={() => scrollToSection("#destinos")}
+              className="group flex flex-col items-center gap-1.5 transition-premium hover:-translate-y-1"
+              title={dest.name}
+            >
+              <span className="relative h-11 w-11 overflow-hidden rounded-full ring-2 ring-white/40 transition-premium group-hover:ring-earth-light sm:h-12 sm:w-12">
+                <Image
+                  src={dest.image}
+                  alt=""
+                  fill
+                  className="object-cover transition-premium group-hover:scale-110"
+                  sizes="48px"
+                />
+              </span>
+              <span className="text-[9px] font-medium tracking-wide text-white/60 uppercase group-hover:text-white/90">
+                {dest.name}
+              </span>
+            </button>
+          ))}
+        </div>
+      </motion.div>
 
       <motion.button
         initial={{ opacity: 0 }}

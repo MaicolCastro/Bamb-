@@ -60,7 +60,7 @@ export function Navbar() {
           className={cn(
             "mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8",
             scrolled &&
-              "mx-4 rounded-full border border-white/70 bg-white/92 px-5 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.06)] sm:mx-6 lg:mx-8 supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:backdrop-blur-md"
+              "mx-4 rounded-full border border-white/80 bg-white/90 px-5 py-2 shadow-[0_12px_40px_rgba(45,90,39,0.12)] sm:mx-6 lg:mx-8 supports-[backdrop-filter]:bg-white/75 supports-[backdrop-filter]:backdrop-blur-xl"
           )}
           aria-label="Navegación principal"
         >

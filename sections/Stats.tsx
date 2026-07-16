@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Users, Award, MapPin, Star, type LucideIcon } from "lucide-react";
-import { HERO_MEDIA, STATS } from "@/lib/constants";
+import { STATS } from "@/lib/constants";
 import { useCountUp } from "@/hooks/useCountUp";
 import { cn } from "@/lib/utils";
 
@@ -80,10 +80,10 @@ export function Stats() {
     >
       <div className="absolute inset-0 bg-bamboo-dark" aria-hidden="true">
         <Image
-          src={HERO_MEDIA.poster}
+          src="/images/destinations/eje-cafetero.png"
           alt=""
           fill
-          className="object-cover opacity-20"
+          className="object-cover opacity-25"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-bamboo-dark/96 via-bamboo-dark/92 to-bamboo/88" />

@@ -1,8 +1,10 @@
 "use client";
 
-import { Check, X } from "lucide-react";
+import { Check } from "lucide-react";
 import { COMPARISON_ROWS } from "@/lib/constants";
 import { ScrollReveal } from "./ScrollReveal";
+
+const OTA_LEVELS = [0.35, 0.2, 0.15, 0.25, 0.85] as const;
 
 export function ComparisonTable() {
   return (
@@ -17,40 +19,57 @@ export function ComparisonTable() {
           </h3>
         </div>
 
-        <div className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 px-4 py-3 text-xs font-semibold uppercase tracking-wider text-foreground/45 sm:px-6 sm:text-sm">
-          <span />
-          <span className="text-center text-bamboo">Bambú</span>
-          <span className="text-center">OTAs</span>
-        </div>
+        <ul role="list" className="divide-y divide-black/[0.04]">
+          {COMPARISON_ROWS.map((row, i) => {
+            const otaLevel = row.ota ? OTA_LEVELS[i] ?? 0.5 : 0.08;
+            return (
+              <li
+                key={row.feature}
+                className="px-5 py-4 sm:px-8 sm:py-5"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-sm font-medium text-foreground/80 sm:text-base">
+                    {row.feature}
+                  </span>
+                  {row.ota ? (
+                    <span className="shrink-0 rounded-full bg-foreground/5 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-foreground/40">
+                      Parcial
+                    </span>
+                  ) : (
+                    <span className="flex shrink-0 items-center gap-1 rounded-full bg-bamboo/10 px-2 py-0.5 text-[10px] font-semibold text-bamboo">
+                      <Check className="h-3 w-3" aria-hidden="true" />
+                      Bambú
+                    </span>
+                  )}
+                </div>
 
-        <ul role="list">
-          {COMPARISON_ROWS.map((row, i) => (
-            <li
-              key={row.feature}
-              className="grid grid-cols-[1fr_auto_auto] items-center gap-x-4 border-t border-black/[0.04] px-4 py-3.5 sm:px-6 sm:py-4"
-            >
-              <span className="text-sm text-foreground/75 sm:text-base">
-                {row.feature}
-              </span>
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-bamboo/10">
-                <Check className="h-4 w-4 text-bamboo" aria-hidden="true" />
-                <span className="sr-only">Sí</span>
-              </span>
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-foreground/5">
-                {row.ota ? (
-                  <>
-                    <Check className="h-4 w-4 text-foreground/35" aria-hidden="true" />
-                    <span className="sr-only">Parcial</span>
-                  </>
-                ) : (
-                  <>
-                    <X className="h-4 w-4 text-foreground/25" aria-hidden="true" />
-                    <span className="sr-only">No</span>
-                  </>
-                )}
-              </span>
-            </li>
-          ))}
+                <div className="mt-3 space-y-1.5">
+                  <div className="flex items-center gap-2">
+                    <span className="w-12 shrink-0 text-[10px] font-semibold text-bamboo">
+                      Bambú
+                    </span>
+                    <div className="compare-bar-track flex-1">
+                      <div
+                        className="compare-bar-fill-bamboo"
+                        style={{ width: row.ota ? "92%" : "100%" }}
+                      />
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="w-12 shrink-0 text-[10px] font-semibold text-foreground/40">
+                      OTAs
+                    </span>
+                    <div className="compare-bar-track flex-1">
+                      <div
+                        className="compare-bar-fill-ota"
+                        style={{ width: `${otaLevel * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </ScrollReveal>

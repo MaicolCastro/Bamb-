@@ -52,9 +52,21 @@ export function DestinationModal({ destination, onClose }: DestinationModalProps
           aria-modal="true"
           aria-labelledby="destination-modal-title"
         >
+          {/* Fondo con imagen difuminada del destino */}
+          <div className="absolute inset-0 overflow-hidden" aria-hidden="true">
+            <Image
+              src={destination.image}
+              alt=""
+              fill
+              className="scale-110 object-cover blur-2xl brightness-50"
+              sizes="100vw"
+            />
+            <div className="absolute inset-0 bg-bamboo-dark/50" />
+          </div>
+
           <button
             type="button"
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"
             onClick={onClose}
             aria-label="Cerrar"
           />
@@ -64,7 +76,7 @@ export function DestinationModal({ destination, onClose }: DestinationModalProps
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 24, scale: 0.97 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-white shadow-2xl sm:rounded-3xl"
+            className="relative z-10 max-h-[92vh] w-full max-w-lg overflow-y-auto rounded-t-3xl bg-white/95 shadow-2xl backdrop-blur-xl sm:rounded-3xl"
           >
             <div className="relative h-48 sm:h-56">
               <Image

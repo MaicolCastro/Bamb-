@@ -86,75 +86,92 @@ function TestimonialCard({
   return (
     <article
       className={cn(
-        "card-surface relative flex h-full flex-col rounded-3xl",
-        compact ? "p-6 sm:p-7" : "p-8 sm:p-12"
+        "postcard relative flex h-full flex-col overflow-hidden rounded-sm bg-white",
+        compact ? "p-6 sm:p-7" : "p-8 sm:p-10"
       )}
     >
-      <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-bamboo-muted px-3 py-1 ring-1 ring-black/[0.04]">
-        <span className="text-xs font-semibold text-bamboo">{testimonial.trip}</span>
-        <span className="text-[10px] text-foreground/40">·</span>
-        <span className="text-[10px] font-medium uppercase tracking-wider text-foreground/45">
-          {testimonial.year}
-        </span>
-      </div>
-
-      <Quote
-        className={cn(
-          "absolute text-bamboo/10",
-          compact ? "right-5 top-5 h-8 w-8" : "right-8 top-8 h-12 w-12"
-        )}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        style={{
+          backgroundImage: `url(${testimonial.backdrop})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
         aria-hidden="true"
       />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white via-white/95 to-white/88" aria-hidden="true" />
 
-      <div
-        className="flex gap-1"
-        aria-label={`${testimonial.rating} de 5 estrellas`}
-      >
-        {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <Star
-            key={i}
-            className={cn(
-              "fill-amber-400 text-amber-400",
-              compact ? "h-4 w-4" : "h-5 w-5"
-            )}
-            aria-hidden="true"
-          />
-        ))}
-      </div>
+      <span className="postcard-stamp" aria-hidden="true">
+        Bambú
+      </span>
 
-      <blockquote
-        className={cn(
-          "mt-4 flex-1 leading-relaxed text-foreground/80",
-          compact ? "text-sm sm:text-base" : "text-lg sm:text-xl"
-        )}
-      >
-        &ldquo;{testimonial.text}&rdquo;
-      </blockquote>
-
-      <footer className="mt-6 flex items-center gap-3">
-        <Image
-          src={testimonial.avatar}
-          alt={testimonial.name}
-          width={compact ? 48 : 56}
-          height={compact ? 48 : 56}
-          className="rounded-full object-cover ring-2 ring-bamboo-muted"
-        />
-        <div>
-          <cite className="not-italic">
-            <p
-              className={cn(
-                "font-bold text-foreground",
-                compact && "text-sm sm:text-base"
-              )}
-            >
-              {testimonial.name}
-            </p>
-            <p className="text-xs text-foreground/50 sm:text-sm">
-              {testimonial.location} · {testimonial.trip}
-            </p>
-          </cite>
+      <div className="relative z-[1]">
+        <div className="mb-4 inline-flex w-fit items-center gap-2 rounded-full bg-bamboo-muted/80 px-3 py-1 ring-1 ring-black/[0.04] backdrop-blur-sm">
+          <span className="text-xs font-semibold text-bamboo">{testimonial.trip}</span>
+          <span className="text-[10px] text-foreground/40">·</span>
+          <span className="text-[10px] font-medium uppercase tracking-wider text-foreground/45">
+            {testimonial.year}
+          </span>
         </div>
-      </footer>
+
+        <Quote
+          className={cn(
+            "absolute text-bamboo/10",
+            compact ? "right-5 top-14 h-8 w-8" : "right-8 top-16 h-12 w-12"
+          )}
+          aria-hidden="true"
+        />
+
+        <div
+          className="flex gap-1"
+          aria-label={`${testimonial.rating} de 5 estrellas`}
+        >
+          {Array.from({ length: testimonial.rating }).map((_, i) => (
+            <Star
+              key={i}
+              className={cn(
+                "fill-amber-400 text-amber-400",
+                compact ? "h-4 w-4" : "h-5 w-5"
+              )}
+              aria-hidden="true"
+            />
+          ))}
+        </div>
+
+        <blockquote
+          className={cn(
+            "mt-4 flex-1 leading-relaxed text-foreground/80",
+            compact ? "text-sm sm:text-base" : "text-lg sm:text-xl"
+          )}
+        >
+          &ldquo;{testimonial.text}&rdquo;
+        </blockquote>
+
+        <footer className="mt-6 flex items-center gap-3 border-t border-foreground/5 pt-5">
+          <Image
+            src={testimonial.avatar}
+            alt={testimonial.name}
+            width={compact ? 48 : 56}
+            height={compact ? 48 : 56}
+            className="rounded-full object-cover ring-2 ring-bamboo-muted"
+          />
+          <div>
+            <cite className="not-italic">
+              <p
+                className={cn(
+                  "font-bold text-foreground",
+                  compact && "text-sm sm:text-base"
+                )}
+              >
+                {testimonial.name}
+              </p>
+              <p className="text-xs text-foreground/50 sm:text-sm">
+                {testimonial.location} · {testimonial.trip}
+              </p>
+            </cite>
+          </div>
+        </footer>
+      </div>
     </article>
   );
 }

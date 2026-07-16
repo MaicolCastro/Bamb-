@@ -41,7 +41,6 @@ export const NAV_LINKS = [
   { label: "Inicio", href: "#inicio" },
   { label: "¿Por qué Bambú?", href: "#por-que-bambu" },
   { label: "Destinos", href: "#destinos" },
-  { label: "Paquetes", href: "#paquetes" },
   { label: "Proceso", href: "#proceso" },
   { label: "Testimonios", href: "#testimonios" },
   { label: "Galería", href: "#galeria" },
@@ -77,6 +76,36 @@ export const TRIP_MARQUEE = [
   "Playa",
   "Montaña",
 ] as const;
+
+export const HERO_ROTATING_DESTINATIONS = [
+  "Cartagena",
+  "San Andrés",
+  "Cancún",
+  "Europa",
+  "Eje Cafetero",
+  "Miami",
+] as const;
+
+export const MARQUEE_DESTINATIONS = [
+  { label: "Cartagena", image: "/images/destinations/cartagena.png" },
+  { label: "San Andrés", image: "/images/destinations/san-andres.png" },
+  { label: "Cancún", image: "/images/destinations/cancun.png" },
+  { label: "Europa", image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=200&h=200&fit=crop" },
+  { label: "Medellín", image: "/images/destinations/medellin.png" },
+  { label: "Orlando", image: "/images/destinations/orlando.png" },
+  { label: "Perú", image: "/images/destinations/peru.png" },
+  { label: "Panamá", image: "/images/destinations/panama.png" },
+] as const;
+
+export const HERO_DESTINATION_STRIP = [
+  { name: "Cartagena", image: "/images/destinations/cartagena.png" },
+  { name: "San Andrés", image: "/images/destinations/san-andres.png" },
+  { name: "Cancún", image: "/images/destinations/cancun.png" },
+  { name: "Europa", image: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=200&h=200&fit=crop" },
+  { name: "Eje Cafetero", image: "/images/destinations/eje-cafetero.png" },
+] as const;
+
+export const FEATURED_DESTINATION_NAME = "Cartagena" as const;
 
 export const TRUST_BADGES = [
   { label: "RNT", sublabel: "Registro Nacional de Turismo" },
@@ -311,39 +340,6 @@ export const DESTINATION_DETAILS: Record<
   },
 };
 
-export const PACKAGES = [
-  {
-    id: "romantica",
-    title: "Escapada romántica",
-    destination: "Cartagena",
-    duration: "4 días / 3 noches",
-    tag: "Parejas",
-    includes: ["Vuelo ida y vuelta", "Hotel boutique", "Traslados", "Asesoría personalizada"],
-    whatsappMessage:
-      "Hola Bambú, me interesa el paquete Escapada romántica a Cartagena. ¿Me pueden dar más información?",
-  },
-  {
-    id: "familiar",
-    title: "Aventura en familia",
-    destination: "San Andrés",
-    duration: "5 días / 4 noches",
-    tag: "Familia",
-    includes: ["Tiquetes aéreos", "Alojamiento", "Actividades para niños", "Seguro de viaje"],
-    whatsappMessage:
-      "Hola Bambú, me interesa el paquete Aventura en familia a San Andrés. ¿Me pueden asesorar?",
-  },
-  {
-    id: "corporativo",
-    title: "Retiro corporativo",
-    destination: "A medida",
-    duration: "Personalizable",
-    tag: "Empresas",
-    includes: ["Logística grupal", "Hoteles y salones", "Actividades de team building", "Coordinador dedicado"],
-    whatsappMessage:
-      "Hola Bambú, necesito cotizar un viaje corporativo para mi empresa. ¿Me pueden asesorar?",
-  },
-] as const;
-
 export const TEAM = [
   {
     role: "Asesores de viaje",
@@ -423,6 +419,7 @@ export const TESTIMONIALS = [
     text: "Bambú organizó nuestro viaje familiar completo. Desde el primer contacto sentimos confianza. Todo salió perfecto y los niños aún hablan del mar de siete colores.",
     avatar: "https://i.pravatar.cc/150?img=47",
     rating: 5,
+    backdrop: "/images/destinations/san-andres.png",
   },
   {
     id: 2,
@@ -433,6 +430,7 @@ export const TESTIMONIALS = [
     text: "Queríamos una luna de miel especial y Bambú superó expectativas. Itinerario impecable, hoteles increíbles y asesoría en cada paso. 100% recomendados.",
     avatar: "https://i.pravatar.cc/150?img=12",
     rating: 5,
+    backdrop: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&h=600&fit=crop",
   },
   {
     id: 3,
@@ -443,6 +441,7 @@ export const TESTIMONIALS = [
     text: "La atención personalizada hace la diferencia. Nos ayudaron a encontrar opciones dentro de nuestro presupuesto sin sacrificar calidad. ¡Ya estamos planeando el próximo!",
     avatar: "https://i.pravatar.cc/150?img=32",
     rating: 5,
+    backdrop: "/images/destinations/cartagena.png",
   },
   {
     id: 4,
@@ -453,6 +452,7 @@ export const TESTIMONIALS = [
     text: "Confiamos en Bambú para el retiro de nuestra empresa. Coordinación impecable para 25 personas. Profesionales, puntuales y siempre disponibles.",
     avatar: "https://i.pravatar.cc/150?img=68",
     rating: 5,
+    backdrop: "/images/destinations/cancun.png",
   },
 ] as const;
 
