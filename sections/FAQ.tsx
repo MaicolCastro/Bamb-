@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Plus, Minus, MessageCircle } from "lucide-react";
-import { FAQ_ITEMS, SITE } from "@/lib/constants";
+import { Plus, Minus, MessageCircle, Search, ChevronsUpDown } from "lucide-react";
+import { FAQ_ITEMS, FAQ_CATEGORIES, SITE } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/Button";
@@ -12,6 +12,8 @@ import { getWhatsAppUrl } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
+
+type CategoryId = (typeof FAQ_CATEGORIES)[number]["id"];
 
 function FaqItem({
   question,
@@ -27,7 +29,7 @@ function FaqItem({
   index: number;
 }) {
   return (
-    <ScrollReveal delay={index * 0.05}>
+    <ScrollReveal delay={index * 0.04}>
       <div
         className={cn(
           "card-surface overflow-hidden rounded-2xl transition-premium",
@@ -89,11 +91,37 @@ function FaqItem({
 }
 
 export function FAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [activeCategory, setActiveCategory] = useState<CategoryId>("all");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set([0]));
+
+  const filteredItems = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    return FAQ_ITEMS.filter((item) => {
+      const matchesCategory =
+        activeCategory === "all" || item.category === activeCategory;
+      const matchesSearch =
+        !query ||
+        item.question.toLowerCase().includes(query) ||
+        item.answer.toLowerCase().includes(query);
+      return matchesCategory && matchesSearch;
+    });
+  }, [activeCategory, searchQuery]);
 
   const toggle = (index: number) => {
-    setOpenIndex((prev) => (prev === index ? null : index));
+    setOpenIndices((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) next.delete(index);
+      else next.add(index);
+      return next;
+    });
   };
+
+  const expandAll = () => {
+    setOpenIndices(new Set(filteredItems.map((_, i) => i)));
+  };
+
+  const collapseAll = () => setOpenIndices(new Set());
 
   return (
     <section
@@ -105,7 +133,7 @@ export function FAQ() {
         <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:items-start">
           <div className="lg:sticky lg:top-28">
             <SectionHeading
-              sectionNumber="06"
+              sectionNumber="07"
               highlights={["primer paso"]}
               eyebrow="Preguntas frecuentes"
               title="Resolvemos tus dudas antes de que des el primer paso"
@@ -115,17 +143,79 @@ export function FAQ() {
             />
           </div>
 
-          <div className="space-y-3 sm:space-y-4">
-            {FAQ_ITEMS.map((item, index) => (
-              <FaqItem
-                key={item.question}
-                question={item.question}
-                answer={item.answer}
-                isOpen={openIndex === index}
-                onToggle={() => toggle(index)}
-                index={index}
-              />
-            ))}
+          <div>
+            <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <label htmlFor="faq-search" className="sr-only">
+                Buscar en preguntas frecuentes
+              </label>
+              <div className="relative flex-1">
+                <Search
+                  className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40"
+                  aria-hidden="true"
+                />
+                <input
+                  id="faq-search"
+                  type="search"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Buscar pregunta..."
+                  className="input-boutique w-full pl-10 text-sm"
+                />
+              </div>
+              <button
+                type="button"
+                onClick={
+                  openIndices.size === filteredItems.length ? collapseAll : expandAll
+                }
+                className="inline-flex shrink-0 items-center gap-1.5 rounded-full px-3 py-2 text-xs font-semibold text-bamboo transition-premium hover:bg-bamboo-muted"
+              >
+                <ChevronsUpDown className="h-3.5 w-3.5" aria-hidden="true" />
+                {openIndices.size === filteredItems.length
+                  ? "Colapsar todo"
+                  : "Expandir todo"}
+              </button>
+            </div>
+
+            <div
+              className="mb-4 flex flex-wrap gap-2"
+              role="tablist"
+              aria-label="Categorías de preguntas"
+            >
+              {FAQ_CATEGORIES.map(({ id, label }) => (
+                <button
+                  key={id}
+                  type="button"
+                  role="tab"
+                  aria-selected={activeCategory === id}
+                  onClick={() => setActiveCategory(id)}
+                  className={cn(
+                    "filter-pill text-xs",
+                    activeCategory === id && "filter-pill-active"
+                  )}
+                >
+                  {label}
+                </button>
+              ))}
+            </div>
+
+            <div className="space-y-3 sm:space-y-4">
+              {filteredItems.length === 0 ? (
+                <p className="py-8 text-center text-foreground/50">
+                  No hay resultados. Escríbenos por WhatsApp y te ayudamos.
+                </p>
+              ) : (
+                filteredItems.map((item, index) => (
+                  <FaqItem
+                    key={item.question}
+                    question={item.question}
+                    answer={item.answer}
+                    isOpen={openIndices.has(index)}
+                    onToggle={() => toggle(index)}
+                    index={index}
+                  />
+                ))
+              )}
+            </div>
           </div>
         </div>
 

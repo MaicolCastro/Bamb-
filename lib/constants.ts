@@ -25,6 +25,9 @@ export const SITE = {
   },
   mapEmbed:
     "https://maps.google.com/maps?q=Armenia,+Quind%C3%ADo,+Colombia&hl=es&z=14&output=embed",
+  businessHours: "Lun – Sáb · 8:00 am – 6:00 pm",
+  nearbyAirport: "Salida desde Pereira y El Edén",
+  googleReviewsUrl: "https://maps.app.goo.gl/beyJxuo2zGXGN4Mh6",
 } as const;
 
 export const HERO_MEDIA = {
@@ -38,10 +41,12 @@ export const NAV_LINKS = [
   { label: "Inicio", href: "#inicio" },
   { label: "¿Por qué Bambú?", href: "#por-que-bambu" },
   { label: "Destinos", href: "#destinos" },
+  { label: "Paquetes", href: "#paquetes" },
   { label: "Proceso", href: "#proceso" },
   { label: "Testimonios", href: "#testimonios" },
   { label: "Galería", href: "#galeria" },
   { label: "FAQ", href: "#faq" },
+  { label: "Equipo", href: "#equipo" },
   { label: "Contacto", href: "#contacto" },
 ] as const;
 
@@ -231,6 +236,148 @@ export const DESTINATIONS = [
   },
 ] as const;
 
+export const DESTINATION_DETAILS: Record<
+  string,
+  {
+    duration: string;
+    bestSeason: string;
+    popular?: boolean;
+    highlights: readonly string[];
+  }
+> = {
+  Cartagena: {
+    duration: "4–5 días",
+    bestSeason: "Dic – Abr",
+    popular: true,
+    highlights: ["Ciudad amurallada", "Islas del Rosario", "Gastronomía caribeña"],
+  },
+  "San Andrés": {
+    duration: "4–6 días",
+    bestSeason: "Todo el año",
+    popular: true,
+    highlights: ["Mar de siete colores", "Johnny Cay", "Buceo y relax"],
+  },
+  "Eje Cafetero": {
+    duration: "3–4 días",
+    bestSeason: "Todo el año",
+    highlights: ["Fincas cafeteras", "Valle del Cocora", "Puebros patrimonio"],
+  },
+  Cancún: {
+    duration: "5–7 días",
+    bestSeason: "Nov – Abr",
+    popular: true,
+    highlights: ["Playas caribeñas", "Ruinas mayas", "Parques acuáticos"],
+  },
+  "Punta Cana": {
+    duration: "5–7 días",
+    bestSeason: "Dic – Abr",
+    highlights: ["Resorts todo incluido", "Isla Saona", "Deportes acuáticos"],
+  },
+  Europa: {
+    duration: "10–15 días",
+    bestSeason: "Abr – Oct",
+    highlights: ["Multi-ciudad", "Cultura y museos", "Gastronomía europea"],
+  },
+  Medellín: {
+    duration: "3–4 días",
+    bestSeason: "Todo el año",
+    highlights: ["Comuna 13", "Guatapé", "Vida nocturna y gastronomía"],
+  },
+  Orlando: {
+    duration: "7–10 días",
+    bestSeason: "Todo el año",
+    popular: true,
+    highlights: ["Parques temáticos", "Compras", "Ideal en familia"],
+  },
+  Perú: {
+    duration: "6–8 días",
+    bestSeason: "Abr – Oct",
+    highlights: ["Machu Picchu", "Cusco", "Gastronomía peruana"],
+  },
+  "Río de Janeiro": {
+    duration: "6–8 días",
+    bestSeason: "Abr – Oct",
+    highlights: ["Cristo Redentor", "Copacabana", "Carnaval y cultura"],
+  },
+  Miami: {
+    duration: "5–7 días",
+    bestSeason: "Nov – Abr",
+    highlights: ["Playas", "Compras", "Vida cosmopolita"],
+  },
+  Panamá: {
+    duration: "4–6 días",
+    bestSeason: "Dic – Abr",
+    highlights: ["Canal de Panamá", "Casco Viejo", "Islas del Pacífico"],
+  },
+};
+
+export const PACKAGES = [
+  {
+    id: "romantica",
+    title: "Escapada romántica",
+    destination: "Cartagena",
+    duration: "4 días / 3 noches",
+    tag: "Parejas",
+    includes: ["Vuelo ida y vuelta", "Hotel boutique", "Traslados", "Asesoría personalizada"],
+    whatsappMessage:
+      "Hola Bambú, me interesa el paquete Escapada romántica a Cartagena. ¿Me pueden dar más información?",
+  },
+  {
+    id: "familiar",
+    title: "Aventura en familia",
+    destination: "San Andrés",
+    duration: "5 días / 4 noches",
+    tag: "Familia",
+    includes: ["Tiquetes aéreos", "Alojamiento", "Actividades para niños", "Seguro de viaje"],
+    whatsappMessage:
+      "Hola Bambú, me interesa el paquete Aventura en familia a San Andrés. ¿Me pueden asesorar?",
+  },
+  {
+    id: "corporativo",
+    title: "Retiro corporativo",
+    destination: "A medida",
+    duration: "Personalizable",
+    tag: "Empresas",
+    includes: ["Logística grupal", "Hoteles y salones", "Actividades de team building", "Coordinador dedicado"],
+    whatsappMessage:
+      "Hola Bambú, necesito cotizar un viaje corporativo para mi empresa. ¿Me pueden asesorar?",
+  },
+] as const;
+
+export const TEAM = [
+  {
+    role: "Asesores de viaje",
+    description:
+      "Expertos en destinos nacionales e internacionales que diseñan cada itinerario según tu estilo y presupuesto.",
+    icon: "Users" as const,
+  },
+  {
+    role: "Operaciones y reservas",
+    description:
+      "Coordinamos vuelos, hoteles, traslados y seguros para que cada detalle quede cubierto antes de tu salida.",
+    icon: "Calendar" as const,
+  },
+  {
+    role: "Atención al cliente",
+    description:
+      "Acompañamiento antes, durante y después del viaje. Siempre a un mensaje de distancia cuando nos necesites.",
+    icon: "Headphones" as const,
+  },
+] as const;
+
+export const CORPORATE_BENEFITS = [
+  "Cotizaciones grupales sin complicaciones",
+  "Facturación empresarial",
+  "Coordinador dedicado para tu equipo",
+  "Itinerarios flexibles y personalizados",
+  "Soporte 24/7 durante el viaje",
+] as const;
+
+export const PULL_QUOTE = {
+  text: "Viajar no es escapar de la vida, es para que la vida no se escape de ti.",
+  author: "Para nuestros viajeros de Bambú",
+} as const;
+
 export const PROCESS_STEPS = [
   {
     step: 1,
@@ -312,6 +459,7 @@ export const TESTIMONIALS = [
 export const GOOGLE_REVIEWS = {
   rating: 4.9,
   count: 47,
+  url: SITE.googleReviewsUrl,
 } as const;
 
 export const STATS = [
@@ -410,35 +558,55 @@ export const GALLERY_IMAGES = [
 
 export const FAQ_ITEMS = [
   {
+    category: "general" as const,
     question: "¿Cómo funciona el proceso de cotización?",
     answer:
       "Escríbenos por WhatsApp o completa el formulario de contacto. Un asesor te contacta en menos de 2 horas, conoce tus preferencias, fechas y presupuesto, y te envía una propuesta personalizada sin compromiso.",
   },
   {
-    question: "¿Debo pagar todo el viaje de una sola vez?",
-    answer:
-      "No necesariamente. Trabajamos con planes de pago flexibles según el destino y la anticipación del viaje. Te explicamos las cuotas, fechas límite y condiciones antes de que confirmes.",
-  },
-  {
-    question: "¿Qué incluyen los paquetes que ofrecen?",
-    answer:
-      "Depende del destino y del plan que elijas. Generalmente incluyen tiquetes, alojamiento, traslados y asesoría completa. Siempre te entregamos un detalle claro de qué está incluido y qué no, para que no haya sorpresas.",
-  },
-  {
+    category: "general" as const,
     question: "¿Pueden diseñar un viaje completamente a mi medida?",
     answer:
       "Sí, esa es nuestra especialidad. No vendemos paquetes genéricos: adaptamos destino, fechas, hoteles, actividades y presupuesto a lo que tú y tu grupo necesitan.",
   },
   {
+    category: "general" as const,
+    question: "¿Atienden solo en Armenia o en todo el país?",
+    answer:
+      "Nuestra oficina está en Armenia, Quindío, pero atendemos clientes de todo Colombia de forma virtual. Cotizamos, confirmamos y te acompañamos por WhatsApp, llamada o correo sin importar dónde estés.",
+  },
+  {
+    category: "pagos" as const,
+    question: "¿Debo pagar todo el viaje de una sola vez?",
+    answer:
+      "No necesariamente. Trabajamos con planes de pago flexibles según el destino y la anticipación del viaje. Te explicamos las cuotas, fechas límite y condiciones antes de que confirmes.",
+  },
+  {
+    category: "pagos" as const,
+    question: "¿Qué incluyen los paquetes que ofrecen?",
+    answer:
+      "Depende del destino y del plan que elijas. Generalmente incluyen tiquetes, alojamiento, traslados y asesoría completa. Siempre te entregamos un detalle claro de qué está incluido y qué no, para que no haya sorpresas.",
+  },
+  {
+    category: "viaje" as const,
     question: "¿Qué pasa si necesito cancelar o cambiar fechas?",
     answer:
       "Las políticas varían según aerolínea, hotel y operador. Te informamos las condiciones de cada reserva antes de confirmar y te acompañamos en cualquier cambio o cancelación que necesites gestionar.",
   },
   {
-    question: "¿Atienden solo en Armenia o en todo el país?",
+    category: "documentos" as const,
+    question: "¿Qué documentos necesito para viajar al exterior?",
     answer:
-      "Nuestra oficina está en Armenia, Quindío, pero atendemos clientes de todo Colombia de forma virtual. Cotizamos, confirmamos y te acompañamos por WhatsApp, llamada o correo sin importar dónde estés.",
+      "Generalmente pasaporte vigente, visa (si aplica según destino), seguro de viaje y comprobantes de reserva. Te orientamos según tu nacionalidad y destino específico antes de confirmar.",
   },
+] as const;
+
+export const FAQ_CATEGORIES = [
+  { id: "all", label: "Todas" },
+  { id: "general", label: "General" },
+  { id: "pagos", label: "Pagos" },
+  { id: "viaje", label: "Viaje" },
+  { id: "documentos", label: "Documentos" },
 ] as const;
 
 export const DESTINATION_OPTIONS = [

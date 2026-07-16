@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Playfair_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { SITE } from "@/lib/constants";
-import { getTravelAgencySchema } from "@/lib/seo";
+import { getTravelAgencySchema, getFaqSchema } from "@/lib/seo";
 import { getSiteUrl, getOgImageUrl } from "@/lib/site-url";
 import "@/styles/globals.css";
 
@@ -95,6 +95,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const schema = getTravelAgencySchema();
+  const faqSchema = getFaqSchema();
 
   return (
     <html
@@ -114,6 +115,10 @@ export default function RootLayout({
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
         />
       </head>
       <body className="min-h-full bg-background font-sans text-foreground antialiased">

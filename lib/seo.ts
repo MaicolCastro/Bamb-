@@ -1,4 +1,4 @@
-import { SITE } from "./constants";
+import { FAQ_ITEMS, SITE } from "./constants";
 
 export function getTravelAgencySchema() {
   return {
@@ -23,5 +23,20 @@ export function getTravelAgencySchema() {
     },
     priceRange: "$$",
     sameAs: Object.values(SITE.social),
+  };
+}
+
+export function getFaqSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ_ITEMS.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 }

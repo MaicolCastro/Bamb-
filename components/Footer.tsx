@@ -204,9 +204,23 @@ export function Footer() {
             <p className="text-sm text-white/50">
               © {currentYear} {SITE.fullName}. Todos los derechos reservados.
             </p>
-            <p className="text-sm text-earth-light/80">
-              Hecho con pasión en el Eje Cafetero ☕
-            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm">
+              <a
+                href="/privacidad"
+                className="text-white/50 transition-colors hover:text-white"
+              >
+                Privacidad
+              </a>
+              <a
+                href="/terminos"
+                className="text-white/50 transition-colors hover:text-white"
+              >
+                Términos
+              </a>
+              <span className="text-earth-light/80">
+                Hecho con pasión en el Eje Cafetero ☕
+              </span>
+            </div>
           </div>
         </FooterLayer>
       </div>

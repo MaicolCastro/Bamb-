@@ -13,12 +13,16 @@ type Testimonial = (typeof TESTIMONIALS)[number];
 
 function GoogleBadge() {
   return (
-    <motion.div
+    <motion.a
+      href={GOOGLE_REVIEWS.url}
+      target="_blank"
+      rel="noopener noreferrer"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-3 rounded-2xl bg-white px-5 py-3 shadow-md shadow-black/5 ring-1 ring-black/5 sm:gap-4 sm:px-6"
+      className="mx-auto mt-10 inline-flex flex-wrap items-center justify-center gap-3 rounded-2xl bg-white px-5 py-3 shadow-md shadow-black/5 ring-1 ring-black/5 transition-premium hover:shadow-lg hover:ring-bamboo/20 sm:gap-4 sm:px-6"
+      aria-label="Ver reseñas en Google"
     >
       <div className="flex items-center gap-2">
         <svg viewBox="0 0 24 24" className="h-6 w-6" aria-hidden="true">
@@ -68,7 +72,7 @@ function GoogleBadge() {
           · {GOOGLE_REVIEWS.count} reseñas
         </span>
       </div>
-    </motion.div>
+    </motion.a>
   );
 }
 
@@ -192,7 +196,7 @@ export function Testimonials() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          sectionNumber="04"
+          sectionNumber="05"
           highlights={["felices"]}
           eyebrow="Testimonios"
           title="Historias reales de viajeros felices"

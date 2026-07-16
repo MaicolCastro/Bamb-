@@ -8,11 +8,15 @@ import { TravelGuides } from "@/components/TravelGuides";
 import { Hero } from "@/sections/Hero";
 import { WhyChooseUs } from "@/sections/WhyChooseUs";
 import { Destinations } from "@/sections/Destinations";
+import { Packages } from "@/sections/Packages";
 import { HowWeWork } from "@/sections/HowWeWork";
 import { Testimonials } from "@/sections/Testimonials";
 import { Stats } from "@/sections/Stats";
 import { Gallery } from "@/sections/Gallery";
+import { PullQuote } from "@/sections/PullQuote";
+import { CorporateTravel } from "@/sections/CorporateTravel";
 import { FAQ } from "@/sections/FAQ";
+import { Team } from "@/sections/Team";
 import { ContactForm } from "@/sections/ContactForm";
 
 const COLORS = {
@@ -26,7 +30,7 @@ const COLORS = {
 export default function HomePage() {
   return (
     <ClientShell>
-      <main>
+      <main id="main">
         <Hero />
         <TrustBadges />
         <SectionWave topColor={COLORS.bambooDark} bottomColor={COLORS.earthMuted} />
@@ -35,6 +39,10 @@ export default function HomePage() {
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.background} />
         <div className="section-deferred">
           <Destinations />
+        </div>
+        <SectionWave topColor={COLORS.background} bottomColor={COLORS.background} />
+        <div className="section-deferred">
+          <Packages />
         </div>
         <EditorialBand />
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.bamboo} />
@@ -55,11 +63,20 @@ export default function HomePage() {
         <div className="section-deferred">
           <TravelGuides />
         </div>
-        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.earthMuted} />
+        <PullQuote />
+        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.bamboo} />
+        <div className="section-deferred">
+          <CorporateTravel />
+        </div>
+        <SectionWave topColor={COLORS.bamboo} bottomColor={COLORS.earthMuted} />
         <div className="section-deferred">
           <FAQ />
         </div>
-        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.earthMuted} />
+        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.background} />
+        <div className="section-deferred">
+          <Team />
+        </div>
+        <SectionWave topColor={COLORS.background} bottomColor={COLORS.earthMuted} />
         <ContactForm />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.bambooDark} />
       </main>

@@ -19,7 +19,7 @@ export function Gallery() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          sectionNumber="05"
+          sectionNumber="06"
           highlights={["inspiran"]}
           eyebrow="Galería"
           title="Momentos que inspiran tu próximo viaje"

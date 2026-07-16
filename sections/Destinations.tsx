@@ -9,17 +9,20 @@ import {
   TreePine,
   Sparkles,
   LayoutGrid,
+  Search,
+  Flame,
   type LucideIcon,
 } from "lucide-react";
-import { DESTINATIONS, SITE } from "@/lib/constants";
-import { getWhatsAppUrl } from "@/lib/utils";
+import { DESTINATIONS, DESTINATION_DETAILS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CardImage } from "@/components/CardImage";
+import { DestinationModal } from "@/components/DestinationModal";
 
 type ClimateKey = (typeof DESTINATIONS)[number]["climate"];
 type FilterKey = "all" | ClimateKey;
+type Destination = (typeof DESTINATIONS)[number];
 
 const climateConfig: Record<
   ClimateKey,
@@ -44,23 +47,23 @@ const FILTER_OPTIONS: { id: FilterKey; label: string; Icon: LucideIcon }[] = [
 function DestinationCard({
   dest,
   index,
+  onSelect,
 }: {
-  dest: (typeof DESTINATIONS)[number];
+  dest: Destination;
   index: number;
+  onSelect: (dest: Destination) => void;
 }) {
   const { Icon: ClimateIcon, label: climateLabel } = climateConfig[dest.climate];
+  const details = DESTINATION_DETAILS[dest.name];
+  const isPopular = details?.popular;
 
   return (
     <ScrollReveal delay={index * 0.05}>
-      <a
-        href={getWhatsAppUrl(
-          SITE.whatsapp,
-          `Hola Bambú, me interesa viajar a ${dest.name}. ¿Me pueden asesorar?`
-        )}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10 ring-1 ring-black/[0.04] transition-premium hover:shadow-xl hover:shadow-bamboo/10"
-        aria-label={`Cotizar viaje a ${dest.name}`}
+      <button
+        type="button"
+        onClick={() => onSelect(dest)}
+        className="group relative block w-full overflow-hidden rounded-3xl text-left shadow-lg shadow-black/10 ring-1 ring-black/[0.04] transition-premium hover:shadow-xl hover:shadow-bamboo/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
+        aria-label={`Ver detalles de ${dest.name}, ${dest.country}`}
       >
         <CardImage
           src={dest.image}
@@ -76,6 +79,13 @@ function DestinationCard({
           className="destination-card-gradient pointer-events-none absolute inset-0 transition-premium"
           aria-hidden="true"
         />
+
+        {isPopular && (
+          <span className="absolute right-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-amber-500/90 px-2 py-0.5 text-[9px] font-bold tracking-wide text-white uppercase backdrop-blur-sm sm:text-[10px]">
+            <Flame className="h-2.5 w-2.5" aria-hidden="true" />
+            Popular
+          </span>
+        )}
 
         <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 transition-premium group-hover:-translate-y-0.5 sm:p-4">
           <div className="flex w-full min-w-0 flex-col items-start text-left">
@@ -103,23 +113,39 @@ function DestinationCard({
             <p className="line-clamp-2 text-[11px] leading-snug text-white/90 text-shadow-premium sm:text-xs sm:leading-normal">
               {dest.tagline}
             </p>
+
+            {details?.duration && (
+              <p className="mt-1.5 text-[10px] font-medium text-white/75 text-shadow-premium sm:text-[11px]">
+                {details.duration}
+              </p>
+            )}
           </div>
         </div>
-      </a>
+      </button>
     </ScrollReveal>
   );
 }
 
 export function Destinations() {
   const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
-
-  const filteredDestinations = useMemo(
-    () =>
-      activeFilter === "all"
-        ? DESTINATIONS
-        : DESTINATIONS.filter((d) => d.climate === activeFilter),
-    [activeFilter]
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedDestination, setSelectedDestination] = useState<Destination | null>(
+    null
   );
+
+  const filteredDestinations = useMemo(() => {
+    const query = searchQuery.trim().toLowerCase();
+    return DESTINATIONS.filter((d) => {
+      const matchesFilter =
+        activeFilter === "all" || d.climate === activeFilter;
+      const matchesSearch =
+        !query ||
+        d.name.toLowerCase().includes(query) ||
+        d.country.toLowerCase().includes(query) ||
+        d.tagline.toLowerCase().includes(query);
+      return matchesFilter && matchesSearch;
+    });
+  }, [activeFilter, searchQuery]);
 
   return (
     <section
@@ -133,11 +159,31 @@ export function Destinations() {
           highlights={["realidad"]}
           eyebrow="Destinos destacados"
           title="Inspírate. Nosotros hacemos realidad el resto."
-          description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Escríbenos y diseñamos tu experiencia ideal."
+          description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Toca una tarjeta para ver detalles y cotizar."
         />
 
+        <div className="mx-auto mt-10 max-w-md">
+          <label htmlFor="destination-search" className="sr-only">
+            Buscar destino
+          </label>
+          <div className="relative">
+            <Search
+              className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-foreground/40"
+              aria-hidden="true"
+            />
+            <input
+              id="destination-search"
+              type="search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Buscar por destino o país..."
+              className="input-boutique w-full pl-11"
+            />
+          </div>
+        </div>
+
         <div
-          className="mt-10 flex flex-wrap justify-center gap-2 sm:gap-2.5"
+          className="mt-6 flex flex-wrap justify-center gap-2 sm:mt-8 sm:gap-2.5"
           role="tablist"
           aria-label="Filtrar destinos por categoría"
         >
@@ -161,7 +207,7 @@ export function Destinations() {
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={activeFilter}
+            key={`${activeFilter}-${searchQuery}`}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -6 }}
@@ -169,17 +215,28 @@ export function Destinations() {
             className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4"
           >
             {filteredDestinations.map((dest, index) => (
-              <DestinationCard key={dest.name} dest={dest} index={index} />
+              <DestinationCard
+                key={dest.name}
+                dest={dest}
+                index={index}
+                onSelect={setSelectedDestination}
+              />
             ))}
           </motion.div>
         </AnimatePresence>
 
         {filteredDestinations.length === 0 && (
           <p className="mt-10 text-center text-foreground/50">
-            No hay destinos en esta categoría por ahora.
+            No encontramos destinos con esos criterios. Prueba otra búsqueda o
+            escríbenos — diseñamos rutas a medida.
           </p>
         )}
       </div>
+
+      <DestinationModal
+        destination={selectedDestination}
+        onClose={() => setSelectedDestination(null)}
+      />
     </section>
   );
 }

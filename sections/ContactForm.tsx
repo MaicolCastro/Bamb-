@@ -17,7 +17,10 @@ interface FormData {
   email: string;
   phone: string;
   destination: string;
+  travelers: string;
+  travelDates: string;
   message: string;
+  consent: boolean;
 }
 
 const initialForm: FormData = {
@@ -25,7 +28,10 @@ const initialForm: FormData = {
   email: "",
   phone: "",
   destination: "",
+  travelers: "2",
+  travelDates: "",
   message: "",
+  consent: false,
 };
 
 function BoutiqueField({
@@ -57,15 +63,18 @@ function BoutiqueField({
 export function ContactForm() {
   const [form, setForm] = useState<FormData>(initialForm);
   const [submitted, setSubmitted] = useState(false);
-  const [errors, setErrors] = useState<Partial<FormData>>({});
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof FormData | "consent", string>>
+  >({});
 
   const validate = (): boolean => {
-    const newErrors: Partial<FormData> = {};
+    const newErrors: Partial<Record<keyof FormData | "consent", string>> = {};
     if (!form.name.trim()) newErrors.name = "Ingresa tu nombre";
     if (!form.email.trim() || !/\S+@\S+\.\S+/.test(form.email))
       newErrors.email = "Ingresa un correo válido";
     if (!form.phone.trim()) newErrors.phone = "Ingresa tu teléfono";
     if (!form.destination) newErrors.destination = "Selecciona un destino";
+    if (!form.consent) newErrors.consent = "Debes aceptar la política de privacidad";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
@@ -74,15 +83,16 @@ export function ContactForm() {
     e.preventDefault();
     if (!validate()) return;
 
-    const whatsappText = `Hola Bambú, quiero cotizar mi viaje.\n\nNombre: ${form.name}\nCorreo: ${form.email}\nTeléfono: ${form.phone}\nDestino: ${form.destination}\nMensaje: ${form.message || "Sin mensaje adicional"}`;
+    const whatsappText = `Hola Bambú, quiero cotizar mi viaje.\n\nNombre: ${form.name}\nCorreo: ${form.email}\nTeléfono: ${form.phone}\nDestino: ${form.destination}\nViajeros: ${form.travelers}\nFechas tentativas: ${form.travelDates || "Por definir"}\nMensaje: ${form.message || "Sin mensaje adicional"}`;
 
     window.open(getWhatsAppUrl(SITE.whatsapp, whatsappText), "_blank");
     setSubmitted(true);
   };
 
-  const updateField = (field: keyof FormData, value: string) => {
+  const updateField = (field: keyof FormData, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+    if (errors[field as keyof typeof errors])
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
   };
 
   if (submitted) {
@@ -125,7 +135,7 @@ export function ContactForm() {
     >
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          sectionNumber="07"
+          sectionNumber="08"
           highlights={["sueño"]}
           eyebrow="Contacto"
           title="Cuéntanos tu sueño de viaje"
@@ -205,6 +215,36 @@ export function ContactForm() {
                   </BoutiqueField>
                 </div>
 
+                <div className="sm:col-span-1">
+                  <BoutiqueField id="travelers" label="Número de viajeros">
+                    <select
+                      id="travelers"
+                      value={form.travelers}
+                      onChange={(e) => updateField("travelers", e.target.value)}
+                      className="input-boutique cursor-pointer"
+                    >
+                      {["1", "2", "3", "4", "5", "6+"].map((n) => (
+                        <option key={n} value={n}>
+                          {n} {n === "1" ? "persona" : "personas"}
+                        </option>
+                      ))}
+                    </select>
+                  </BoutiqueField>
+                </div>
+
+                <div className="sm:col-span-1">
+                  <BoutiqueField id="travelDates" label="Fechas tentativas">
+                    <input
+                      id="travelDates"
+                      type="text"
+                      value={form.travelDates}
+                      onChange={(e) => updateField("travelDates", e.target.value)}
+                      className="input-boutique"
+                      placeholder="Ej. 15–22 dic 2026"
+                    />
+                  </BoutiqueField>
+                </div>
+
                 <div className="sm:col-span-2">
                   <BoutiqueField id="message" label="Cuéntanos más sobre tu viaje ideal">
                     <textarea
@@ -213,9 +253,38 @@ export function ContactForm() {
                       value={form.message}
                       onChange={(e) => updateField("message", e.target.value)}
                       className="input-boutique resize-none"
-                      placeholder="Fechas, viajeros, tipo de experiencia..."
+                      placeholder="Tipo de hotel, actividades, presupuesto aproximado..."
                     />
                   </BoutiqueField>
+                </div>
+
+                <div className="sm:col-span-2">
+                  <label className="flex cursor-pointer items-start gap-3">
+                    <input
+                      type="checkbox"
+                      checked={form.consent}
+                      onChange={(e) => updateField("consent", e.target.checked)}
+                      className="mt-1 h-4 w-4 rounded border-foreground/20 text-bamboo focus:ring-bamboo"
+                      aria-invalid={!!errors.consent}
+                    />
+                    <span className="text-sm leading-relaxed text-foreground/65">
+                      Acepto la{" "}
+                      <a
+                        href="/privacidad"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-medium text-bamboo hover:underline"
+                      >
+                        política de privacidad
+                      </a>{" "}
+                      y autorizo el contacto para cotizar mi viaje. *
+                    </span>
+                  </label>
+                  {errors.consent && (
+                    <p className="mt-1 text-sm text-red-500" role="alert">
+                      {errors.consent}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -247,12 +316,16 @@ export function ContactForm() {
                     Te esperamos en el corazón del Eje Cafetero.
                   </p>
                   <p className="mt-2 text-sm text-white/75">
-                    {SITE.city}, {SITE.region} — Colombia
+                    {SITE.city}, {SITE.region} — {SITE.nearbyAirport}
                   </p>
                 </div>
               </div>
 
               <ul className="mt-6 space-y-4" role="list">
+                <li className="flex items-start gap-3 text-sm text-foreground/70">
+                  <Clock className="mt-0.5 h-4 w-4 shrink-0 text-bamboo" aria-hidden="true" />
+                  {SITE.businessHours}
+                </li>
                 <li className="flex items-start gap-3 text-sm text-foreground/70">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-bamboo" aria-hidden="true" />
                   {SITE.address}

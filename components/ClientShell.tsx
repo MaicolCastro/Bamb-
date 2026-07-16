@@ -5,6 +5,8 @@ import { Navbar } from "./Navbar";
 import { WhatsAppFloat } from "./WhatsAppFloat";
 import { ScrollToTop } from "./ScrollToTop";
 import { MobileActionBar } from "./MobileActionBar";
+import { ReadingProgress } from "./ReadingProgress";
+import { SkipLink } from "./SkipLink";
 
 interface ClientShellProps {
   children: React.ReactNode;
@@ -14,6 +16,8 @@ interface ClientShellProps {
 export function ClientShell({ children }: ClientShellProps) {
   return (
     <>
+      <SkipLink />
+      <ReadingProgress />
       <Loader />
       <Navbar />
       {children}
