@@ -61,30 +61,30 @@ function DestinationCard({
           aria-hidden="true"
         />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-6 transition-transform duration-300 ease-out group-hover:-translate-y-1 sm:p-8">
-          <div className="flex max-w-[92%] flex-col items-start text-left">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:p-5">
+          <div className="flex w-full min-w-0 flex-col items-start text-left">
             <div
-              className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-shadow-premium backdrop-blur-md"
+              className="mb-2 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-shadow-premium backdrop-blur-md"
               title={climateLabel}
             >
               <ClimateIcon
-                className="h-3.5 w-3.5 shrink-0 text-white/95"
+                className="h-3 w-3 shrink-0 text-white/95"
                 aria-hidden="true"
               />
-              <span className="text-xs font-medium tracking-wide text-white/95 sm:text-[13px]">
+              <span className="truncate text-[10px] font-medium tracking-wide text-white/95 sm:text-[11px]">
                 {climateLabel}
               </span>
             </div>
 
-            <p className="mb-2 text-[15px] font-medium tracking-[0.12em] text-white/85 uppercase text-shadow-premium sm:text-base">
+            <p className="mb-1.5 text-[11px] font-medium tracking-[0.1em] text-white/85 uppercase text-shadow-premium sm:text-xs">
               {dest.country}
             </p>
 
-            <h3 className="font-playfair mb-3 text-[1.75rem] font-semibold leading-[1.15] tracking-tight text-white text-shadow-premium sm:text-[2.125rem] lg:text-[2.5rem]">
+            <h3 className="font-playfair mb-2 line-clamp-2 text-lg font-semibold leading-tight tracking-tight text-white text-shadow-premium sm:text-xl">
               {dest.name}
             </h3>
 
-            <p className="line-clamp-2 text-base leading-snug text-white/90 text-shadow-premium sm:text-lg sm:leading-relaxed">
+            <p className="line-clamp-2 text-xs leading-snug text-white/90 text-shadow-premium sm:text-sm sm:leading-normal">
               {dest.tagline}
             </p>
           </div>

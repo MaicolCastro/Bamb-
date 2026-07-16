@@ -51,20 +51,20 @@
 .destination-card-gradient {
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.75) 0%,
-    rgba(0, 0, 0, 0.45) 35%,
-    rgba(0, 0, 0, 0.15) 70%,
-    transparent 100%
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.42) 28%,
+    rgba(0, 0, 0, 0.1) 58%,
+    transparent 88%
   );
 }
 
 .group:hover .destination-card-gradient {
   background: linear-gradient(
     to top,
-    rgba(0, 0, 0, 0.82) 0%,
-    rgba(0, 0, 0, 0.52) 38%,
-    rgba(0, 0, 0, 0.2) 72%,
-    transparent 100%
+    rgba(0, 0, 0, 0.78) 0%,
+    rgba(0, 0, 0, 0.48) 28%,
+    rgba(0, 0, 0, 0.14) 58%,
+    transparent 88%
   );
 }
 
