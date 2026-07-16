@@ -81,7 +81,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       magnetic ?? magneticVariants.includes(variant);
 
     const classes = cn(
-      "inline-flex items-center justify-center font-semibold transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
+      "inline-flex items-center justify-center font-semibold transition-premium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none",
       variants[variant],
       sizes[size],
       className

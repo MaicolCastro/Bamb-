@@ -51,25 +51,38 @@ export function Loader() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.25 }}
-              className="flex h-full flex-col items-center justify-center"
+              className="film-grain relative flex h-full flex-col items-center justify-center"
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-beige via-background to-bamboo-muted/40" />
+              <div className="absolute inset-0 bg-gradient-to-b from-bamboo-dark via-bamboo-dark/95 to-bamboo/90" />
+              <div
+                className="absolute inset-0 opacity-25"
+                style={{
+                  backgroundImage:
+                    "url(https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1280&h=720&fit=crop&crop=entropy&auto=format&q=60)",
+                  backgroundSize: "cover",
+                  backgroundPosition: "center",
+                }}
+                aria-hidden="true"
+              />
+              <div className="absolute inset-0 bg-gradient-to-b from-bamboo-dark/70 via-black/40 to-bamboo-dark/85" />
 
               <motion.div
                 initial={{ scale: 0.92, opacity: 0, y: 8 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: easePremium }}
-                className="relative flex flex-col items-center gap-8"
+                className="relative z-10 flex flex-col items-center gap-8"
               >
-                <Logo size="lg" priority />
+                <div className="rounded-2xl bg-white/95 px-6 py-4 shadow-xl shadow-black/20 ring-1 ring-white/50">
+                  <Logo size="lg" priority />
+                </div>
 
                 <div className="flex flex-col items-center gap-3">
-                  <p className="font-display text-lg tracking-wide text-bamboo-dark sm:text-xl">
+                  <p className="font-playfair text-lg tracking-wide text-white/90 sm:text-xl">
                     Preparando tu próxima aventura
                   </p>
-                  <div className="h-1 w-48 overflow-hidden rounded-full bg-beige-dark/80">
+                  <div className="h-1 w-48 overflow-hidden rounded-full bg-white/15 ring-1 ring-white/10">
                     <div
-                      className="loader-progress h-full rounded-full bg-gradient-to-r from-bamboo via-bamboo-light to-earth"
+                      className="loader-progress h-full rounded-full bg-gradient-to-r from-bamboo-light via-earth-light to-bamboo-light"
                       style={{ animationDuration: `${LOADER_MS}ms` }}
                     />
                   </div>

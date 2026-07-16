@@ -32,21 +32,37 @@ export function Gallery() {
               <button
                 type="button"
                 onClick={() => setLightboxIndex(index)}
-                className="group relative w-full overflow-hidden rounded-2xl focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
-                aria-label={`Ver imagen: ${image.alt}`}
+                className="group relative w-full overflow-hidden rounded-2xl ring-1 ring-black/[0.04] transition-premium hover:shadow-lg hover:shadow-bamboo/10 focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
+                aria-label={`Ver imagen: ${image.destination}, ${image.country}`}
               >
                 <CardImage
                   src={image.src}
                   alt={image.alt}
-                  imageClassName="gallery-duotone transition-transform duration-700 group-hover:scale-105"
+                  imageClassName="gallery-duotone"
                   className="rounded-2xl"
                 />
-                <div className="absolute inset-0 bg-bamboo/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/15" />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 shadow-lg">
-                    <ZoomIn className="h-5 w-5 text-bamboo" />
-                  </div>
+
+                <div
+                  className="gallery-overlay-duo pointer-events-none absolute inset-0 opacity-0 transition-premium group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+
+                <div
+                  className="gallery-caption-gradient pointer-events-none absolute inset-0 opacity-0 transition-premium group-hover:opacity-100"
+                  aria-hidden="true"
+                />
+
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 opacity-0 transition-premium group-hover:opacity-100 sm:p-4">
+                  <p className="text-[10px] font-medium tracking-[0.1em] text-white/80 uppercase text-shadow-premium sm:text-[11px]">
+                    {image.country}
+                  </p>
+                  <p className="font-playfair mt-0.5 text-base font-semibold text-white text-shadow-premium sm:text-lg">
+                    {image.destination}
+                  </p>
+                </div>
+
+                <div className="pointer-events-none absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-md transition-premium group-hover:opacity-100 sm:h-10 sm:w-10">
+                  <ZoomIn className="h-4 w-4 text-bamboo" aria-hidden="true" />
                 </div>
               </button>
             </ScrollReveal>

@@ -27,13 +27,13 @@ function FaqItem({
   index: number;
 }) {
   return (
-    <ScrollReveal delay={index * 0.06}>
+    <ScrollReveal delay={index * 0.05}>
       <div
         className={cn(
-          "overflow-hidden rounded-2xl bg-white ring-1 ring-black/5 transition-all duration-300",
+          "card-surface overflow-hidden rounded-2xl transition-premium",
           isOpen
-            ? "shadow-lg shadow-bamboo/10 ring-bamboo/15"
-            : "shadow-sm hover:shadow-md"
+            ? "border-l-[3px] border-l-bamboo shadow-lg shadow-bamboo/10"
+            : "hover:shadow-md hover:shadow-bamboo/5"
         )}
       >
         <button
@@ -49,13 +49,10 @@ function FaqItem({
           </span>
           <motion.span
             initial={false}
-            animate={{
-              rotate: isOpen ? 180 : 0,
-              scale: isOpen ? 1.05 : 1,
-            }}
-            transition={{ duration: 0.35, ease: easePremium }}
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.3, ease: easePremium }}
             className={cn(
-              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors duration-300",
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-premium",
               isOpen ? "bg-bamboo text-white" : "bg-bamboo-muted text-bamboo"
             )}
             aria-hidden="true"
@@ -77,7 +74,7 @@ function FaqItem({
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: easePremium }}
+              transition={{ duration: 0.3, ease: easePremium }}
               className="overflow-hidden"
             >
               <p className="border-t border-foreground/5 px-5 pb-5 pt-4 text-base leading-relaxed text-foreground/65 sm:px-6 sm:pb-6">
@@ -101,33 +98,39 @@ export function FAQ() {
   return (
     <section
       id="faq"
-      className="bg-gray-light py-24 sm:py-32"
+      className="bg-beige py-24 sm:py-32"
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          sectionNumber="06"
-          highlights={["primer paso"]}
-          eyebrow="Preguntas frecuentes"
-          title="Resolvemos tus dudas antes de que des el primer paso"
-          description="Lo más importante es que viajes con confianza. Aquí respondemos las preguntas que nos hacen con más frecuencia."
-        />
-
-        <div className="mx-auto mt-16 max-w-3xl space-y-3 sm:space-y-4">
-          {FAQ_ITEMS.map((item, index) => (
-            <FaqItem
-              key={item.question}
-              question={item.question}
-              answer={item.answer}
-              isOpen={openIndex === index}
-              onToggle={() => toggle(index)}
-              index={index}
+        <div className="grid gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16 lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <SectionHeading
+              sectionNumber="06"
+              highlights={["primer paso"]}
+              eyebrow="Preguntas frecuentes"
+              title="Resolvemos tus dudas antes de que des el primer paso"
+              description="Lo más importante es que viajes con confianza. Aquí respondemos las preguntas que nos hacen con más frecuencia."
+              align="left"
+              className="max-w-none"
             />
-          ))}
+          </div>
+
+          <div className="space-y-3 sm:space-y-4">
+            {FAQ_ITEMS.map((item, index) => (
+              <FaqItem
+                key={item.question}
+                question={item.question}
+                answer={item.answer}
+                isOpen={openIndex === index}
+                onToggle={() => toggle(index)}
+                index={index}
+              />
+            ))}
+          </div>
         </div>
 
-        <ScrollReveal delay={0.3}>
-          <div className="mx-auto mt-12 max-w-3xl rounded-3xl bg-white p-6 text-center shadow-sm ring-1 ring-black/5 sm:p-8">
+        <ScrollReveal delay={0.2}>
+          <div className="card-surface mx-auto mt-12 max-w-3xl rounded-3xl p-6 text-center sm:p-8 lg:mt-16">
             <MessageCircle
               className="mx-auto h-10 w-10 text-bamboo"
               aria-hidden="true"

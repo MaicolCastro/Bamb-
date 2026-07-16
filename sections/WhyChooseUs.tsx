@@ -42,14 +42,14 @@ export function WhyChooseUs() {
             return (
               <ScrollReveal key={item.title} delay={index * 0.1}>
                 <article
-                  className="card-shine group relative h-full rounded-3xl bg-white p-8 shadow-sm transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-bamboo/10"
+                  className="card-shine card-surface group relative h-full rounded-3xl p-8 transition-premium hover:-translate-y-1 hover:shadow-xl hover:shadow-bamboo/10"
                   style={
                     { "--shine-delay": `${index * 1.2}s` } as React.CSSProperties
                   }
                 >
-                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-bamboo-muted transition-colors group-hover:bg-bamboo group-hover:shadow-lg group-hover:shadow-bamboo/30">
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-bamboo-muted transition-premium group-hover:bg-bamboo group-hover:shadow-lg group-hover:shadow-bamboo/30">
                     <Icon
-                      className="h-7 w-7 text-bamboo transition-colors group-hover:text-white"
+                      className="h-7 w-7 text-bamboo transition-premium group-hover:text-white"
                       aria-hidden="true"
                     />
                   </div>

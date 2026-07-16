@@ -11,14 +11,13 @@ const statIcons: LucideIcon[] = [Users, Award, MapPin, Star];
 const easePremium = [0.22, 1, 0.36, 1] as const;
 
 const statVariants = {
-  hidden: { opacity: 0, y: 32, scale: 0.94 },
+  hidden: { opacity: 0, y: 24 },
   visible: (index: number) => ({
     opacity: 1,
     y: 0,
-    scale: 1,
     transition: {
-      duration: 0.65,
-      delay: index * 0.12,
+      duration: 0.55,
+      delay: index * 0.1,
       ease: easePremium,
     },
   }),
@@ -54,15 +53,15 @@ function StatItem({
           style={{ animationDelay: `${index * 0.5}s` }}
           aria-hidden="true"
         />
-        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/15 group-hover:ring-white/35 sm:h-16 sm:w-16">
+        <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 transition-premium group-hover:bg-white/15 group-hover:ring-white/35 sm:h-16 sm:w-16">
           <Icon
-            className="h-6 w-6 text-bamboo-light transition-transform duration-500 group-hover:scale-110 sm:h-7 sm:w-7"
+            className="h-6 w-6 text-bamboo-light transition-premium group-hover:scale-110 sm:h-7 sm:w-7"
             aria-hidden="true"
           />
         </div>
       </div>
 
-      <p className="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
+      <p className="font-playfair text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
         <span ref={displayRef}>{count}</span>
         <span className="text-bamboo-light">{suffix}</span>
       </p>
@@ -79,7 +78,6 @@ export function Stats() {
       className="relative overflow-hidden py-20 sm:py-28"
       aria-label="Estadísticas de la agencia"
     >
-      {/* Fondo — sin blur en runtime (costoso al hacer scroll) */}
       <div className="absolute inset-0 bg-bamboo-dark" aria-hidden="true">
         <Image
           src={HERO_MEDIA.poster}
@@ -93,6 +91,10 @@ export function Stats() {
       </div>
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p className="font-playfair mb-12 text-center text-xl font-medium italic text-white/85 sm:mb-14 sm:text-2xl">
+          Números que respaldan cada aventura.
+        </p>
+
         <ul className="flex flex-wrap justify-center gap-y-10 lg:flex-nowrap lg:items-center lg:gap-0">
           {STATS.map((stat, index) => (
             <li
@@ -111,7 +113,7 @@ export function Stats() {
               />
               {index < STATS.length - 1 && (
                 <div
-                  className="hidden h-20 w-px shrink-0 bg-gradient-to-b from-transparent via-white/25 to-transparent lg:block"
+                  className="hidden h-14 w-px shrink-0 bg-gradient-to-b from-transparent via-bamboo-light/35 to-transparent lg:block"
                   aria-hidden="true"
                 />
               )}

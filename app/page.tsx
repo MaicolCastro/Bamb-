@@ -44,11 +44,11 @@ export default function HomePage() {
         <div className="section-deferred">
           <Gallery />
         </div>
-        <SectionWave topColor={COLORS.background} bottomColor={COLORS.grayLight} />
+        <SectionWave topColor={COLORS.background} bottomColor={COLORS.earthMuted} />
         <div className="section-deferred">
           <FAQ />
         </div>
-        <SectionWave topColor={COLORS.grayLight} bottomColor={COLORS.earthMuted} />
+        <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.earthMuted} />
         <ContactForm />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.bambooDark} />
       </main>

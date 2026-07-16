@@ -1,21 +1,28 @@
 "use client";
 
+import { useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Sun,
   Mountain,
   Building2,
   TreePine,
   Sparkles,
+  LayoutGrid,
   type LucideIcon,
 } from "lucide-react";
 import { DESTINATIONS, SITE } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { CardImage } from "@/components/CardImage";
 
+type ClimateKey = (typeof DESTINATIONS)[number]["climate"];
+type FilterKey = "all" | ClimateKey;
+
 const climateConfig: Record<
-  (typeof DESTINATIONS)[number]["climate"],
+  ClimateKey,
   { Icon: LucideIcon; label: string }
 > = {
   beach: { Icon: Sun, label: "Playa y sol" },
@@ -24,6 +31,15 @@ const climateConfig: Record<
   nature: { Icon: TreePine, label: "Naturaleza" },
   family: { Icon: Sparkles, label: "Familia y diversión" },
 };
+
+const FILTER_OPTIONS: { id: FilterKey; label: string; Icon: LucideIcon }[] = [
+  { id: "all", label: "Todos", Icon: LayoutGrid },
+  { id: "beach", label: "Playa y sol", Icon: Sun },
+  { id: "nature", label: "Naturaleza", Icon: TreePine },
+  { id: "city", label: "Ciudad y cultura", Icon: Building2 },
+  { id: "mountain", label: "Montaña y aventura", Icon: Mountain },
+  { id: "family", label: "Familia y diversión", Icon: Sparkles },
+];
 
 function DestinationCard({
   dest,
@@ -35,7 +51,7 @@ function DestinationCard({
   const { Icon: ClimateIcon, label: climateLabel } = climateConfig[dest.climate];
 
   return (
-    <ScrollReveal delay={index * 0.06}>
+    <ScrollReveal delay={index * 0.05}>
       <a
         href={getWhatsAppUrl(
           SITE.whatsapp,
@@ -43,7 +59,7 @@ function DestinationCard({
         )}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10 ring-1 ring-black/5 transition-shadow duration-300 ease-out hover:shadow-xl hover:shadow-black/20"
+        className="group relative block overflow-hidden rounded-3xl shadow-lg shadow-black/10 ring-1 ring-black/[0.04] transition-premium hover:shadow-xl hover:shadow-bamboo/10"
         aria-label={`Cotizar viaje a ${dest.name}`}
       >
         <CardImage
@@ -52,16 +68,16 @@ function DestinationCard({
           objectPosition={
             "objectPosition" in dest ? dest.objectPosition : undefined
           }
-          imageClassName="transition-transform duration-300 ease-out group-hover:scale-[1.04]"
+          imageClassName="transition-premium group-hover:scale-[1.04]"
           className="rounded-3xl"
         />
 
         <div
-          className="destination-card-gradient pointer-events-none absolute inset-0 transition-[background] duration-300 ease-out"
+          className="destination-card-gradient pointer-events-none absolute inset-0 transition-premium"
           aria-hidden="true"
         />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:p-4">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 transition-premium group-hover:-translate-y-0.5 sm:p-4">
           <div className="flex w-full min-w-0 flex-col items-start text-left">
             <div
               className="mb-1.5 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-black/35 px-2 py-0.5 text-shadow-premium"
@@ -95,6 +111,16 @@ function DestinationCard({
 }
 
 export function Destinations() {
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+
+  const filteredDestinations = useMemo(
+    () =>
+      activeFilter === "all"
+        ? DESTINATIONS
+        : DESTINATIONS.filter((d) => d.climate === activeFilter),
+    [activeFilter]
+  );
+
   return (
     <section
       id="destinos"
@@ -110,11 +136,49 @@ export function Destinations() {
           description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Escríbenos y diseñamos tu experiencia ideal."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
-          {DESTINATIONS.map((dest, index) => (
-            <DestinationCard key={dest.name} dest={dest} index={index} />
+        <div
+          className="mt-10 flex flex-wrap justify-center gap-2 sm:gap-2.5"
+          role="tablist"
+          aria-label="Filtrar destinos por categoría"
+        >
+          {FILTER_OPTIONS.map(({ id, label, Icon }) => (
+            <button
+              key={id}
+              type="button"
+              role="tab"
+              aria-selected={activeFilter === id}
+              onClick={() => setActiveFilter(id)}
+              className={cn(
+                "filter-pill",
+                activeFilter === id && "filter-pill-active"
+              )}
+            >
+              <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+              {label}
+            </button>
           ))}
         </div>
+
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.3, ease: [0, 0, 0.2, 1] }}
+            className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4"
+          >
+            {filteredDestinations.map((dest, index) => (
+              <DestinationCard key={dest.name} dest={dest} index={index} />
+            ))}
+          </motion.div>
+        </AnimatePresence>
+
+        {filteredDestinations.length === 0 && (
+          <p className="mt-10 text-center text-foreground/50">
+            No hay destinos en esta categoría por ahora.
+          </p>
+        )}
       </div>
     </section>
   );
