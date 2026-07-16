@@ -1,44 +1,38 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
 import { EDITORIAL_BAND, SITE } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/utils";
 
 export function EditorialBand() {
+  const whatsappHref = getWhatsAppUrl(SITE.whatsapp, EDITORIAL_BAND.whatsappMessage);
+
   return (
     <section
-      className="relative flex min-h-[280px] items-center overflow-hidden sm:min-h-[340px]"
+      className="relative flex min-h-[280px] items-center overflow-hidden sm:min-h-[340px] lg:min-h-[420px]"
       aria-label="Frase inspiracional"
     >
       <Image
         src={EDITORIAL_BAND.image}
         alt=""
         fill
-        className="ken-burns ken-burns-1 object-cover"
+        className="ken-burns ken-burns-1 object-cover object-[center_40%]"
         sizes="100vw"
-        aria-hidden="true"
+        priority={false}
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-bamboo-dark/88 via-bamboo-dark/65 to-bamboo-dark/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <blockquote className="max-w-2xl">
-          <p className="font-playfair text-2xl font-medium leading-snug text-white sm:text-3xl lg:text-4xl">
-            {EDITORIAL_BAND.quote}
-          </p>
-          <footer className="mt-6">
-            <a
-              href={getWhatsAppUrl(SITE.whatsapp, EDITORIAL_BAND.whatsappMessage)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-earth-light transition-premium hover:gap-3 hover:text-white"
-            >
-              {EDITORIAL_BAND.cta}
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-          </footer>
-        </blockquote>
-      </div>
+      <a
+        href={whatsappHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="absolute inset-0 z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-earth-light"
+        aria-label={`${EDITORIAL_BAND.quote} ${EDITORIAL_BAND.cta}`}
+      >
+        <span className="sr-only">
+          {EDITORIAL_BAND.quote} — {EDITORIAL_BAND.cta}
+        </span>
+      </a>
     </section>
   );
 }
