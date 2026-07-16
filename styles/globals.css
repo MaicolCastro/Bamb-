@@ -69,7 +69,7 @@
 }
 
 * {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
 html {
@@ -81,6 +81,12 @@ body {
   color: var(--foreground);
   font-family: var(--font-jakarta), system-ui, sans-serif;
   overflow-x: hidden;
+}
+
+/* Renderiza secciones fuera de pantalla solo cuando se acercan */
+.section-deferred {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 ::selection {
@@ -156,14 +162,23 @@ body {
 .film-grain::before {
   content: "";
   position: absolute;
-  inset: -100%;
-  width: 300%;
-  height: 300%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.04;
+  opacity: 0.035;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: film-grain 1s steps(4) infinite;
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .film-grain::before {
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.04;
+    animation: film-grain 1.2s steps(3) infinite;
+  }
 }
 
 @keyframes film-grain {
@@ -184,16 +199,13 @@ body {
   }
 }
 
-/* Duotono bambú/tierra en galería */
+/* Duotono bambú/tierra en galería — solo transform, sin filter en hover */
 .gallery-duotone {
-  transition:
-    transform 0.7s ease,
-    filter 0.5s ease;
+  transition: transform 0.5s ease;
 }
 
 .group:hover .gallery-duotone {
-  filter: grayscale(1) contrast(1.1) brightness(0.85);
-  transform: scale(1.1);
+  transform: scale(1.06);
 }
 
 /* Ken Burns — paneo cinematográfico en destinos */
@@ -280,7 +292,39 @@ body {
   );
   animation: card-shine 5s ease-in-out infinite;
   animation-delay: var(--shine-delay, 0s);
+  animation-play-state: paused;
   pointer-events: none;
+}
+
+.card-shine:hover::after {
+  animation-play-state: running;
+}
+
+.loader-progress {
+  width: 0;
+  animation: loader-progress linear forwards;
+}
+
+@keyframes loader-progress {
+  to {
+    width: 100%;
+  }
+}
+
+.stat-pulse-ring {
+  animation: stat-pulse 3s ease-in-out infinite;
+}
+
+@keyframes stat-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0;
+  }
 }
 
 @keyframes card-shine {

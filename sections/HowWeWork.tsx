@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { MessageSquare, PenTool, CalendarCheck, Plane } from "lucide-react";
 import { PROCESS_STEPS } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
-import { CursorSpotlight } from "@/components/CursorSpotlight";
 
 const stepIcons = [MessageSquare, PenTool, CalendarCheck, Plane];
 const easePremium = [0.22, 1, 0.36, 1] as const;
@@ -43,8 +42,6 @@ export function HowWeWork() {
         <div className="absolute -left-40 top-0 h-96 w-96 rounded-full bg-white blur-3xl" />
         <div className="absolute -right-40 bottom-0 h-96 w-96 rounded-full bg-white blur-3xl" />
       </div>
-
-      <CursorSpotlight size={340} intensity={0.16} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading

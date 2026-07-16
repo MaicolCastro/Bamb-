@@ -44,7 +44,8 @@ export function Footer() {
     const prefersReduced = window.matchMedia(
       "(prefers-reduced-motion: reduce)"
     ).matches;
-    setParallaxEnabled(!prefersReduced);
+    const isNarrow = window.matchMedia("(max-width: 1024px)").matches;
+    setParallaxEnabled(!prefersReduced && !isNarrow);
   }, []);
 
   const layer = (y: ReturnType<typeof useTransform<number, number>>) =>

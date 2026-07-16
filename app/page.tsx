@@ -27,17 +27,27 @@ export default function HomePage() {
         <SectionWave topColor={COLORS.bambooDark} bottomColor={COLORS.earthMuted} />
         <WhyChooseUs />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.background} />
-        <Destinations />
+        <div className="section-deferred">
+          <Destinations />
+        </div>
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.bamboo} />
-        <HowWeWork />
+        <div className="section-deferred">
+          <HowWeWork />
+        </div>
         <SectionWave topColor={COLORS.bamboo} bottomColor={COLORS.grayLight} />
-        <Testimonials />
+        <div className="section-deferred">
+          <Testimonials />
+        </div>
         <SectionWave topColor={COLORS.grayLight} bottomColor={COLORS.bambooDark} />
         <Stats />
         <SectionWave topColor={COLORS.bambooDark} bottomColor={COLORS.background} />
-        <Gallery />
+        <div className="section-deferred">
+          <Gallery />
+        </div>
         <SectionWave topColor={COLORS.background} bottomColor={COLORS.grayLight} />
-        <FAQ />
+        <div className="section-deferred">
+          <FAQ />
+        </div>
         <SectionWave topColor={COLORS.grayLight} bottomColor={COLORS.earthMuted} />
         <ContactForm />
         <SectionWave topColor={COLORS.earthMuted} bottomColor={COLORS.bambooDark} />

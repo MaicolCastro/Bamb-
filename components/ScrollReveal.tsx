@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, type Variants } from "framer-motion";
+import { motion, useReducedMotion, type Variants } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 interface ScrollRevealProps {
@@ -12,10 +12,10 @@ interface ScrollRevealProps {
 }
 
 const directionOffset = {
-  up: { y: 40, x: 0 },
-  down: { y: -40, x: 0 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
+  up: { y: 24, x: 0 },
+  down: { y: -24, x: 0 },
+  left: { x: 24, y: 0 },
+  right: { x: -24, y: 0 },
   none: { x: 0, y: 0 },
 };
 
@@ -24,17 +24,21 @@ export function ScrollReveal({
   className,
   delay = 0,
   direction = "up",
-  duration = 0.6,
+  duration = 0.5,
 }: ScrollRevealProps) {
+  const prefersReduced = useReducedMotion();
   const offset = directionOffset[direction];
 
+  if (prefersReduced) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   const variants: Variants = {
-    hidden: { opacity: 0, ...offset, filter: "blur(6px)" },
+    hidden: { opacity: 0, ...offset },
     visible: {
       opacity: 1,
       x: 0,
       y: 0,
-      filter: "blur(0px)",
       transition: {
         duration,
         delay,
@@ -47,7 +51,7 @@ export function ScrollReveal({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-60px", amount: 0.15 }}
       variants={variants}
       className={cn(className)}
     >

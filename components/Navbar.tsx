@@ -40,7 +40,7 @@ export function Navbar() {
           className={cn(
             "mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8",
             scrolled &&
-              "glass mx-4 rounded-full border border-white/60 px-5 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.06)] backdrop-blur-xl sm:mx-6 lg:mx-8"
+              "mx-4 rounded-full border border-white/70 bg-white/92 px-5 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.06)] sm:mx-6 lg:mx-8 supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:backdrop-blur-md"
           )}
           aria-label="Navegación principal"
         >
@@ -53,7 +53,7 @@ export function Navbar() {
             className={cn(
               "group shrink-0 transition-all duration-500 hover:scale-[1.02] active:scale-[0.98]",
               !scrolled &&
-                "glass rounded-full px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.10)] backdrop-blur-xl sm:px-5 sm:py-2.5"
+                "rounded-full border border-white/70 bg-white/92 px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.10)] sm:px-5 sm:py-2.5 supports-[backdrop-filter]:bg-white/80 supports-[backdrop-filter]:backdrop-blur-md"
             )}
             aria-label={`${SITE.fullName} — Inicio`}
           >
@@ -123,7 +123,7 @@ export function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-bamboo-dark/60 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-40 bg-bamboo-dark/85 lg:hidden"
             onClick={() => setMobileOpen(false)}
           >
             <motion.div

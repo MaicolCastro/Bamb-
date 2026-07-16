@@ -21,17 +21,19 @@ export function Hero() {
       <HeroVideo />
       <CursorSpotlight size={380} intensity={0.2} />
 
-      {/* Ambient glow */}
+      {/* Ambient glow — animado solo en desktop */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute -left-20 top-1/4 h-64 w-64 rounded-full bg-bamboo/12 lg:hidden" />
+        <div className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-earth/15 lg:hidden" />
         <motion.div
           animate={{ y: [0, -20, 0], opacity: [0.4, 0.7, 0.4] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -left-20 top-1/4 h-64 w-64 rounded-full bg-bamboo/15 blur-3xl"
+          className="absolute -left-20 top-1/4 hidden h-64 w-64 rounded-full bg-bamboo/15 blur-3xl lg:block"
         />
         <motion.div
           animate={{ y: [0, 20, 0], opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-earth/20 blur-3xl"
+          className="absolute -right-20 bottom-1/4 hidden h-80 w-80 rounded-full bg-earth/20 blur-3xl lg:block"
         />
       </div>
 
@@ -39,12 +41,12 @@ export function Hero() {
         <motion.div
           initial={{ opacity: 0, y: 36 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 2.2, ease: easePremium }}
+          transition={{ duration: 0.8, delay: 1, ease: easePremium }}
         >
           <motion.span
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 2.4, ease: easePremium }}
+            transition={{ duration: 0.5, delay: 1.1, ease: easePremium }}
             className="mb-6 inline-block rounded-full glass-dark px-5 py-2 text-sm font-medium tracking-wide text-white/90 ring-1 ring-earth/40"
           >
             Agencia de viajes · {SITE.city}, {SITE.region}
@@ -57,7 +59,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.5, ease: easePremium }}
+            transition={{ duration: 0.7, delay: 1.2, ease: easePremium }}
             className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/85 sm:text-xl md:text-2xl"
           >
             Creamos experiencias inolvidables en Colombia y el mundo. Asesoría
@@ -67,7 +69,7 @@ export function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2.65, ease: easePremium }}
+            transition={{ duration: 0.7, delay: 1.35, ease: easePremium }}
             className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
           >
             <Button
@@ -91,7 +93,7 @@ export function Hero() {
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 2.9 }}
+            transition={{ duration: 0.5, delay: 1.5 }}
             className="mt-8 text-sm tracking-wide text-white/55"
           >
             Respuesta en menos de 2 horas · Cotización sin compromiso
@@ -102,7 +104,7 @@ export function Hero() {
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.2, duration: 0.8 }}
+        transition={{ delay: 1.7, duration: 0.6 }}
         onClick={() => scrollToSection("#por-que-bambu")}
         className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2 text-white/60 transition-colors hover:text-white"
         aria-label="Desplazarse hacia abajo"

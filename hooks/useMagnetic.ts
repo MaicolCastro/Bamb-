@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 
-/** Desplaza el elemento suavemente hacia el cursor */
+/** Desplaza el elemento suavemente hacia el cursor (rAF, sin re-renders) */
 export function useMagnetic<T extends HTMLElement>(strength = 0.3) {
   const ref = useRef<T>(null);
 
@@ -14,28 +14,42 @@ export function useMagnetic<T extends HTMLElement>(strength = 0.3) {
       "(prefers-reduced-motion: reduce)"
     ).matches;
     const isCoarse = window.matchMedia("(pointer: coarse)").matches;
-    if (prefersReduced || isCoarse) return;
-
-    const onMove = (e: MouseEvent) => {
-      const rect = el.getBoundingClientRect();
-      const x = e.clientX - (rect.left + rect.width / 2);
-      const y = e.clientY - (rect.top + rect.height / 2);
-      el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
-    };
-
-    const onLeave = () => {
-      el.style.transform = "translate(0px, 0px)";
-    };
+    const isNarrow = window.matchMedia("(max-width: 1024px)").matches;
+    if (prefersReduced || isCoarse || isNarrow) return;
 
     const parent = el.parentElement;
     if (!parent) return;
 
-    parent.addEventListener("mousemove", onMove);
+    let raf = 0;
+    let tx = 0;
+    let ty = 0;
+
+    const apply = () => {
+      raf = 0;
+      el.style.transform = `translate(${tx}px, ${ty}px)`;
+    };
+
+    const onMove = (e: MouseEvent) => {
+      const rect = el.getBoundingClientRect();
+      tx = (e.clientX - (rect.left + rect.width / 2)) * strength;
+      ty = (e.clientY - (rect.top + rect.height / 2)) * strength;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    const onLeave = () => {
+      tx = 0;
+      ty = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    parent.addEventListener("mousemove", onMove, { passive: true });
     parent.addEventListener("mouseleave", onLeave);
 
     return () => {
       parent.removeEventListener("mousemove", onMove);
       parent.removeEventListener("mouseleave", onLeave);
+      if (raf) cancelAnimationFrame(raf);
+      el.style.transform = "";
     };
   }, [strength]);
 

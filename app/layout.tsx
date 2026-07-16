@@ -99,7 +99,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${jakarta.variable} ${cormorant.variable} ${playfair.variable} h-full scroll-smooth`}
+      className={`${jakarta.variable} ${cormorant.variable} ${playfair.variable} h-full`}
     >
       <head>
         <meta property="og:image" content={ogImageUrl} />

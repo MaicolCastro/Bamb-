@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Users, Award, MapPin, Star, type LucideIcon } from "lucide-react";
 import { HERO_MEDIA, STATS } from "@/lib/constants";
 import { useCountUp } from "@/hooks/useCountUp";
-import { CursorSpotlight } from "@/components/CursorSpotlight";
 import { cn } from "@/lib/utils";
 
 const statIcons: LucideIcon[] = [Users, Award, MapPin, Star];
@@ -36,7 +35,7 @@ function StatItem({
   label: string;
   index: number;
 }) {
-  const { count, ref } = useCountUp(value, 2000);
+  const { count, ref, displayRef } = useCountUp(value, 2000);
   const Icon = statIcons[index];
 
   return (
@@ -50,15 +49,9 @@ function StatItem({
       className="group flex flex-1 flex-col items-center px-4 text-center sm:px-6"
     >
       <div className="relative mb-5">
-        <motion.span
-          animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0, 0.3] }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            delay: index * 0.5,
-            ease: "easeInOut",
-          }}
-          className="absolute inset-0 rounded-full bg-bamboo-light"
+        <span
+          className="absolute inset-0 rounded-full bg-bamboo-light/30 stat-pulse-ring"
+          style={{ animationDelay: `${index * 0.5}s` }}
           aria-hidden="true"
         />
         <div className="relative flex h-14 w-14 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/20 backdrop-blur-sm transition-all duration-500 group-hover:bg-white/15 group-hover:ring-white/35 sm:h-16 sm:w-16">
@@ -70,7 +63,7 @@ function StatItem({
       </div>
 
       <p className="font-display text-4xl font-semibold tracking-tight text-white sm:text-5xl lg:text-6xl">
-        {count}
+        <span ref={displayRef}>{count}</span>
         <span className="text-bamboo-light">{suffix}</span>
       </p>
       <p className="mt-2 max-w-[10rem] text-sm font-medium leading-snug text-white/70 sm:text-base">
@@ -83,25 +76,21 @@ function StatItem({
 export function Stats() {
   return (
     <section
-      className="film-grain relative overflow-hidden py-20 sm:py-28"
+      className="relative overflow-hidden py-20 sm:py-28"
       aria-label="Estadísticas de la agencia"
     >
-      {/* Fondo con imagen desenfocada + patrón */}
+      {/* Fondo — sin blur en runtime (costoso al hacer scroll) */}
       <div className="absolute inset-0 bg-bamboo-dark" aria-hidden="true">
         <Image
           src={HERO_MEDIA.poster}
           alt=""
           fill
-          className="object-cover opacity-25 blur-md scale-105"
+          className="object-cover opacity-20"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-bamboo-dark/95 via-bamboo-dark/90 to-bamboo/85" />
+        <div className="absolute inset-0 bg-gradient-to-br from-bamboo-dark/96 via-bamboo-dark/92 to-bamboo/88" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.07)_1px,transparent_0)] bg-[size:28px_28px]" />
-        <div className="absolute -left-32 top-0 h-64 w-64 rounded-full bg-bamboo-light/10 blur-3xl" />
-        <div className="absolute -right-32 bottom-0 h-64 w-64 rounded-full bg-earth/15 blur-3xl" />
       </div>
-
-      <CursorSpotlight size={300} intensity={0.18} />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <ul className="flex flex-wrap justify-center gap-y-10 lg:flex-nowrap lg:items-center lg:gap-0">

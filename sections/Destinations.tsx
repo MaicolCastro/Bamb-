@@ -64,7 +64,7 @@ function DestinationCard({
         <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:p-4">
           <div className="flex w-full min-w-0 flex-col items-start text-left">
             <div
-              className="mb-1.5 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-shadow-premium backdrop-blur-md"
+              className="mb-1.5 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-black/35 px-2 py-0.5 text-shadow-premium"
               title={climateLabel}
             >
               <ClimateIcon

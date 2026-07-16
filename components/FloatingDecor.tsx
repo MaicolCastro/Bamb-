@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   motion,
   useScroll,
@@ -48,23 +48,25 @@ const iconConfigs: IconConfig[] = [
     rotate: 25,
     drift: 0.6,
   },
-  {
-    Icon: Plane,
-    position: "right-[14%] bottom-[16%]",
-    speed: 1.4,
-    size: 24,
-    rotate: -8,
-    drift: -0.8,
-  },
-  {
-    Icon: Leaf,
-    position: "right-[22%] top-[45%]",
-    speed: 1,
-    size: 20,
-    rotate: -20,
-    drift: 1.2,
-  },
 ];
+
+function StaticIcon({
+  config,
+  colorClass,
+}: {
+  config: IconConfig;
+  colorClass: string;
+}) {
+  const { Icon, position, size, rotate } = config;
+  return (
+    <div
+      className={cn("absolute", position, colorClass)}
+      style={{ transform: `rotate(${rotate}deg)` }}
+    >
+      <Icon style={{ width: size, height: size }} strokeWidth={1.25} />
+    </div>
+  );
+}
 
 function FloatingIcon({
   config,
@@ -76,39 +78,46 @@ function FloatingIcon({
   colorClass: string;
 }) {
   const { Icon, position, speed, size, rotate, drift } = config;
-  const y = useTransform(scrollYProgress, [0, 1], [-60 * speed, 60 * speed]);
-  const x = useTransform(scrollYProgress, [0, 1], [30 * drift, -30 * drift]);
-  const rotateValue = useTransform(scrollYProgress, [0, 1], [rotate, rotate + 15 * drift]);
+  const y = useTransform(scrollYProgress, [0, 1], [-40 * speed, 40 * speed]);
+  const x = useTransform(scrollYProgress, [0, 1], [20 * drift, -20 * drift]);
+  const rotateValue = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [rotate, rotate + 10 * drift]
+  );
 
   return (
     <motion.div
       style={{ y, x, rotate: rotateValue }}
       className={cn("absolute", position, colorClass)}
     >
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{
-          duration: 4 + speed,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      >
-        <Icon style={{ width: size, height: size }} strokeWidth={1.25} />
-      </motion.div>
+      <Icon style={{ width: size, height: size }} strokeWidth={1.25} />
     </motion.div>
   );
 }
 
-/** Íconos decorativos con parallax para secciones claras */
+/** Íconos decorativos — parallax solo en desktop */
 export function FloatingDecor({ variant = "earth" }: FloatingDecorProps) {
   const ref = useRef<HTMLDivElement>(null);
+  const [motionEnabled, setMotionEnabled] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
+  useEffect(() => {
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    const isNarrow = window.matchMedia("(max-width: 1024px)").matches;
+    setMotionEnabled(!prefersReduced && !isNarrow);
+  }, []);
+
   const colorClass =
     variant === "earth" ? "text-bamboo/[0.12]" : "text-bamboo/[0.09]";
+
+  const icons = motionEnabled ? iconConfigs : iconConfigs.slice(0, 3);
 
   return (
     <div
@@ -116,14 +125,18 @@ export function FloatingDecor({ variant = "earth" }: FloatingDecorProps) {
       className="pointer-events-none absolute inset-0 overflow-hidden"
       aria-hidden="true"
     >
-      {iconConfigs.map((config, index) => (
-        <FloatingIcon
-          key={index}
-          config={config}
-          scrollYProgress={scrollYProgress}
-          colorClass={colorClass}
-        />
-      ))}
+      {icons.map((config, index) =>
+        motionEnabled ? (
+          <FloatingIcon
+            key={index}
+            config={config}
+            scrollYProgress={scrollYProgress}
+            colorClass={colorClass}
+          />
+        ) : (
+          <StaticIcon key={index} config={config} colorClass={colorClass} />
+        )
+      )}
     </div>
   );
 }

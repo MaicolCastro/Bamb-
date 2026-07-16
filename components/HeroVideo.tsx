@@ -2,54 +2,58 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { HERO_MEDIA } from "@/lib/constants";
 
-/** Video de fondo con imagen de respaldo y efecto parallax suave */
+/** Video de fondo con imagen de respaldo y parallax opcional (solo desktop) */
 export function HeroVideo() {
   const ref = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [videoReady, setVideoReady] = useState(false);
-  const [preferStatic, setPreferStatic] = useState(false);
+  const [preferStatic, setPreferStatic] = useState(true);
+  const prefersReduced = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "28%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.08]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.4]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+  const opacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.5]);
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const mobile = window.matchMedia("(max-width: 768px)").matches;
-    if (reduced || mobile) {
+    const lowPower = window.matchMedia("(max-width: 1024px)").matches;
+    if (reduced || lowPower) {
       setPreferStatic(true);
       return;
     }
+
+    setPreferStatic(false);
 
     const video = videoRef.current;
     if (!video) return;
 
     const onReady = () => setVideoReady(true);
-    video.addEventListener("canplaythrough", onReady);
+    video.addEventListener("canplaythrough", onReady, { once: true });
     video.play().catch(() => setPreferStatic(true));
 
     return () => video.removeEventListener("canplaythrough", onReady);
   }, []);
 
+  const parallaxEnabled = !preferStatic && !prefersReduced;
+
   return (
     <motion.div
       ref={ref}
-      style={{ y, scale, opacity }}
-      className="absolute inset-0 will-change-transform"
+      style={parallaxEnabled ? { y, opacity } : undefined}
+      className="absolute inset-0"
     >
       <Image
         src={HERO_MEDIA.poster}
         alt=""
         fill
         priority
-        className={`object-cover transition-opacity duration-1000 ${
+        className={`object-cover transition-opacity duration-700 ${
           videoReady && !preferStatic ? "opacity-0" : "opacity-100"
         }`}
         sizes="100vw"
@@ -63,9 +67,9 @@ export function HeroVideo() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           poster={HERO_MEDIA.poster}
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             videoReady ? "opacity-100" : "opacity-0"
           }`}
           aria-hidden="true"
