@@ -3,26 +3,10 @@
 import { useState } from "react";
 import { ZoomIn } from "lucide-react";
 import { GALLERY_IMAGES } from "@/lib/constants";
-import { cn } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Lightbox } from "@/components/Lightbox";
 import { CardImage } from "@/components/CardImage";
-
-const BENTO_LAYOUT = [
-  "gallery-bento-hero",
-  "",
-  "",
-  "gallery-bento-wide",
-  "gallery-bento-tall",
-  "",
-  "gallery-bento-wide",
-  "",
-  "gallery-bento-tall",
-  "",
-  "",
-  "gallery-bento-wide",
-] as const;
 
 export function Gallery() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -42,25 +26,20 @@ export function Gallery() {
           description="Cada imagen cuenta una historia. ¿Cuál será la tuya?"
         />
 
-        <div className="gallery-bento-grid mt-16">
+        <div className="mt-16 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
           {GALLERY_IMAGES.map((image, index) => (
-            <ScrollReveal
-              key={image.id}
-              delay={index * 0.04}
-              className={cn(BENTO_LAYOUT[index] ?? "", "h-full min-h-0")}
-            >
+            <ScrollReveal key={image.id} delay={index * 0.05}>
               <button
                 type="button"
                 onClick={() => setLightboxIndex(index)}
-                className="polaroid-hover group relative h-full w-full overflow-hidden rounded-2xl ring-1 ring-black/[0.04] transition-premium hover:shadow-lg hover:shadow-bamboo/10 focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
+                className="group relative w-full overflow-hidden rounded-2xl ring-1 ring-black/[0.04] transition-premium hover:shadow-lg hover:shadow-bamboo/10 focus-visible:ring-2 focus-visible:ring-bamboo focus-visible:ring-offset-2"
                 aria-label={`Ver imagen: ${image.destination}, ${image.country}`}
               >
                 <CardImage
                   src={image.src}
                   alt={image.alt}
-                  fillHeight
                   imageClassName="gallery-duotone"
-                  className="h-full rounded-2xl"
+                  className="rounded-2xl"
                 />
 
                 <div
