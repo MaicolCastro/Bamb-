@@ -58,7 +58,7 @@ export function WhyChooseUs() {
                   <div className="relative min-h-[220px] overflow-hidden lg:min-h-full">
                     <Image
                       src={featured.image}
-                      alt=""
+                      alt="Asesora de viajes Bambú atendiendo a clientes en la oficina"
                       fill
                       className="object-cover transition-premium group-hover:scale-105"
                       sizes="(max-width:1024px) 100vw, 50vw"

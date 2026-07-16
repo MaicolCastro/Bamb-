@@ -154,7 +154,7 @@ export const WHY_CHOOSE_US = [
     description:
       "Cada viajero es único. Escuchamos tus sueños, preferencias y presupuesto para diseñar una experiencia hecha a tu medida, sin fórmulas genéricas.",
     featured: true,
-    image: "/images/destinations/eje-cafetero.png",
+    image: "/images/sections/why-choose-us-atencion.jpg",
   },
   {
     icon: "Map" as const,
