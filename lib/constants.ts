@@ -86,15 +86,6 @@ export const COMPARISON_ROWS = [
   { feature: "Comparar precios online", ota: true },
 ] as const;
 
-export const PARTNERS = [
-  "Avianca",
-  "LATAM",
-  "Decameron",
-  "Hotelbeds",
-  "Best Western",
-  "Hilton",
-] as const;
-
 export const TRAVEL_GUIDES = [
   {
     title: "Qué empacar para San Andrés",

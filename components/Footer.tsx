@@ -8,7 +8,6 @@ import { InstagramIcon, FacebookIcon, WhatsAppIcon } from "./SocialIcons";
 import { Logo } from "./Logo";
 import { SITE, NAV_LINKS } from "@/lib/constants";
 import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
-import { PartnersStrip } from "./PartnersStrip";
 
 function FooterLayer({
   children,
@@ -211,7 +210,6 @@ export function Footer() {
           </div>
         </FooterLayer>
       </div>
-      <PartnersStrip />
     </footer>
   );
 }
