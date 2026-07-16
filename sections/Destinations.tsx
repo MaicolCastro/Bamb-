@@ -61,30 +61,30 @@ function DestinationCard({
           aria-hidden="true"
         />
 
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-4 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:p-5">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 p-3.5 transition-transform duration-300 ease-out group-hover:-translate-y-0.5 sm:p-4">
           <div className="flex w-full min-w-0 flex-col items-start text-left">
             <div
-              className="mb-2 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-shadow-premium backdrop-blur-md"
+              className="mb-1.5 inline-flex max-w-full items-center gap-1 rounded-full border border-white/20 bg-white/10 px-2 py-0.5 text-shadow-premium backdrop-blur-md"
               title={climateLabel}
             >
               <ClimateIcon
-                className="h-3 w-3 shrink-0 text-white/95"
+                className="h-2.5 w-2.5 shrink-0 text-white/95"
                 aria-hidden="true"
               />
-              <span className="truncate text-[10px] font-medium tracking-wide text-white/95 sm:text-[11px]">
+              <span className="truncate text-[9px] font-medium tracking-wide text-white/95 sm:text-[10px]">
                 {climateLabel}
               </span>
             </div>
 
-            <p className="mb-1.5 text-[11px] font-medium tracking-[0.1em] text-white/85 uppercase text-shadow-premium sm:text-xs">
+            <p className="mb-1 text-[10px] font-medium tracking-[0.1em] text-white/85 uppercase text-shadow-premium sm:text-[11px]">
               {dest.country}
             </p>
 
-            <h3 className="font-playfair mb-2 line-clamp-2 text-lg font-semibold leading-tight tracking-tight text-white text-shadow-premium sm:text-xl">
+            <h3 className="font-playfair mb-1.5 line-clamp-2 text-base font-semibold leading-tight tracking-tight text-white text-shadow-premium sm:text-lg">
               {dest.name}
             </h3>
 
-            <p className="line-clamp-2 text-xs leading-snug text-white/90 text-shadow-premium sm:text-sm sm:leading-normal">
+            <p className="line-clamp-2 text-[11px] leading-snug text-white/90 text-shadow-premium sm:text-xs sm:leading-normal">
               {dest.tagline}
             </p>
           </div>
