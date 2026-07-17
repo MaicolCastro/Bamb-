@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { EDITORIAL_BAND, SITE } from "@/lib/constants";
-import { CARD_IMAGE_QUALITY } from "@/lib/image-utils";
 import { getWhatsAppUrl } from "@/lib/utils";
 
-/** Proporción nativa del banner (2560×1203) — sin recorte */
-const BANNER_WIDTH = 2560;
-const BANNER_HEIGHT = 1203;
+/** Banner recortado, upscaled 2× y sin recomprimir en Next.js */
+const BANNER_WIDTH = 2048;
+const BANNER_HEIGHT = 626;
 
 export function EditorialBand() {
   const whatsappHref = getWhatsAppUrl(SITE.whatsapp, EDITORIAL_BAND.whatsappMessage);
@@ -28,7 +27,7 @@ export function EditorialBand() {
           height={BANNER_HEIGHT}
           className="block h-auto w-full"
           sizes="100vw"
-          quality={CARD_IMAGE_QUALITY}
+          unoptimized
           priority={false}
         />
       </a>
