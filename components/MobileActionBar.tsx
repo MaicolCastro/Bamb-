@@ -9,7 +9,7 @@ import { getWhatsAppUrl } from "@/lib/utils";
 export function MobileActionBar() {
   return (
     <div
-      className="fixed inset-x-0 bottom-0 z-50 border-t border-black/[0.06] bg-white/95 p-3 shadow-[0_-8px_32px_rgba(0,0,0,0.08)] supports-[backdrop-filter]:backdrop-blur-md lg:hidden"
+      className="shell-chrome fixed inset-x-0 bottom-0 z-50 border-t border-black/[0.06] bg-white/95 p-3 shadow-[0_-8px_32px_rgba(0,0,0,0.08)] supports-[backdrop-filter]:backdrop-blur-md lg:hidden"
       role="navigation"
       aria-label="Acciones rápidas"
     >

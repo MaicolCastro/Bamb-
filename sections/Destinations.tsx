@@ -10,6 +10,8 @@ import {
   Sparkles,
   LayoutGrid,
   Flame,
+  Users,
+  Calendar,
   type LucideIcon,
 } from "lucide-react";
 import { DESTINATIONS, DESTINATION_DETAILS } from "@/lib/constants";
@@ -113,10 +115,22 @@ function DestinationCard({
               {dest.tagline}
             </p>
 
-            {details?.duration && (
-              <p className="mt-1.5 text-[10px] font-medium text-white/75 text-shadow-premium sm:text-[11px]">
-                {details.duration}
-              </p>
+            {details && (
+              <div className="mt-2 flex w-full flex-col gap-1">
+                <p className="flex items-center gap-1 text-[10px] text-white/80 text-shadow-premium sm:text-[11px]">
+                  <Users className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
+                  <span className="line-clamp-1">{details.idealFor}</span>
+                </p>
+                <p className="flex items-center gap-1 text-[10px] font-medium text-white/75 text-shadow-premium sm:text-[11px]">
+                  <Calendar className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
+                  {details.duration}
+                  <span className="text-white/50" aria-hidden="true">
+                    ·
+                  </span>
+                  <Sun className="h-2.5 w-2.5 shrink-0" aria-hidden="true" />
+                  <span className="line-clamp-1">{details.bestSeason.split(" (")[0]}</span>
+                </p>
+              </div>
             )}
           </div>
         </div>

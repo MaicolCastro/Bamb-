@@ -671,3 +671,11 @@ body {
     transform: none;
   }
 }
+
+/* Ocultar barras flotantes y navbar cuando hay modal abierto */
+body[data-modal-open="true"] .shell-chrome,
+body[data-modal-open="true"] .site-header {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+}

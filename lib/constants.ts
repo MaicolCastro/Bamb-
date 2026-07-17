@@ -270,72 +270,232 @@ export const DESTINATION_DETAILS: Record<
     duration: string;
     bestSeason: string;
     popular?: boolean;
+    idealFor: string;
+    description: string;
+    tip: string;
     highlights: readonly string[];
+    includes: readonly string[];
   }
 > = {
   Cartagena: {
     duration: "4–5 días",
-    bestSeason: "Dic – Abr",
+    bestSeason: "Dic – Abr (menos lluvia)",
     popular: true,
-    highlights: ["Ciudad amurallada", "Islas del Rosario", "Gastronomía caribeña"],
+    idealFor: "Parejas, amigos y viajes en grupo",
+    description:
+      "Ciudad amurallada, atardeceres en el muro y paseos en chalupa por la bahía. Combina historia, playa cercana e islas para desconectar sin volar tan lejos.",
+    tip: "Reserva con 2–3 meses de anticipación en temporada alta (diciembre y Semana Santa).",
+    highlights: [
+      "Centro histórico y Getsemaní",
+      "Islas del Rosario y Playa Blanca",
+      "Rutas gastronómicas y rumba caribeña",
+    ],
+    includes: [
+      "Vuelos desde Armenia, Pereira o Bogotá",
+      "Hoteles en centro o Bocagrande",
+      "Traslados y tours a islas",
+    ],
   },
   "San Andrés": {
     duration: "4–6 días",
-    bestSeason: "Todo el año",
+    bestSeason: "Todo el año (evita sept–oct si prefieres menos lluvia)",
     popular: true,
-    highlights: ["Mar de siete colores", "Johnny Cay", "Buceo y relax"],
+    idealFor: "Familias, parejas y quienes buscan mar turquesa",
+    description:
+      "Agua cristalina, snorkel en arrecifes y ritmo relajado. Ideal para desconectar en pareja o llevar a los niños a una isla sin complicaciones de visa ni largas distancias.",
+    tip: "Combina San Andrés con Johnny Cay o Providencia si tienes más días — te ayudamos a armar el itinerario.",
+    highlights: [
+      "Mar de siete colores y snorkel",
+      "Johnny Cay y manglares",
+      "Paseos en moto y playas tranquilas",
+    ],
+    includes: [
+      "Tiquetes aéreos con equipaje",
+      "Hoteles frente al mar o en centro",
+      "Traslados aeropuerto–hotel",
+    ],
   },
   "Eje Cafetero": {
     duration: "3–4 días",
-    bestSeason: "Todo el año",
-    highlights: ["Fincas cafeteras", "Valle del Cocora", "Puebros patrimonio"],
+    bestSeason: "Todo el año (clima templado)",
+    idealFor: "Familias, parejas y viajeros de naturaleza",
+    description:
+      "A pocos minutos de casa: fincas cafeteras, palmas de cera en el Cocora y pueblos coloridos. Perfecto para un fin de semana largo o vacaciones sin pasaporte.",
+    tip: "Visita una finca por la mañana y deja la tarde libre para termal o canopy — armamos el ritmo contigo.",
+    highlights: [
+      "Tour cafetero con degustación",
+      "Valle del Cocora y Salento",
+      "Filandia, termales y aventura suave",
+    ],
+    includes: [
+      "Transporte desde tu ciudad",
+      "Hoteles campestres o boutique",
+      "Experiencias y entradas coordinadas",
+    ],
   },
   Cancún: {
     duration: "5–7 días",
-    bestSeason: "Nov – Abr",
+    bestSeason: "Nov – Abr (menos huracanes)",
     popular: true,
-    highlights: ["Playas caribeñas", "Ruinas mayas", "Parques acuáticos"],
+    idealFor: "Familias, lunas de miel y grupos de amigos",
+    description:
+      "Playas de postal, ruinas mayas a un día de distancia y resorts para todos los presupuestos. Un clásico que nunca falla para primera vez en el Caribe mexicano.",
+    tip: "Chichen Itzá conviene reservarla con guía y salida temprano — evitas calor y multitudes.",
+    highlights: [
+      "Zona hotelera y playas",
+      "Chichen Itzá o Tulum",
+      "Xcaret, cenotes y vida nocturna",
+    ],
+    includes: [
+      "Vuelos internacionales",
+      "Resort o hotel según tu estilo",
+      "Tours a ruinas y parques",
+    ],
   },
   "Punta Cana": {
     duration: "5–7 días",
     bestSeason: "Dic – Abr",
-    highlights: ["Resorts todo incluido", "Isla Saona", "Deportes acuáticos"],
+    idealFor: "Todo incluido, parejas y familias",
+    description:
+      "Resorts frente al mar, playas de arena blanca y excursiones a Isla Saona. Muy cómodo si quieres desconectar sin pensar en comidas ni traslados diarios.",
+    tip: "Compara resorts según lo que busques: solo adultos, animación familiar o spa — te orientamos sin sesgo.",
+    highlights: [
+      "Playas Bávaro y Macao",
+      "Isla Saona en catamarán",
+      "Golf, spa y deportes acuáticos",
+    ],
+    includes: [
+      "Paquetes todo incluido o hotel + vuelo",
+      "Traslados privados o compartidos",
+      "Excursiones opcionales",
+    ],
   },
   Europa: {
     duration: "10–15 días",
-    bestSeason: "Abr – Oct",
-    highlights: ["Multi-ciudad", "Cultura y museos", "Gastronomía europea"],
+    bestSeason: "Abr – Oct (primavera y verano)",
+    idealFor: "Parejas, cultura y viajeros exigentes",
+    description:
+      "Museos, gastronomía y ciudades icónicas en un solo viaje. Diseñamos rutas multi-país según tu tiempo, presupuesto y si es primera vez en el continente.",
+    tip: "Un solo país bien recorrido suele ser mejor que muchas ciudades apuradas — te ayudamos a elegir.",
+    highlights: [
+      "París, Roma, Barcelona o rutas a medida",
+      "Trenes, museos y barrios locales",
+      "Experiencias gastronómicas",
+    ],
+    includes: [
+      "Vuelos transatlánticos",
+      "Hoteles céntricos o boutique",
+      "Trenes, traslados y seguro de viaje",
+    ],
   },
   Medellín: {
     duration: "3–4 días",
-    bestSeason: "Todo el año",
-    highlights: ["Comuna 13", "Guatapé", "Vida nocturna y gastronomía"],
+    bestSeason: "Todo el año (clima primaveral)",
+    idealFor: "Amigos, parejas y escapadas urbanas",
+    description:
+      "Clima perfecto, transformación urbana, Guatapé y gastronomía de nivel. Cerca del Eje Cafetero: puedes combinar ciudad y naturaleza en una sola salida.",
+    tip: "Reserva el tour a Guatapé entre semana si puedes — menos filas en la Piedra del Peñol.",
+    highlights: [
+      "Comuna 13 y arte urbano",
+      "Guatapé y Piedra del Peñol",
+      "Rooftops, café y vida nocturna",
+    ],
+    includes: [
+      "Vuelos o bus desde tu ciudad",
+      "Hoteles en El Poblado o Laureles",
+      "City tours y excursiones",
+    ],
   },
   Orlando: {
     duration: "7–10 días",
-    bestSeason: "Todo el año",
+    bestSeason: "Todo el año (evita julio por calor intenso)",
     popular: true,
-    highlights: ["Parques temáticos", "Compras", "Ideal en familia"],
+    idealFor: "Familias con niños y parques temáticos",
+    description:
+      "Disney, Universal y SeaWorld en un solo destino. Planificamos días por parque, hoteles con traslado y tips para filas y presupuesto familiar.",
+    tip: "Comprar entradas multi-día con anticipación ahorra tiempo y dinero — te guiamos con opciones oficiales.",
+    highlights: [
+      "Walt Disney World",
+      "Universal Studios",
+      "Compras en outlets y descanso en piscina",
+    ],
+    includes: [
+      "Vuelos a Orlando (MCO)",
+      "Hoteles dentro o fuera de parques",
+      "Traslados y entradas coordinadas",
+    ],
   },
   Perú: {
     duration: "6–8 días",
-    bestSeason: "Abr – Oct",
-    highlights: ["Machu Picchu", "Cusco", "Gastronomía peruana"],
+    bestSeason: "Abr – Oct (temporada seca en Cusco)",
+    idealFor: "Aventura, cultura e historia",
+    description:
+      "Machu Picchu, Cusco colonial y cocina reconocida mundialmente. Ajustamos altitud, ritmo y tren o caminata según tu condición física y días disponibles.",
+    tip: "Llega a Cusco un día antes de subir a Machu Picchu para aclimatarte — lo incluimos en la propuesta.",
+    highlights: [
+      "Machu Picchu y Valle Sagrado",
+      "Centro histórico de Cusco",
+      "Gastronomía limeña y mercados",
+    ],
+    includes: [
+      "Vuelos internacionales y domésticos",
+      "Hoteles en Lima y Cusco",
+      "Tren o bus a Machu Picchu",
+    ],
   },
   "Río de Janeiro": {
     duration: "6–8 días",
-    bestSeason: "Abr – Oct",
-    highlights: ["Cristo Redentor", "Copacabana", "Carnaval y cultura"],
+    bestSeason: "Abr – Oct (menos lluvia)",
+    idealFor: "Parejas, amigos y playa + ciudad",
+    description:
+      "Cristo Redentor, Copacabana, samba y energía brasileña. Combinamos lo urbano con días de playa y excursiones a Pan de Azúcar sin apuros.",
+    tip: "Evita llevar mucho valor a la playa; preferimos hoteles en zonas seguras y traslados coordinados.",
+    highlights: [
+      "Cristo Redentor y Pan de Azúcar",
+      "Copacabana e Ipanema",
+      "Samba, feijoada y vida nocturna",
+    ],
+    includes: [
+      "Vuelos internacionales",
+      "Hoteles en Copacabana o Ipanema",
+      "Tours con guía en español",
+    ],
   },
   Miami: {
     duration: "5–7 días",
-    bestSeason: "Nov – Abr",
-    highlights: ["Playas", "Compras", "Vida cosmopolita"],
+    bestSeason: "Nov – Abr (menos humedad)",
+    idealFor: "Compras, playa y viajes en pareja o amigos",
+    description:
+      "Playas, outlets, arte en Wynwood y cruceros de partida. Muy pedido para combinar shopping, relax y vuelos cortos desde Colombia.",
+    tip: "Si vas de compras, revisa temporadas de descuento — muchos viajeros combinan Miami con un fin de semana extra.",
+    highlights: [
+      "South Beach y Art Deco",
+      "Wynwood y Little Havana",
+      "Outlets y Sawgrass Mills",
+    ],
+    includes: [
+      "Vuelos directos o con escala",
+      "Hoteles en Miami Beach o Brickell",
+      "Auto de alquiler o traslados",
+    ],
   },
   Panamá: {
     duration: "4–6 días",
     bestSeason: "Dic – Abr",
-    highlights: ["Canal de Panamá", "Casco Viejo", "Islas del Pacífico"],
+    idealFor: "Ciudad, canal y playa en pocos días",
+    description:
+      "Canal de Panamá, Casco Antiguo y playas del Pacífico a una hora. Destino compacto: cultura, naturaleza y buena conectividad aérea desde Colombia.",
+    tip: "Reserva la visita al Canal con horario de paso de barcos — es el momento más impresionante.",
+    highlights: [
+      "Canal de Panamá y Miraflores",
+      "Casco Viejo patrimonio UNESCO",
+      "Islas del Pacífico y Emberá",
+    ],
+    includes: [
+      "Vuelos cortos desde Colombia",
+      "Hoteles en ciudad o playa",
+      "Tours al canal y traslados",
+    ],
   },
 };
 

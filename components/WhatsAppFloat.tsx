@@ -21,7 +21,7 @@ export function WhatsAppFloat() {
   };
 
   return (
-    <div className="fixed bottom-24 right-6 z-50 hidden sm:bottom-8 sm:block">
+    <div className="shell-chrome fixed bottom-24 right-6 z-50 hidden sm:bottom-8 sm:block">
       {showTip && (
         <motion.div
           initial={{ opacity: 0, x: 8 }}
