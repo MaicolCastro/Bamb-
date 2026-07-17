@@ -57,7 +57,8 @@ export const HERO_TRUST = [
 ] as const;
 
 export const EDITORIAL_BAND = {
-  image: "/images/sections/editorial-band-photo.jpg",
+  image:
+    "https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1920&h=800&fit=crop&crop=entropy&auto=format&q=80",
   quote: "Cada viaje empieza con una conversación.",
   cta: "Cuéntanos tu idea",
   whatsappMessage:
