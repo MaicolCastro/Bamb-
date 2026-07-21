@@ -3,12 +3,10 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Plus, Minus, MessageCircle, ChevronsUpDown } from "lucide-react";
-import { FAQ_ITEMS, FAQ_CATEGORIES, SITE } from "@/lib/constants";
+import { FAQ_ITEMS, FAQ_CATEGORIES } from "@/lib/constants";
 import { SectionHeading } from "@/components/SectionHeading";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { Button } from "@/components/Button";
-import { WhatsAppIcon } from "@/components/SocialIcons";
-import { getWhatsAppUrl } from "@/lib/utils";
+import { scrollToSection } from "@/lib/utils";
 import { cn } from "@/lib/utils";
 
 const easePremium = [0.22, 1, 0.36, 1] as const;
@@ -178,7 +176,7 @@ export function FAQ() {
             <div className="space-y-3 sm:space-y-4">
               {filteredItems.length === 0 ? (
                 <p className="py-8 text-center text-foreground/50">
-                  No hay resultados. Escríbenos por WhatsApp y te ayudamos.
+                  No hay resultados en esta categoría.
                 </p>
               ) : (
                 filteredItems.map((item, index) => (
@@ -206,18 +204,15 @@ export function FAQ() {
               ¿Tienes otra pregunta?
             </p>
             <p className="mt-2 text-foreground/60">
-              Escríbenos por WhatsApp y te respondemos en menos de 2 horas.
+              Cuéntanos en la sección de contacto y te respondemos en menos de 2 horas.
             </p>
-            <Button
-              href={getWhatsAppUrl(SITE.whatsapp, SITE.whatsappMessage)}
-              external
-              variant="whatsapp"
-              size="lg"
-              className="mt-6"
+            <button
+              type="button"
+              onClick={() => scrollToSection("#contacto")}
+              className="mt-6 text-sm font-semibold text-bamboo underline-offset-4 transition-premium hover:underline"
             >
-              <WhatsAppIcon className="h-5 w-5" />
-              Hacer una pregunta
-            </Button>
+              Ir a contacto
+            </button>
           </div>
         </ScrollReveal>
       </div>

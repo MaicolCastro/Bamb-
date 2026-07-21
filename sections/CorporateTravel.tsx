@@ -2,11 +2,10 @@
 
 import Image from "next/image";
 import { Check, Building2 } from "lucide-react";
-import { CORPORATE_BENEFITS, SITE } from "@/lib/constants";
-import { getWhatsAppUrl } from "@/lib/utils";
+import { CORPORATE_BENEFITS } from "@/lib/constants";
+import { scrollToSection } from "@/lib/utils";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { Button } from "@/components/Button";
-import { WhatsAppIcon } from "@/components/SocialIcons";
 
 export function CorporateTravel() {
   return (
@@ -60,17 +59,12 @@ export function CorporateTravel() {
             </ul>
 
             <Button
-              href={getWhatsAppUrl(
-                SITE.whatsapp,
-                "Hola Bambú, necesito cotizar un viaje corporativo para mi empresa. ¿Me pueden asesorar?"
-              )}
-              external
               variant="secondary"
               size="lg"
               className="mt-10"
+              onClick={() => scrollToSection("#contacto")}
             >
-              <WhatsAppIcon className="h-5 w-5" />
-              Cotizar viaje corporativo
+              Solicitar propuesta corporativa
             </Button>
           </ScrollReveal>
 

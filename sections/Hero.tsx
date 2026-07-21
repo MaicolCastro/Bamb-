@@ -5,14 +5,13 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronDown } from "lucide-react";
 import { HeroVideo } from "@/components/HeroVideo";
-import { WhatsAppIcon } from "@/components/SocialIcons";
 import {
   HERO_DESTINATION_STRIP,
   HERO_ROTATING_DESTINATIONS,
   HERO_TRUST,
   SITE,
 } from "@/lib/constants";
-import { getWhatsAppUrl, scrollToSection } from "@/lib/utils";
+import { scrollToSection } from "@/lib/utils";
 import { Button } from "@/components/Button";
 import { CursorSpotlight } from "@/components/CursorSpotlight";
 
@@ -117,13 +116,11 @@ export function Hero() {
               className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4"
             >
               <Button
-                href={getWhatsAppUrl(SITE.whatsapp, SITE.whatsappMessage)}
-                external
-                variant="whatsapp"
+                variant="primary"
                 size="lg"
+                onClick={() => scrollToSection("#contacto")}
               >
-                <WhatsAppIcon className="h-5 w-5" />
-                Cotizar por WhatsApp
+                Quiero cotizar mi viaje
               </Button>
               <Button
                 variant="outline"

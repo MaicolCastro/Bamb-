@@ -165,7 +165,7 @@ export function Destinations() {
           highlights={["realidad"]}
           eyebrow="Destinos destacados"
           title="Inspírate. Nosotros hacemos realidad el resto."
-          description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Toca una tarjeta para ver detalles y cotizar."
+          description="Estos son algunos de los destinos que nuestros viajeros aman. ¿Cuál despierta tu curiosidad? Toca una tarjeta para ver más detalles."
         />
 
         <div

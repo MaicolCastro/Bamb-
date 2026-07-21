@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS, SITE } from "@/lib/constants";
-import { cn, getWhatsAppUrl, scrollToSection } from "@/lib/utils";
+import { cn, scrollToSection } from "@/lib/utils";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { Button } from "./Button";
@@ -108,12 +108,11 @@ export function Navbar() {
 
           <div className="hidden lg:block">
             <Button
-              href={getWhatsAppUrl(SITE.whatsapp, SITE.whatsappMessage)}
-              external
-              variant="whatsapp"
+              variant="primary"
               size="sm"
+              onClick={() => scrollToSection("#contacto")}
             >
-              Cotizar ahora
+              Cotizar mi viaje
             </Button>
           </div>
 
@@ -183,18 +182,6 @@ export function Navbar() {
                   </motion.li>
                 ))}
               </ul>
-
-              <div className="mt-auto pt-6">
-                <Button
-                  href={getWhatsAppUrl(SITE.whatsapp, SITE.whatsappMessage)}
-                  external
-                  variant="whatsapp"
-                  size="md"
-                  className="w-full"
-                >
-                  Cotizar por WhatsApp
-                </Button>
-              </div>
             </motion.div>
           </motion.div>
         )}

@@ -4,7 +4,6 @@ import { useState, type FormEvent } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Send, CheckCircle, Phone, Mail, MapPin, Clock } from "lucide-react";
-import { WhatsAppIcon } from "@/components/SocialIcons";
 import { DESTINATION_OPTIONS, SITE } from "@/lib/constants";
 import { getWhatsAppUrl } from "@/lib/utils";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -346,17 +345,6 @@ export function ContactForm() {
                   >
                     <Mail className="h-4 w-4 shrink-0 text-bamboo" aria-hidden="true" />
                     {SITE.email}
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href={getWhatsAppUrl(SITE.whatsapp, SITE.whatsappMessage)}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-semibold text-bamboo transition-premium hover:underline"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    Escríbenos por WhatsApp
                   </a>
                 </li>
               </ul>
